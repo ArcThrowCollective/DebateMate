@@ -1,0 +1,23 @@
+{
+  "name": "debatemate",
+  "version": "1.0.0",
+  "description": "Political debating platform based on real-time video/audio comms",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ArcThrowCollective/DebateMate.git"
+  },
+  "keywords": [
+    "debate",
+    "mate"
+  ],
+  "author": "ArcThrowCollective",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ArcThrowCollective/DebateMate/issues"
+  },
+  "homepage": "https://github.com/ArcThrowCollective/DebateMate#readme"
+}
