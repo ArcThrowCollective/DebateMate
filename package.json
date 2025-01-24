@@ -4,7 +4,8 @@
   "description": "Political debating platform based on real-time video/audio comms",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "repository": {
     "type": "git",
@@ -19,5 +20,17 @@
   "bugs": {
     "url": "https://github.com/ArcThrowCollective/DebateMate/issues"
   },
-  "homepage": "https://github.com/ArcThrowCollective/DebateMate#readme"
+  "homepage": "https://github.com/ArcThrowCollective/DebateMate#readme",
+  "devDependencies": {
+    "eslint": "^9.18.0",
+    "eslint-config-prettier": "^10.0.1",
+    "eslint-plugin-prettier": "^5.2.3",
+    "prettier": "^3.4.2"
+  },
+  "prettier": {
+    "semi": true,
+    "singleQuote": true,
+    "printWidth": 80,
+    "trailingComma": "es5"
+  }
 }
