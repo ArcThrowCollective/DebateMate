@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Political debating platform based on real-time video/audio comms",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint . -f visualstudio --ext .js,.jsx,.ts,.tsx"
