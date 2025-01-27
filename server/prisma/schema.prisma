@@ -1,0 +1,122 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Channels {
+  id          String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title       String
+  description String    @db.Text
+  user        Users?  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      String?   @unique @db.Uuid
+  is_public   Boolean
+  channel_image String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  debates     Debates[]
+}
+
+model Users {
+  id            String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  username      String
+  email         String        @unique
+  password      String
+  role          Role          @default(GUEST)
+  profile_image String?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime?      @updatedAt
+  channels      Channels[]
+  participants  Participants[]
+  notifications Notifications[]
+  history        Debate_History[]
+}
+
+model Debates {
+  id            String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  topic         String       
+  channel     Channels      @relation(fields: [channelId], references: [id], onDelete: Cascade)
+  channelId   String        @db.Uuid
+  startTime   DateTime      @default(now())
+  endTime     DateTime?     // Null possible if it has no endTime
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  participants Participants[]
+  history     Debate_History[]
+  request     Requests_To_Speak[]
+}
+
+model Participants {
+  id          String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  debate      Debates      @relation(fields: [debateId], references: [id], onDelete: Cascade)
+  debateId    String       @db.Uuid
+  user        Users        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String         @db.Uuid
+  role          Role       @default(GUEST)
+  isSpeaking  Boolean      @default(false)
+  joinedAt    DateTime     @default(now())
+  request     Requests_To_Speak[]
+}
+
+model Notifications {
+  id          String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user        Users        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      String       @db.Uuid
+  message     String
+  type        NotificationType       
+  isRead      Boolean      @default(false)
+  createdAt   DateTime     @default(now())
+}
+
+model Debate_History {
+  id          String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  debate      Debates      @relation(fields: [debateId], references: [id], onDelete: Cascade)
+  debateId    String       @db.Uuid
+  user        Users        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      String       @db.Uuid
+  role        Role         @default(GUEST)
+  joinedAt    DateTime
+  leftAt      DateTime
+}
+
+model Requests_To_Speak {
+  id          String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  debate      Debates      @relation(fields: [debateId], references: [id], onDelete: Cascade)
+  debateId    String       @db.Uuid
+  participant Participants        @relation(fields: [participantId], references: [id], onDelete: Cascade)
+  participantId      String       @db.Uuid
+  status      RequestStatus @default(PENDING)       
+  requestedAt DateTime     @default(now())
+  handledAt   DateTime?
+}
+
+enum Role {
+  GUEST        
+  MEMBER
+  ADMIN
+  LISTENER
+  SPEAKER
+  MODERATOR
+}
+
+enum NotificationType {
+  SYSTEM
+  REQUEST
+  DEBATE
+  CUSTOM
+}
+
+enum RequestStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
