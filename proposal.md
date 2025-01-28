@@ -68,16 +68,19 @@ Add a list of other features you’d like to add once the MVP is working.
 **Answer:**
 
 - Platform features
+
   - customize profile (avatar, nickname, ...)
   - channel search
   - invitation system
   - up-/ downviting channel
 
 - Channel features
+
   - announcements
   - up-/ downviting speakers
 
 - Debate room features
+
   - voting
   - moderator role
   - text chat
@@ -98,6 +101,7 @@ Does your app have a client, a server, or both? If it has a client, is it web or
 - Styling: Tailwind CSS
 - Axios or JS Fetch or superagent for REST API Interactions
 - Testing: Cypress
+- [Icons: React-icons](https://www.npmjs.com/package/react-icons)
 
 **Back End:**
 

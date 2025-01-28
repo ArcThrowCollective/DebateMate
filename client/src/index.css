@@ -1,11 +1,15 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.8;
-  font-weight: 400;
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wdth,wght@75..100,100..900&family=Titillium+Web:ital,wght@0,200;0,400;0,600;0,700;0,900;1,200;1,400;1,600;1,700&display=swap');
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+:root {
+  --accent-color: #ffb662;
+  --dark-color: #352f41;
+  --gradient-purple: linear-gradient(to top, #6d25ff, #cf82ff);
+  --gradient-dark: linear-gradient(307deg, #514a5c 0%, #1a1527 100%);
+  --gradient-light: linear-gradient(307deg, #e4e5ea 0%, #f0f1f6 100%);
+
+  font-family: 'Titillium Web', serif;
+  background: var(--gradient-light);
+  color: var(--dark-color);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -13,16 +17,40 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-body {
+::selection {
+  color: var(--accent-color);
+  background: var(--dark-color);
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.8;
+  letter-spacing: 0.08rem;
+  text-decoration: none;
+  text-transform: none;
+}
+
+body {
   display: flex;
+  justify-content: center;
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 900;
+  letter-spacing: 0.24rem;
+  font-size: 3rem;
 }
