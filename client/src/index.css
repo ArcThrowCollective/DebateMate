@@ -6,6 +6,11 @@
   --gradient-purple: linear-gradient(to top, #6d25ff, #cf82ff);
   --gradient-dark: linear-gradient(307deg, #514a5c 0%, #1a1527 100%);
   --gradient-light: linear-gradient(307deg, #e4e5ea 0%, #f0f1f6 100%);
+  --gradient-purple__light: linear-gradient(
+    283deg,
+    #514a5ca1 0%,
+    #1a1527a1 100%
+  );
 
   font-family: 'Titillium Web', serif;
   background: var(--gradient-light);
