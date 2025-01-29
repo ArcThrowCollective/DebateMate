@@ -2,12 +2,21 @@
 
 import dotenv from 'dotenv';
 import express from 'express';
-import { createServer } from 'node:http';
+import { readFileSync } from 'node:fs';
+import { createServer } from 'node:https';
 import { Server, Socket } from 'socket.io';
-dotenv.config({ path: '.env' });
 
+dotenv.config({ path: '.env' });
 const app = express();
-const server = createServer(app);
+const httpsServer = createServer(
+  {
+    key: readFileSync('./cert/cert-key.pem'),
+    cert: readFileSync('./cert/fullchain.pem'),
+  },
+  app
+);
+
+const server = createServer(httpsServer);
 const io = new Server(server, {
   cors: {
     origin: '*',
@@ -47,6 +56,12 @@ io.on('connection', (socket) => {
   socket.on('ping', (text) => {
     console.log('ping', text);
     io.emit('pong');
+  });
+  io.engine.on('connection_error', (err) => {
+    console.log(err.req); // the request object
+    console.log(err.code); // the error code, for example 1
+    console.log(err.message); // the error message, for example "Session ID unknown"
+    console.log(err.context); // some additional error context
   });
 });
 
