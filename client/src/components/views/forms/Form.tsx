@@ -5,6 +5,7 @@ import { CreateChannel } from './channelForm/CreateChannel';
 import { CreateTopic } from './topicForm/CreateTopic';
 import { handleFormSubmit } from '../../../utils/handleFormSubmit';
 import { useState } from 'react';
+import { submitFormData } from '../../../services/API.Service';
 
 interface FormProps extends React.FormHTMLAttributes<HTMLFormElement> {
   type: 'signup' | 'login' | 'channel' | 'topic';
@@ -21,15 +22,21 @@ export const Form: React.FC<FormProps> = ({ type, title, ...props }) => {
 
   const [minRating, setMinRating] = useState(0);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const extraData: Record<string, any> = { formType: type };
     if (type === 'topic') {
       extraData.minRating = minRating;
     }
 
-    handleFormSubmit(e, extraData);
+    const formData = handleFormSubmit(e, extraData);
+
+    try {
+      await submitFormData(type, formData);
+    } catch (error) {
+      console.error('❌ Submission failed:', error);
+    }
   };
 
   return (
