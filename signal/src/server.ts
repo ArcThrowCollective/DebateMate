@@ -75,14 +75,14 @@ io.on('connection', (socket) => {
   // SDP offers / answers
   socket.on('offer', (offerObj: offerObj) => {
     if (offerObj.offer.type !== 'offer') console.log('offer.type!=offer');
-    socket.broadcast.emit('offer', offerObj);
+    socket.broadcast.to(offerObj.room).emit('offer', offerObj);
     console.log(
       `o offer from ${offerObj.from} has been broadcast [${offerObj.room}]`
     );
   });
   socket.on('answer', (answerObj: answerObj) => {
     if (answerObj.answer.type !== 'answer') console.log('answer.type!=answer');
-    socket.broadcast.emit('answer', answerObj);
+    socket.broadcast.to(answerObj.room).emit('answer', answerObj);
     console.log(
       `o answer from ${answerObj.from} has been broadcast [${answerObj.room}]`
     );
@@ -91,7 +91,7 @@ io.on('connection', (socket) => {
     console.log(
       `i received iceCandidate from ${candidateObj.from}: ${candidateObj.candidate.candidate} (${candidateObj.candidate.type}) [${candidateObj.room}]`
     );
-    socket.broadcast.emit('ice-candidate', candidateObj);
+    socket.broadcast.to(candidateObj.room).emit('ice-candidate', candidateObj);
     console.log('... candidate has been broadcast');
   });
 
