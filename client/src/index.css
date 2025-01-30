@@ -14,6 +14,11 @@
     #1a1527a1 100%
   );
 
+  --purple__card: linear-gradient(to top, #6d25ff 0%, #cf82ff 50%);
+  --white: #e4e5ea;
+  --border-radius: 0.6rem;
+  --box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
   font-family: 'Titillium Web', serif;
   background: var(--gradient-light);
   color: var(--dark-color);
@@ -44,9 +49,6 @@
 }
 
 body {
-  display: flex;
-  justify-content: center;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
 }
@@ -57,6 +59,42 @@ h3,
 h4,
 h5,
 h6 {
-  font-weight: 900;
-  letter-spacing: 0.24rem;
+  font-weight: 700;
+  letter-spacing: 0.1rem;
+}
+
+.card {
+  background: var(--gradient-light);
+}
+
+.purple-border {
+  border: 2px solid #6d25ff;
+}
+
+.border-gradient {
+  position: relative;
+  padding: 2px;
+
+  background: var(--gradient-purple);
+}
+
+.border-gradient-inner {
+  background: var(--gradient-light);
+  border-radius: inherit;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.accent {
+  color: var(--accent-color);
+}
+
+.center {
+  margin: 0 auto;
+}
+
+button {
+  cursor: pointer;
 }
