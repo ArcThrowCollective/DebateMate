@@ -11,7 +11,7 @@ const app = express();
 const httpsServer = createServer(
   {
     key: readFileSync('./cert/cert-key.pem'),
-    cert: readFileSync('./cert/fullchain.pem'),
+    cert: readFileSync('./cert/signalcert.pem'),
   },
   app
 );
@@ -27,14 +27,16 @@ const io = new Server(server, {
 declare module 'socket.io' {
   interface Socket {
     user: string;
+    userID: number;
   }
 }
 
 // inject user ID
 // connect like: const socket = io('ws://localhost:5000', {query: {user: 'Nody'}});
 io.use((socket, next) => {
-  if (socket.handshake.query && socket.handshake.query.user) {
-    socket.user = <string>socket.handshake.query.user;
+  if (socket.handshake.query && socket.handshake.auth.user) {
+    socket.user = <string>socket.handshake.auth.user;
+    socket.userID = <number>socket.handshake.auth.id;
   } else {
     // TODO: make user ID mandatory?
     socket.user = 'anonymous';
@@ -43,10 +45,10 @@ io.use((socket, next) => {
 });
 
 // join room
-io.use((socket, next) => {
-  socket.join('default');
-  next();
-});
+// io.use((socket, next) => {
+//   socket.join('default');
+//   next();
+// });
 
 io.on('connection', (socket) => {
   console.log(`${socket.user} connected. Rooms: `, socket.rooms);
@@ -57,11 +59,15 @@ io.on('connection', (socket) => {
     console.log('ping', text);
     io.emit('pong');
   });
+  socket.on('joinRoom', (room) => {
+    socket.join(room);
+    console.log(`${socket.user} joined room ${room}. Rooms: `, socket.rooms)
+  })
   io.engine.on('connection_error', (err) => {
     console.log(err.req); // the request object
     console.log(err.code); // the error code, for example 1
     console.log(err.message); // the error message, for example "Session ID unknown"
-    console.log(err.context); // some additional error context
+    // console.log(err.context); // some additional error context
   });
 });
 

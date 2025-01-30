@@ -1,11 +1,16 @@
 // run this in node to test socket communication
 
+import dotenv from 'dotenv';
+dotenv.config({ path: '.env' });
 const { readFileSync } = require('fs');
 const { io } = await import('socket.io-client');
 
-const socket = io('wss://127.0.0.1:5000', {
-  ca: readFileSync('../signal/cert/fullchain.pem'),
-  query: { callerID: 'Nody' },
+const serverURI = `https://${process.env.SIGNAL_HOST}:${process.env.SIGNAL_PORT}`;
+console.log(`..connecting to signaling server ${serverURI}`)
+const socket = io(serverURI, {
+  ca: readFileSync('./cert/signalcert.pem'),
+  rejectUnauthorized: false,
+  query: { user: 'Nody' },
 });
 
 socket.on('connect_error', (err) => {
@@ -17,4 +22,5 @@ socket.on('connect_error', (err) => {
   console.log(err.context);
 });
 
-socket.emit('ping', 'pang');
+socket.on('pong', () => console.log('pong'));
+socket.emit('ping');
