@@ -1,0 +1,12 @@
+#header {
+  background: var(--white);
+  box-shadow: var(--box-shadow);
+
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+.avatar {
+  cursor: pointer;
+}
