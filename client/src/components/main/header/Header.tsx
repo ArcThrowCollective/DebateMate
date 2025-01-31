@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import {
   navigateToHome,
   navigateToProfile,
+  navigateToRoom,
 } from '../../../state/navigation/navigationSlice';
 
 export default function Header() {
@@ -31,6 +32,9 @@ export default function Header() {
           onClick={() => dispatch(navigateToHome())}
         />
         <div className="flex gap-4">
+          <button onClick={() => dispatch(navigateToRoom('Number1 User'))}>
+            TempRoom
+          </button>
           <button onClick={() => setOverlayType('login')}>Login</button>
           <button onClick={() => setOverlayType('signup')}>Sign Up</button>
           <FaUserCircle
