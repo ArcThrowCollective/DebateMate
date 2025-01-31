@@ -1,9 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
+import navigationReducer from './navigation/navigationSlice';
 import loaderReducer from './loader/loaderSlice';
 
 export const store = configureStore({
   reducer: {
-    // Each slice in the reducer is responsible for its own state.
+    navigation: navigationReducer,
     loader: loaderReducer,
   },
 });

@@ -2,6 +2,11 @@ import './App.css';
 import Header from './components/main/header/Header.tsx';
 import { RoomList } from './components/UI/cards/RoomList.tsx';
 import { Dashboard } from './components/main/dashboard/Dashboard.tsx';
+import Footer from './components/main/footer/Footer.tsx';
+import { useSelector } from 'react-redux';
+import { RootState } from './state/store.ts';
+import ChannelPage from './components/views/channel/ChannelPage.tsx';
+import ProfilePage from './components/views/profile/ProfilePage.tsx';
 
 const roomData = [
   {
@@ -25,14 +30,26 @@ const roomData = [
 ];
 
 function App() {
+  const { currentPage, channelId, profileId } = useSelector(
+    (state: RootState) => state.navigation
+  ); // add roomId
+
   return (
     <Dashboard>
       <Header />
-      <div className="flex flex-col self-center w-[90vw] gap-10 text-center">
-        <h1 className="text-3xl font-bold">Active Topics</h1>
-        <RoomList rooms={roomData} />
-      </div>
-      <Header />
+      <section className="flex flex-col self-center w-[90vw] gap-10 text-center">
+        {currentPage === 'home' && (
+          <>
+            <h1 className="text-3xl font-bold">Active Topics</h1>
+            <RoomList rooms={roomData} />
+          </>
+        )}
+
+        {currentPage === 'channel' && <ChannelPage channelId={channelId!} />}
+        {currentPage === 'profile' && <ProfilePage profileId={profileId!} />}
+        {/* {currentPage === 'room' && <Room roomId={roomId!} />} */}
+      </section>
+      <Footer />
     </Dashboard>
   );
 }

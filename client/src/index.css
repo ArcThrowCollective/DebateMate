@@ -14,6 +14,7 @@
     #1a1527a1 100%
   );
 
+  user-select: none;
   --purple-color: #6d25ff;
   --purple__card: linear-gradient(to top, #6d25ff 0%, #cf82ff 50%);
   --white: #e4e5ea;
