@@ -14,4 +14,5 @@
 .header_logo {
   height: 1.4rem;
   align-self: center;
+  cursor: pointer;
 }
