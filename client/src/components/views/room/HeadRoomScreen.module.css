@@ -1,0 +1,19 @@
+.HeadRoomScreenContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra horizontalmente */
+    justify-content: center; /* Centra verticalmente */
+    height: 100vh; /* Asegura que el contenedor ocupe toda la altura de la pantalla */
+    width: 100%; /* Asegura que el contenedor ocupe toda la anchura */
+}
+
+.UserNameCardContainer {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    width: 100%; /* Asegura que el contenedor ocupe toda la anchura */
+}
+.UserName_Card {
+    width: 300px; /* Ajusta según sea necesario */
+    margin: 0 auto; /* Centra horizontalmente */
+}
