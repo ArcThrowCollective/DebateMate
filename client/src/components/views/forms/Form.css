@@ -6,9 +6,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  box-shadow: var(--box-shadow);
-  background: var(--white);
-  border-radius: var(--border-radius);
   width: fit-content;
   gap: 2rem;
   padding: 3rem;
@@ -72,4 +69,10 @@ textarea {
   color: var(--purple-color);
   right: 0.8rem;
   top: 0.8rem;
+}
+
+.error-message {
+  position: absolute;
+  bottom: -2.4rem;
+  color: var(--accent-color);
 }

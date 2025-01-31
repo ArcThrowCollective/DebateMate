@@ -10,3 +10,8 @@
 .avatar {
   cursor: pointer;
 }
+
+.header_logo {
+  height: 1.4rem;
+  align-self: center;
+}
