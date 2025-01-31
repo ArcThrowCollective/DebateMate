@@ -9,7 +9,7 @@ export const submitFormData = async (
   formData: Record<string, any>
 ) => {
   try {
-    const response = await axios.post(`${URL}/form/${formType}`, formData, {
+    const response = await axios.post(`${URL}/api`, formData, {
       headers: {
         'Content-Type': 'application/json',
       },
