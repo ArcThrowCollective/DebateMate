@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from './state/store.ts';
 import ChannelPage from './components/views/channel/ChannelPage.tsx';
 import ProfilePage from './components/views/profile/ProfilePage.tsx';
+import Room from './components/views/room/room.tsx';
 
 const roomData = [
   {
@@ -30,9 +31,9 @@ const roomData = [
 ];
 
 function App() {
-  const { currentPage, channelId, profileId } = useSelector(
+  const { currentPage, channelId, profileId, roomId } = useSelector(
     (state: RootState) => state.navigation
-  ); // add roomId
+  );
 
   return (
     <Dashboard>
@@ -47,7 +48,7 @@ function App() {
 
         {currentPage === 'channel' && <ChannelPage channelId={channelId!} />}
         {currentPage === 'profile' && <ProfilePage profileId={profileId!} />}
-        {/* {currentPage === 'room' && <Room roomId={roomId!} />} */}
+        {currentPage === 'room' && <Room roomId={roomId!} />}
       </section>
       <Footer />
     </Dashboard>
