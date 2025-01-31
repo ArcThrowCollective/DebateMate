@@ -4,7 +4,10 @@ import { FaUserCircle } from 'react-icons/fa';
 import { Modal } from '../../UI/modal/ShowModal';
 import svg from '../../../assets/55Debate_logo_dark-1573x237.svg';
 import { useDispatch } from 'react-redux';
-import { navigateToProfile, navigateToHome } from '../../../state/store';
+import {
+  navigateToHome,
+  navigateToProfile,
+} from '../../../state/navigation/navigationSlice';
 
 export default function Header() {
   const dispatch = useDispatch();
