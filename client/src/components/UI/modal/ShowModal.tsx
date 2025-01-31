@@ -13,6 +13,7 @@ export const Modal: React.FC<ModalProps> = ({ type, onClose }) => {
 
   return (
     <div className="overlay" onClick={onClose}>
+      <div className="bg_shape" onClick={onClose}></div>
       <div className="modal__content" onClick={(e) => e.stopPropagation()}>
         <IoCloseCircle className="modal__close" size="2rem" onClick={onClose} />
         <Form type={type} onClose={onClose} />

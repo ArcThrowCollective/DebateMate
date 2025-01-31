@@ -1,0 +1,16 @@
+#footer {
+  background: var(--white);
+  box-shadow: var(--box-shadow);
+
+  display: flex;
+  justify-content: end;
+  padding: 1rem;
+}
+
+.footer__banner {
+  padding: 0.1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  background: var(--purple-color);
+  color: var(--white);
+}
