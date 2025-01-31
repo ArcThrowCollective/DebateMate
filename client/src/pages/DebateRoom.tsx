@@ -3,6 +3,7 @@ import VideoChat from '../components/VideoChat';
 import useUserMedia from '../hooks/useUserMedia';
 import { io, Socket } from 'socket.io-client';
 import { useSearchParams } from 'react-router-dom';
+import env from '../../env';
 
 type Props = {};
 type PeerConnections = { [id: string]: RTCPeerConnection };
@@ -28,19 +29,28 @@ const DebateRoom = (props: Props) => {
   const [peers, setPeers] = useState<PeerConnections>({});
   const [streams, setStreams] = useState<Streams>({});
   const [username, setUserName] = useState<string>('');
-  const { stream, error, videoRef } = useUserMedia({
+  const userStreamHasBeenCreated = useRef<boolean>(false);
+  console.log('this runs once?');
+  // set up <video> Refs
+  const {
+    stream: streamLoc,
+    error: errorLoc,
+    videoRef: videoRefLoc,
+  } = useUserMedia({
     video: true,
     audio: false,
   });
+  const videoRefRem = useRef<HTMLVideoElement>(null);
 
   // one-to-one variables (temporary)
   const remotePeerSocketId = useRef<string>('TMP REMOTE ID');
+  const remoteStream = useRef<Streams>();
 
   // run all connection logic once
   useEffect(() => {
     // create socket
     // setUserName(userName);
-    const socket = io('https://194.164.53.5:8181', {
+    const socket = io(`https://${env.SIGNAL_HOST}:${env.SIGNAL_PORT}`, {
       auth: { userName, roomId },
     });
     socketRef.current = socket;
@@ -86,17 +96,16 @@ const DebateRoom = (props: Props) => {
     socket.emit('joinRoom', room);
     console.log(`Joining room: ${room}`);
 
-    // socket.on('remoteID', (remoteId) => {
-    //   if (remoteId === socketRef.current) return;
-    //   remotePeerSocketId.current = remoteId;
-    // });
-
     // set up peer connection
     const peer = new RTCPeerConnection({
       iceServers: [
         // { urls: ['stun:stun.l.google.com:19302'] },
-        { urls: ['stun:188.245.183.220:5349'] },
-        // { urls: ['stun:188.245.183.220:5349', 'turn:188.245.183.220:5349'] },
+        { urls: [`stun:${env.STUN_HOST}:${env.STUN_PORT}`] },
+        {
+          urls: [`turn:${env.TURN_HOST}:${env.TURN_PORT}`],
+          username: env.TURN_USER,
+          credential: env.TURN_PWD,
+        },
       ],
     });
 
@@ -116,6 +125,27 @@ const DebateRoom = (props: Props) => {
       } else {
         console.log(':warning: No more ICE candidates.');
       }
+    };
+
+    peer.ontrack = (event) => {
+      console.log(`Received remote track from ${remotePeerSocketId.current}`);
+      if (!streamsRef.current[remotePeerSocketId.current]) {
+        streamsRef.current[remotePeerSocketId.current] = {
+          stream: event.streams[0],
+          candidates: [],
+        };
+      } else {
+        streamsRef.current[remotePeerSocketId.current].stream =
+          event.streams[0];
+        // set remote video ref here for <VideoChat>
+        videoRefRem.current!.srcObject = event.streams[0];
+      }
+      setStreams((prev) => ({
+        ...prev,
+        [remotePeerSocketId.current]: {
+          ...streamsRef.current[remotePeerSocketId.current],
+        },
+      }));
     };
 
     // handle offer
@@ -190,7 +220,18 @@ const DebateRoom = (props: Props) => {
 
   return (
     <>
-      <div>{/* <VideoChat></VideoChat> */}</div>
+      <div>
+        <VideoChat
+          stream={streamLoc}
+          error={errorLoc}
+          videoRef={videoRefLoc}
+        ></VideoChat>
+        <VideoChat
+          stream={streams[remotePeerSocketId.current]?.stream}
+          error={null}
+          videoRef={videoRefRem}
+        ></VideoChat>
+      </div>
     </>
   );
 };

@@ -3,14 +3,16 @@ const useUserMedia = (constraints: MediaStreamConstraints) => {
   const [stream, setStream] = useState<MediaStream | null>(null);
   const [error, setError] = useState<string | null>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+
   useEffect(() => {
     const enableStream = async () => {
       try {
+        console.log('trying to enableStream');
         const userStream =
           await navigator.mediaDevices.getUserMedia(constraints);
         setStream(userStream);
       } catch (err) {
-        setError('Failed to access media devices.');
+        setError('Failed to access media devices.' + err);
       }
     };
     enableStream();

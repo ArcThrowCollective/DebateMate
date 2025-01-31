@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import useUserMedia from '../hooks/useUserMedia';
 type Props = {
-  stream: MediaStream | null;
+  stream: MediaStream | undefined | null;
   error: string | null;
   videoRef: React.RefObject<HTMLVideoElement>;
 };
