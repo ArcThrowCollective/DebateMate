@@ -1,6 +1,5 @@
 import './Form.css';
 import { IoMdSend } from 'react-icons/io';
-import { IoCloseCircle } from 'react-icons/io5';
 import { CreateChannel } from './channelForm/CreateChannel';
 import { CreateTopic } from './topicForm/CreateTopic';
 import { handleFormSubmit } from '../../../utils/handleFormSubmit';
@@ -10,9 +9,15 @@ import { submitFormData } from '../../../services/API.Service';
 interface FormProps extends React.FormHTMLAttributes<HTMLFormElement> {
   type: 'signup' | 'login' | 'channel' | 'topic';
   title?: string;
+  onClose: () => void;
 }
 
-export const Form: React.FC<FormProps> = ({ type, title, ...props }) => {
+export const Form: React.FC<FormProps> = ({
+  type,
+  title,
+  onClose,
+  ...props
+}) => {
   const formTitles: Record<FormProps['type'], string> = {
     signup: 'Sign Up',
     login: 'Login',
@@ -22,8 +27,12 @@ export const Form: React.FC<FormProps> = ({ type, title, ...props }) => {
 
   const [minRating, setMinRating] = useState(0);
 
+  const [error, setError] = useState<string | null>(null);
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setError(null); // clear errors
+
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const extraData: Record<string, any> = { formType: type };
     if (type === 'topic') {
@@ -33,17 +42,19 @@ export const Form: React.FC<FormProps> = ({ type, title, ...props }) => {
     const formData = handleFormSubmit(e, extraData);
 
     try {
-      await submitFormData(type, formData);
+      const response = await submitFormData(type, formData);
+      console.log('Submission successful:', response);
+      onClose();
     } catch (error) {
       console.error('❌ Submission failed:', error);
+      setError('Failed to submit. Please try again.');
     }
   };
 
   return (
     <form id="form__container" onSubmit={handleSubmit} {...props}>
-      <IoCloseCircle id="closeForm" />
       <h1 id="formTitle">{title || formTitles[type]}</h1>
-
+      {error && <p className="error-message">{error}</p>}
       {(type === 'signup' || type === 'login') && (
         <>
           {type === 'signup' && (
