@@ -1,0 +1,79 @@
+.requestspeak {
+    position: absolute;
+    height: 100%;
+    width: 67.57%;
+    top: 0%;
+    right: 32.43%;
+    bottom: 0%;
+    left: 0%;
+    border-radius: 25px 0px 0px 25px;
+    background: linear-gradient(180deg, #e4e5ea, #f0f1f6);
+}
+.butonnoIcon {
+    position: absolute;
+    height: 100%;
+    width: 13.51%;
+    top: 0%;
+    right: 16.22%;
+    bottom: 0%;
+    left: 70.27%;
+    max-width: 100%;
+    overflow: hidden;
+    max-height: 100%;
+}
+.buttonyesIcon {
+    position: absolute;
+    height: 100%;
+    width: 13.51%;
+    top: 0%;
+    right: 0%;
+    bottom: 0%;
+    left: 86.49%;
+    max-width: 100%;
+    overflow: hidden;
+    max-height: 100%;
+}
+.userright1AvatarIcon {
+    position: absolute;
+    height: 100%;
+    width: 13.51%;
+    top: 0%;
+    right: 86.49%;
+    bottom: 0%;
+    left: 0%;
+    border-radius: 500px;
+    max-width: 100%;
+    overflow: hidden;
+    max-height: 100%;
+    object-fit: cover;
+}
+.jean {
+    position: absolute;
+    height: 50%;
+    width: 14.86%;
+    top: 24%;
+    left: 15.68%;
+    letter-spacing: 0.05em;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+}
+.request {
+    position: absolute;
+    height: 50%;
+    width: 25.68%;
+    top: 24%;
+    left: 37.57%;
+    text-align: right;
+    display: flex;
+    align-items: center;
+}
+.requestContainer {
+    width: 100%;
+    position: relative;
+    height: 50px;
+    text-align: left;
+    font-size: 18px;
+    color: #000;
+    font-family: 'Titillium Web';
+}

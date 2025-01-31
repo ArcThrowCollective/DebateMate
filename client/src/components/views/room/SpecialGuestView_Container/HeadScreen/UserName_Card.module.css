@@ -1,0 +1,54 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+.usernameheadContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  /* z-index: 10; */
+}
+
+.leftcarduser {
+	display: flex;
+  align-items: center;
+	justify-content: space-between;
+	background: linear-gradient(90deg, #C362FF 0%, rgba(0, 0, 0, 0) 66%, #6D25FF 100%);
+  background-image: url("src/assets/room-img/LeftCardUser.svg");
+	width: 185px;
+	
+}
+.rightcarduser {
+  display: flex;
+  align-items: center;
+	justify-content: space-between;
+	background: linear-gradient(90deg, #6D25FF 0%, rgba(0, 0, 0, 0) 66%, #C362FF 100%);
+	background-image: url("src/assets/room-img/RightCardUser.svg");
+	width: 185px;
+}
+
+.usernameLeft,
+.usernameRight {
+	
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  padding: 0 20px;
+}
+
+.avataruserleftcardheadIcon {
+	width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid white;
+}
+.avataruserrightcardheadIcon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid white;
+}
