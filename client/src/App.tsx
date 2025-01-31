@@ -3,6 +3,8 @@ import './App.css';
 import Header from './components/main/header/Header.tsx';
 // import { RoomList } from './components/UI/cards/RoomList.tsx';
 import { Dashboard } from './components/main/dashboard/Dashboard.tsx';
+import DebateRoom from './pages/DebateRoom.tsx';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 // const roomData = [
 //   {
@@ -45,15 +47,25 @@ import { Dashboard } from './components/main/dashboard/Dashboard.tsx';
 
 function App() {
   return (
-    <Dashboard>
-      <Header />
-      <div className="flex flex-col self-center w-[90vw] gap-10 text-center">
-        {/* <h1 className="text-3xl font-bold">Active Topics</h1> */}
-        <Form type="channel" />
-        {/* <RoomList rooms={roomData} /> */}
-      </div>
-      <Header />
-    </Dashboard>
+    <Router>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Dashboard>
+              <Header />
+              <div className="flex flex-col self-center w-[90vw] gap-10 text-center">
+                {/* <h1 className="text-3xl font-bold">Active Topics</h1> */}
+                <Form type="channel" />
+                {/* <RoomList rooms={roomData} /> */}
+              </div>
+              <Header />
+            </Dashboard>
+          }
+        />
+        <Route path="/debate" element={<DebateRoom />} />
+      </Routes>
+    </Router>
   );
 }
 
