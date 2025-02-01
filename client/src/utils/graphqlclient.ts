@@ -6,16 +6,13 @@ const client = new GraphQLClient(`${import.meta.env.VITE_APP_API_URL}/api/`);
 export const fetchData = async (): Promise<Channel[]> => {
   const query = gql`
     query GetPublicChannels {
-      channels {
+      rooms {
         id
-        title
-        description
-        is_public
-        createdAt
-        updatedAt
-        user {
-          id
-          username
+        topic
+        channel {
+          name
+          avatarUrl
+          imageUrl
         }
       }
     }
