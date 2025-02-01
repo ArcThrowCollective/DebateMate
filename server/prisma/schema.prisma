@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -14,93 +8,95 @@ datasource db {
 }
 
 model Channels {
-  id          String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  title       String
-  description String    @db.Text
-  user        Users?  @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId      String?   @unique @db.Uuid
-  is_public   Boolean
+  id            String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  description   String
+  userId        String?  @unique @db.Uuid
+  is_public     Boolean
   channel_image String?
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-  debates     Debates[]
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  avatarUrl     String?
+  name          String
+  user          Users?   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  rooms         Rooms[]
 }
 
 model Users {
-  id            String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  id            String           @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   username      String
-  email         String        @unique
+  email         String           @unique
   password      String
-  role          Role          @default(GUEST)
+  role          Role             @default(GUEST)
   profile_image String?
-  createdAt     DateTime      @default(now())
-  updatedAt     DateTime?      @updatedAt
-  channels      Channels[]
-  participants  Participants[]
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @updatedAt
+  channels      Channels?
+  history       Debate_History[]
   notifications Notifications[]
-  history        Debate_History[]
+  participants  Participants[]
 }
 
-model Debates {
-  id            String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  topic         String       
-  channel     Channels      @relation(fields: [channelId], references: [id], onDelete: Cascade)
-  channelId   String        @db.Uuid
-  startTime   DateTime      @default(now())
-  endTime     DateTime?     // Null possible if it has no endTime
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
+model Rooms {
+  id           String              @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  topic        String
+  channelId    String              @db.Uuid
+  startTime    DateTime            @default(now())
+  endTime      DateTime?
+  createdAt    DateTime            @default(now())
+  updatedAt    DateTime            @updatedAt
+  imageUrl     String?
+  history      Debate_History[]
   participants Participants[]
-  history     Debate_History[]
-  request     Requests_To_Speak[]
+  request      Requests_To_Speak[]
+  channel      Channels            @relation(fields: [channelId], references: [id], onDelete: Cascade)
 }
 
 model Participants {
-  id          String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  debate      Debates      @relation(fields: [debateId], references: [id], onDelete: Cascade)
-  debateId    String       @db.Uuid
-  user        Users        @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId    String         @db.Uuid
-  role          Role       @default(GUEST)
-  isSpeaking  Boolean      @default(false)
-  joinedAt    DateTime     @default(now())
-  request     Requests_To_Speak[]
+  id         String              @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  userId     String              @db.Uuid
+  role       Role                @default(GUEST)
+  isSpeaking Boolean             @default(false)
+  joinedAt   DateTime            @default(now())
+  roomId     String              @db.Uuid
+  room       Rooms               @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  user       Users               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  request    Requests_To_Speak[]
 }
 
 model Notifications {
-  id          String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  user        Users        @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId      String       @db.Uuid
-  message     String
-  type        NotificationType       
-  isRead      Boolean      @default(false)
-  createdAt   DateTime     @default(now())
+  id        String           @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  userId    String           @db.Uuid
+  message   String
+  type      NotificationType
+  isRead    Boolean          @default(false)
+  createdAt DateTime         @default(now())
+  user      Users            @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Debate_History {
-  id          String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  debate      Debates      @relation(fields: [debateId], references: [id], onDelete: Cascade)
-  debateId    String       @db.Uuid
-  user        Users        @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId      String       @db.Uuid
-  role        Role         @default(GUEST)
-  joinedAt    DateTime
-  leftAt      DateTime
+  id       String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  userId   String   @db.Uuid
+  role     Role     @default(GUEST)
+  joinedAt DateTime
+  leftAt   DateTime
+  roomId   String   @db.Uuid
+  room     Rooms    @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  user     Users    @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Requests_To_Speak {
-  id          String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  debate      Debates      @relation(fields: [debateId], references: [id], onDelete: Cascade)
-  debateId    String       @db.Uuid
-  participant Participants        @relation(fields: [participantId], references: [id], onDelete: Cascade)
-  participantId      String       @db.Uuid
-  status      RequestStatus @default(PENDING)       
-  requestedAt DateTime     @default(now())
-  handledAt   DateTime?
+  id            String        @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  participantId String        @db.Uuid
+  status        RequestStatus @default(PENDING)
+  requestedAt   DateTime      @default(now())
+  handledAt     DateTime?
+  roomId        String        @db.Uuid
+  participant   Participants  @relation(fields: [participantId], references: [id], onDelete: Cascade)
+  room          Rooms         @relation(fields: [roomId], references: [id], onDelete: Cascade)
 }
 
 enum Role {
-  GUEST        
+  GUEST
   MEMBER
   ADMIN
   LISTENER

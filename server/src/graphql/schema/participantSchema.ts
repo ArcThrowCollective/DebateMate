@@ -11,14 +11,14 @@ import {
   getParticipants,
   createParticipant,
 } from '../../controllers/graphql/participantController';
-import { debateType } from './debateSchema';
+import { roomsType } from './roomSchema';
 import { userType } from './userSchema';
 
 export const participantType = new GraphQLObjectType({
   name: 'Participant',
   fields: {
     id: { type: GraphQLID },
-    debate: { type: debateType },
+    debate: { type: roomsType },
     debateId: { type: GraphQLID },
     user: { type: userType },
     userId: { type: GraphQLID },
@@ -48,7 +48,7 @@ export const participantMutation = {
     },
     resolve: async (
       _: unknown,
-      participant: Omit<Participants, 'id' | 'joinedAt'>,
+      participant: Omit<Participants, 'id' | 'joinedAt'>
     ) => {
       return await createParticipant(participant);
     },

@@ -14,6 +14,7 @@
     "@reduxjs/toolkit": "^2.5.1",
     "@tailwindcss/vite": "^4.0.0",
     "axios": "^1.7.9",
+    "graphql-request": "^7.1.2",
     "ldrs": "^1.0.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",

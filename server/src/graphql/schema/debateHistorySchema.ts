@@ -11,14 +11,14 @@ import {
   getDebateHistories,
   createDebateHistory,
 } from '../../controllers/graphql/debateHistoryController';
-import { debateType } from './debateSchema';
+import { roomsType } from './roomSchema';
 import { userType } from './userSchema';
 
 export const debateHistoryType = new GraphQLObjectType({
   name: 'DebateHistory',
   fields: {
     id: { type: GraphQLID },
-    debate: { type: debateType },
+    debate: { type: roomsType },
     debateId: { type: GraphQLID },
     user: { type: userType },
     userId: { type: GraphQLID },
