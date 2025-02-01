@@ -1,81 +1,67 @@
-.headscreenIcon {
-  	width: 100vh; 
-    height: 200px;
-    object-fit: cover; 
-}
-
 .nametopic {
-display: flex;
-padding-top: 10px;
-/* position: relative;
-font-size: 40px;
-letter-spacing: 0.05em;
-
-font-family: 'Titillium Web';
-color: #fff;
-height: auto;
-align-items: center;
-justify-content: center; */
-
+  position: absolute;
+  display: flex;
+  color: rgba(26, 21, 39, 0.9);
+  font-weight: bolder;
+  left: 16px;
+  top: 100px;
 }
 
-.personicon {
-  	width: 24px;
-    height: 24px;
+.live {
+  /* position: absolute; */
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  color: rgb(245, 184, 112);
+  background-color: rgba(53, 47, 65, 0.9);
+  background-size: 40px;
+  height: 20px;
+  margin-left: 16px;
 }
-
-.liveboxIcon {
-  	width: 48px;
-    height: 21.5px;
-}
-
-.liveContainer {
-  	display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 8px; /* Espaciado entre los elementos */
-    /* position: relative; */
-    padding-top: 90px;
-    width: auto;
-    height: 24px;
-    font-size: 20px;
-}
-.debateLogoIcon {
-  	position: absolute;
-  	top: 26px;
-  	left: 40px;
-  	width: 165.1px;
-  	height: 24.8px;
-}
-.headviewContainer {
-    width: 100vw;
-    height: 200px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    background-image: url("src/assets/room-img/HeadScreenDark.svg");
-    background-size: cover; /* Se ajusta automáticamente */
-    background-position: center;
-    background-repeat: no-repeat;
-    z-index: 1000;
-
-    display: flex;
-    flex-direction: column;
-    align-content: flex-start;
-    /* align-items: center; */
-    /* justify-content: space-between; */
-    
-    padding:10px 40px;
-    
-  	
-  	font-size: 3.2em;
-  	line-height: normal;
-  	color: #fff;
+.viewersIcon {
+  width: 20px;
+  display: flex;
+  font-weight: bolder;
+  /* position: absolute; */
+  margin-left: 6px;
+  margin-right: 6px;
+  color: rgb(245, 184, 112);
 }
 
 .totalonline {
-    font-size: 20px;
-    color: white;
-    margin: 0;
+  display: flex;
+  /* position: absolute; */
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0;
+  color: rgba(53, 47, 65, 1);
 }
 
+.live_Container {
+  width: 100px;
+  /* position: absolute; */
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  /* justify-content: space-around; */
+}
+
+.headviewContainer {
+  width: 100vw;
+  height: 180px;
+  padding-top: 20px;
+
+  /* position: relative; */
+  display: flex;
+  flex-direction: column;
+
+  font-size: 3.2em;
+  line-height: normal;
+  color: #fff;
+  background: linear-gradient(
+    180deg,
+    rgba(26, 21, 39, 0.8) 5%,
+    rgba(53, 47, 65, 0.5) 30%,
+    rgba(224, 222, 228, 0.1) 65%
+  );
+}

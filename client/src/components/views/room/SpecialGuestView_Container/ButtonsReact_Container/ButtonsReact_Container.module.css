@@ -1,69 +1,49 @@
 .buttonLike {
-  	/* position: absolute;
-  	top: 0px;
-  	left: 0px; */
-  	width: 50px;
-  	height: 50px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-size: 50px;
+  padding-bottom: 5px;
 
-		background-color: transparent;
-		mask-image: url("src/assets/room-img/Buttonlike.svg");
-		mask-repeat: no-repeat;
-		mask-size: cover;
-		border: none;
-		cursor: pointer;
-		background-color: rgb(130, 250, 175);
+  border: none;
+  cursor: pointer;
+  background-color: rgb(130, 250, 175);
+  opacity: 0.8;
 }
 
 .buttonUnlike {
-  	/* position: absolute;
-  	top: 0px;
-  	left: 70px; */
-  	width: 50px;
-  	height: 50px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-size: 50px;
+  background-color: rgb(245, 184, 112);
+  font-size: 50px;
+  padding-top: 5px;
 
-		background-color: transparent;
-		mask-image: url("src/assets/room-img/ButtonUnlike.svg");
-		mask-repeat: no-repeat;
-		mask-size: cover;
-		border: none;
-		cursor: pointer;
-		background-color: rgb(245, 184, 112);
-
+  border: none;
+  cursor: pointer;
+  opacity: 0.8;
 }
 .buttonhandupIcon {
-  	/* height: 100%;
-  	width: 41.67%;
-  	top: 0%;
-  	right: 0%;
-  	bottom: 0%;
-  	left: 58.33%;
-  	max-width: 100%;
-  	overflow: hidden;
-  	max-height: 100%; */
-
-		
-		background-color: transparent;
-		mask-image: url("src/assets/room-img/ButtonHandUp.svg");
-		mask-repeat: no-repeat;
-		mask-size: cover;
-		border: none;
-		cursor: pointer;
-		background-color: rgb(233, 233, 238);
-    
+  font-size: 50px;
+  width: 50px;
+  border-radius: 50%;
+  margin-left: 40px;
+  border: none;
+  cursor: pointer;
+  background-color: rgb(233, 233, 238);
+  padding: 4px;
+  opacity: 0.8;
 }
 .buttonsreactContainer {
-  	width: 100%;
-  	/* position: relative; */
-  	height: 50px;
-		display: flex;
-		justify-content: space-between;
-		/* align-items: center; */
-		/* position: absolute; */
-		gap: 30px;
-		/* transform: translateX(-50%); */
-		/* left: 50%; */
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  background: transparent;
 }
 
 .buttonReact {
-	gap: 20px;
+  gap: 20px;
 }

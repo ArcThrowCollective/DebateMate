@@ -1,0 +1,10 @@
+.RoomContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.HeadContainer {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
