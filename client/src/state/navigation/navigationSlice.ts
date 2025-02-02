@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { User } from '../../types/debate';
+import { AuthUser, Room } from '../../types/debate';
 
 type PageType =
   | 'home'
@@ -14,11 +14,13 @@ interface NavigationState {
   channelId?: string;
   roomId?: string;
   profileId?: string;
-  user?: User;
+  user?: AuthUser | null;
+  room?: Room | null;
 }
 
 const initialState: NavigationState = {
   currentPage: 'home',
+  user: null, // In case theres no user (null) the user is considered a guest
 };
 
 const navigationSlice = createSlice({
@@ -46,10 +48,10 @@ const navigationSlice = createSlice({
     },
     navigateToDebateScreen: (
       state,
-      action: PayloadAction<{ user: User; roomId: string }>
+      action: PayloadAction<{ user: AuthUser | null; room: Room | null }>
     ) => {
       state.currentPage = 'debatescreen';
-      state.roomId = action.payload.roomId;
+      state.room = action.payload.room;
       state.user = action.payload.user;
     },
   },

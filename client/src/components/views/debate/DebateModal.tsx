@@ -1,23 +1,68 @@
 import { useDispatch } from 'react-redux';
 import { navigateToDebateScreen } from '../../../state/navigation/navigationSlice';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { AuthUser } from '../../../types/debate';
+import { fetchRoomById } from '../../../utils/graphqlclient';
+import { Room } from '../../../types/debate';
 
 type Props = {
   isModalOpen: boolean;
   setIsModalOpen: (isOpen: boolean) => void;
+  roomId: string;
 };
 
-const DebateModal = ({ isModalOpen, setIsModalOpen }: Props) => {
+const DebateModal = ({ isModalOpen, setIsModalOpen, roomId }: Props) => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [room, setRoom] = useState<Room | null>(null);
+  const [user, setUser] = useState<AuthUser | null>(null);
   const dispatch = useDispatch();
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
 
-  const handleConfirm = () => {
-    const user = 'Test';
-    const roomId = Math.floor(Math.random() * 100000);
-    //navigate(`/debate?username=${username + id}&id=${id}`);
-    dispatch(navigateToDebateScreen({ user, roomId }));
+  useEffect(() => {
+    // check if a user is logged in
+    const checkAuthStatus = async () => {
+      try {
+        const response = await axios.get('http://localhost:3000/auth/status', {
+          withCredentials: true,
+        });
+        if (response.data.isAuthenticated) {
+          setIsLoggedIn(true);
+          setUser(response.data.user);
+        } else {
+          setIsLoggedIn(false);
+        }
+      } catch (error) {
+        console.error('Error auth status: ', error);
+        setIsLoggedIn(false);
+      }
+    };
+
+    const getRoom = async () => {
+      try {
+        const roomData = await fetchRoomById(roomId as string);
+        setRoom(roomData);
+      } catch (error) {
+        console.error('Error fetching room:', error);
+      }
+    };
+
+    checkAuthStatus();
+    if (roomId) getRoom();
+  }, []);
+
+  const handleConfirm = async () => {
+    //TODO Pass the correct room id
+    if (isLoggedIn && user) {
+      //TODO Additional call to graphql for more information
+      dispatch(navigateToDebateScreen({ user, room }));
+    } else {
+      // User who tries to view without authentication is a GUEST
+      dispatch(navigateToDebateScreen({ user: null, room }));
+    }
   };
   return (
     <div>

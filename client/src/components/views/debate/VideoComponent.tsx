@@ -59,7 +59,7 @@ const VideoChat = ({ stream, error, videoRef }: Props) => {
   }, [stream, videoRef]);
 
   return (
-    <div>
+    <div className="relative">
       {error && <p>{error}</p>}
       <video
         ref={videoRef}

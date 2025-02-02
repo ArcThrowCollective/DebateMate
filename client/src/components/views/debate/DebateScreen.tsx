@@ -4,14 +4,18 @@ import { FaHandPaper, FaUser } from 'react-icons/fa';
 import { BsFillCameraVideoFill } from 'react-icons/bs';
 import { FaMicrophoneAlt } from 'react-icons/fa';
 import { FaThumbsUp } from 'react-icons/fa';
+import { RootState } from '../../../state/store';
+import { useSelector } from 'react-redux';
 
 type Props = {};
 
 const DebateRoom = (props: Props) => {
+  const { user, room } = useSelector((state: RootState) => state.navigation);
   const { stream, error, videoRef } = useUserMedia({
     video: true,
     audio: false,
   });
+  console.log(user, room);
   return (
     <div className="bg-slate-400 relative min-h-screen flex flex-col justify-between">
       <VideoChat stream={stream} error={error} videoRef={videoRef} />
@@ -24,7 +28,7 @@ const DebateRoom = (props: Props) => {
             <div className="text-white">userCount</div>
           </div>
           <div className="">
-            <div className="text-[50px] text-white">topicTitle</div>
+            <div className="text-[50px] text-white">{room?.topic}</div>
           </div>
         </div>
       </div>

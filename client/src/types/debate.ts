@@ -20,6 +20,12 @@ export enum RequestStatus {
   REJECTED = 'REJECTED',
 }
 
+export interface AuthUser {
+  id: string;
+  email: string;
+  iat: string;
+}
+
 export interface User {
   id: string;
   username: string;
