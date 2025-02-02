@@ -3,25 +3,20 @@ import styles from './VideoSreenModarator.module.css';
 import HeadRoomScreen from './HeadRoomScreen';
 // import FooterModaratorRoomScreen from './FooterModaratorRoomScreen';
 import FooterModaratorControlContain from './ModeratorView_Container/FooterControl/FooterModaratorControl_Container';
-
 import { FunctionComponent } from 'react';
-import ReactPlayer from 'react-player';
+import VideoScreen from './SpecialGuestView_Container/VideoSreen';
 
 const VideoScreenModarator: FunctionComponent = () => {
   return (
-    <div>
+    <div className={styles.VideoScreenModaratorContainer}>
+      <div className={styles.VideoRoomScreen}>
+        <VideoScreen />
+      </div>
+
       <div className={styles.HeadRoomScreen}>
         <HeadRoomScreen />
       </div>
-      <div>
-        <ReactPlayer
-          className={styles.VideoScreenModarator}
-          url="https://youtu.be/thxbiR-XfJo?si=zWKqEabzZO63uXKT"
-          width="100%"
-          height="100vh"
-        ></ReactPlayer>
-      </div>
-      <div>
+      <div className={styles.FooterRoomScreen}>
         <FooterModaratorControlContain />
       </div>
     </div>

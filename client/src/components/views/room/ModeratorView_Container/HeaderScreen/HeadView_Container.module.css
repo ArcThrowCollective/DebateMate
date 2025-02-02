@@ -41,8 +41,9 @@
   width: 100vw;
   height: 20vh;
   position: fixed;
+  left: 0;
   /* top: 0;
-    left: 0; */
+  
   /* background-image: url("src/assets/room-img/HeadScreenDark.svg"); */
   background-size: cover; /* Se ajusta automáticamente */
   background-position: center;
