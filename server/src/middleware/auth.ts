@@ -7,7 +7,7 @@ export const verifyAuthToken = (
   next: NextFunction
 ): void => {
   try {
-    if (req.body.query?.includes('GetPublicChannels')) {
+    if (req.body.query?.includes('PublicQuery')) {
       // all channels should be shown on the landingpage without any authentication
       // this makes sure GetPublicChannel request get their response
       return next();

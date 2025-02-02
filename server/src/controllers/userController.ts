@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken';
 import config from '../../config/env_config';
 import { UserStore } from '../models/user';
 import { Prisma } from '@prisma/client';
+import { NONAME } from 'dns';
 
 const userStore = new UserStore();
 
@@ -70,6 +71,7 @@ export const loginUser = async (req: Request, res: Response) => {
 
     res.cookie('accessToken', accessToken, {
       httpOnly: true,
+
       maxAge: 15 * 60 * 1000, // 15 min
     });
 

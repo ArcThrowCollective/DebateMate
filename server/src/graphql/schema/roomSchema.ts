@@ -9,6 +9,7 @@ import { Rooms } from '@prisma/client';
 import {
   getRooms,
   createRoom,
+  getRoomById,
 } from '../../controllers/graphql/roomsController';
 import { channelType } from './channelSchema';
 
@@ -31,6 +32,15 @@ export const roomsQuery = {
     type: new GraphQLList(roomsType),
     resolve: async () => {
       return await getRooms();
+    },
+  },
+  room: {
+    type: roomsType,
+    args: {
+      id: { type: new GraphQLNonNull(GraphQLID) },
+    },
+    resolve: async (_: unknown, { id }: { id: string }) => {
+      return await getRoomById(id);
     },
   },
 };

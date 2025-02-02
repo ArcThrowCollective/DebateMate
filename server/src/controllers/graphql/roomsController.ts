@@ -18,3 +18,10 @@ export const createRoom = async (
     },
   });
 };
+
+export const getRoomById = async (id: string) => {
+  return await prisma.rooms.findUnique({
+    where: { id },
+    include: { channel: true },
+  });
+};
