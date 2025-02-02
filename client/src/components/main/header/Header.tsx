@@ -5,6 +5,7 @@ import { Modal } from '../../UI/modal/ShowModal';
 import svg from '../../../assets/55Debate_logo_dark-1573x237.svg';
 import { useDispatch } from 'react-redux';
 import {
+  navigateToDebateLobby,
   navigateToHome,
   navigateToProfile,
   navigateToRoom,
@@ -32,6 +33,10 @@ export default function Header() {
           onClick={() => dispatch(navigateToHome())}
         />
         <div className="flex gap-4">
+          <button onClick={() => dispatch(navigateToDebateLobby())}>
+            {/* This is a test */}
+            testRoom
+          </button>
           <button onClick={() => dispatch(navigateToRoom('Number1 User'))}>
             TempRoom
           </button>

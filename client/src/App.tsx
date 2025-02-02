@@ -8,6 +8,8 @@ import { RootState } from './state/store.ts';
 import ChannelPage from './components/views/channel/ChannelPage.tsx';
 import ProfilePage from './components/views/profile/ProfilePage.tsx';
 import Room from './components/views/room/room.tsx';
+import DebateLobby from './components/views/debate/DebateLobby.tsx';
+import DebateScreen from './components/views/debate/DebateScreen.tsx';
 
 const roomData = [
   {
@@ -49,6 +51,9 @@ function App() {
         {currentPage === 'channel' && <ChannelPage channelId={channelId!} />}
         {currentPage === 'profile' && <ProfilePage profileId={profileId!} />}
         {currentPage === 'room' && <Room roomId={roomId!} />}
+        {/* This are test navigations */}
+        {currentPage === 'debatelobby' && <DebateLobby />}
+        {currentPage === 'debatescreen' && <DebateScreen />}
       </section>
       <Footer />
     </Dashboard>
