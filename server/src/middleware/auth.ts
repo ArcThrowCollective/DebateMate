@@ -13,7 +13,10 @@ export const verifyAuthToken = (
       return next();
     }
 
+    /*
+    ----- Use this for Authorization headers instead of cookies -----
     const authorizationHeader = req.headers.authorization;
+    
 
     if (!authorizationHeader) {
       res.status(401).json({ message: 'Authorization header is missing' });
@@ -21,6 +24,9 @@ export const verifyAuthToken = (
     }
 
     const token = authorizationHeader?.split(' ')[1];
+    */
+
+    const token = req.cookies.accessToken;
 
     if (!token) {
       res.status(401).json({ message: 'Unauthorized' });
