@@ -79,8 +79,9 @@
 }
 
 .footerscreenContainer {
+  pointer-events: none;
   width: 100vw;
-  height: 149px;
+  height: 135px;
   position: fixed;
   bottom: 91px;
   left: 0;
