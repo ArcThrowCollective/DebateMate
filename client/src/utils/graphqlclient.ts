@@ -16,9 +16,10 @@ const client = new ApolloClient({
   link,
 });
 
+// Any public query bypasses auth
 export const fetchData = async (): Promise<Channel[]> => {
   const GET_PUBLIC_CHANNELS = gql`
-    query GetPublicChannels {
+    query PublicQuery {
       rooms {
         id
         topic
@@ -40,7 +41,7 @@ export const fetchData = async (): Promise<Channel[]> => {
 
 export const fetchRoomById = async (roomId: string | number): Promise<Room> => {
   const GET_ROOM_BY_ID = gql`
-    query GetRoomById($roomId: ID!) {
+    query PublicQuery($roomId: ID!) {
       room(id: $roomId) {
         id
         topic

@@ -26,9 +26,10 @@ const DebateModal = ({ isModalOpen, setIsModalOpen, roomId }: Props) => {
     // check if a user is logged in
     const checkAuthStatus = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/auth/status', {
+        const response = await axios.get('http://127.0.0.1:3000/auth/status', {
           withCredentials: true,
         });
+        console.log(response.data);
         if (response.data.isAuthenticated) {
           setIsLoggedIn(true);
           setUser(response.data.user);
@@ -61,7 +62,7 @@ const DebateModal = ({ isModalOpen, setIsModalOpen, roomId }: Props) => {
       dispatch(navigateToDebateScreen({ user, room }));
     } else {
       // User who tries to view without authentication is a GUEST
-      dispatch(navigateToDebateScreen({ user: null, room }));
+      dispatch(navigateToDebateScreen({ user, room }));
     }
   };
   return (
