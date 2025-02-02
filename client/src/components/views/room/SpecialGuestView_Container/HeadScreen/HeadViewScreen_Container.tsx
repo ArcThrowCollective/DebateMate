@@ -1,8 +1,8 @@
 import { FunctionComponent } from 'react';
-import styles from '../HeadScreen/HeadView_Container.module.css';
+import styles from '../HeadScreen/HeadViewScreen_Container.module.css';
 import { GrView } from 'react-icons/gr';
 
-const HeadViewContainer: FunctionComponent = () => {
+const HeadViewScreenContainer: FunctionComponent = () => {
   return (
     <div className={styles.headviewContainer}>
       <div className={styles.live_Container}>
@@ -18,4 +18,4 @@ const HeadViewContainer: FunctionComponent = () => {
   );
 };
 
-export default HeadViewContainer;
+export default HeadViewScreenContainer;

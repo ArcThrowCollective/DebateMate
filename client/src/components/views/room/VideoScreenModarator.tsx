@@ -1,6 +1,8 @@
-import FooterRoomScreen from './FooterRoomScreen';
-import styles from './VideoScreenModarator.module.css';
+// import FooterRoomScreen from './FooterRoomScreen';
+import styles from './VideoSreenModarator.module.css';
 import HeadRoomScreen from './HeadRoomScreen';
+// import FooterModaratorRoomScreen from './FooterModaratorRoomScreen';
+import FooterModaratorControlContain from './ModeratorView_Container/FooterControl/FooterModaratorControl_Container';
 
 import { FunctionComponent } from 'react';
 import ReactPlayer from 'react-player';
@@ -20,7 +22,7 @@ const VideoScreenModarator: FunctionComponent = () => {
         ></ReactPlayer>
       </div>
       <div>
-        <FooterRoomScreen />
+        <FooterModaratorControlContain />
       </div>
     </div>
   );

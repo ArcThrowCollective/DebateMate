@@ -2,7 +2,8 @@ import { FunctionComponent } from 'react';
 import styles from './UserName_Card.module.css';
 import TimerContainer from './TimerContainer';
 import BattleLine from './BattleLine_Container';
-const UserNameHeadContainer: FunctionComponent = () => {
+
+const UserName_Card: FunctionComponent = () => {
   return (
     <div className={styles.usernameheadContainer}>
       <div className={styles.leftcarduser}>
@@ -23,4 +24,4 @@ const UserNameHeadContainer: FunctionComponent = () => {
   );
 };
 
-export default UserNameHeadContainer;
+export default UserName_Card;
