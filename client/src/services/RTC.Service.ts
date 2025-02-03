@@ -10,6 +10,7 @@ interface connProps {
   room: string;
   peersRef: RefObject<PeerConnections>;
   streamsRef: RefObject<Streams>;
+  streamLoc: MediaStream | undefined;
 }
 
 async function createConnection(connProps: connProps) {
@@ -25,6 +26,17 @@ async function createConnection(connProps: connProps) {
       },
     ],
   });
+
+  // attach tracks of local stream
+  if (connProps.streamLoc) {
+    connProps.streamLoc.getTracks().forEach((track) => {
+      peer.addTrack(track, connProps.streamLoc!);
+    });
+    console.log('+ local stream tracks added to peer connection');
+  } else {
+    console.log('WARNING: no local stream found to add to peer connection');
+    console.log(connProps.streamLoc);
+  }
 
   peer.onicecandidate = (event) => {
     console.log('onicecandidate triggered');

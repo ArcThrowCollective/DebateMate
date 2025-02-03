@@ -70,6 +70,7 @@ const DebateRoom = (props: Props) => {
           room: room,
           peersRef: peersRef,
           streamsRef: streamsRef,
+          streamLoc: streamLoc.current,
         });
       }
       console.log(peersRef.current);
@@ -132,6 +133,7 @@ const DebateRoom = (props: Props) => {
             room: room,
             peersRef: peersRef,
             streamsRef: streamsRef,
+            streamLoc: streamLoc.current,
           });
           console.log(`# created connection to ${offerFrom}`);
         }
