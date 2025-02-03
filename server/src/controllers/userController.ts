@@ -3,7 +3,6 @@ import jwt from 'jsonwebtoken';
 import config from '../../config/env_config';
 import { UserStore } from '../models/user';
 import { Prisma } from '@prisma/client';
-import { NONAME } from 'dns';
 
 const userStore = new UserStore();
 
