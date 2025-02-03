@@ -223,7 +223,7 @@ const DebateRoom = (props: Props) => {
     if (streamLoc.current) {
       streamLoc.current.getTracks().forEach((track) => {
         for (let peerId in peersRef.current) {
-          peersRef.current[peerId].addTrack(track, streamLoc.current);
+          peersRef.current[peerId].addTrack(track, streamLoc.current!);
         }
       });
       console.log('+ local stream tracks added to peer connection');
@@ -232,11 +232,21 @@ const DebateRoom = (props: Props) => {
       console.log(streamLoc.current);
     }
   }
+  function attachStreamRem() {
+    for (let peerId in peersRef.current) {
+      console.log(`*** checking peer ${peerId} for track`);
+      if (peersRef.current[peerId]) {
+        streamRightRef.current = streamsRef.current[peerId];
+        videoRefRem.current!.srcObject = streamRightRef.current;
+        console.log(`*** setting videoRef to: `, streamsRef.current[peerId]);
+      }
+    }
+  }
 
   return (
     <>
       <div>
-        <button onClick={attachStreamLoc}>ATTACH LOCAL STREAM</button>
+        <button onClick={attachStreamRem}>ATTACH REMOTE STREAM</button>
         <VideoChat
           stream={streamLoc.current}
           error={errorLoc}
@@ -247,6 +257,12 @@ const DebateRoom = (props: Props) => {
           error={null}
           videoRef={videoRefRem}
         ></VideoChat>
+        <video
+          ref={videoRefRem}
+          autoPlay
+          playsInline
+          style={{ width: '400px', border: '1px solid black' }}
+        ></video>
       </div>
     </>
   );

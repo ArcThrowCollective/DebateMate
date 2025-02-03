@@ -55,7 +55,10 @@ async function createConnection(connProps: connProps) {
   };
 
   peer.ontrack = (event) => {
-    console.log(`i received remote track from ${connProps.to}`);
+    console.log(
+      `i received remote track from ${connProps.to}:`,
+      event.streams[0]
+    );
     // TODO: check if there are more streams than [0] ?
     connProps.streamsRef.current[connProps.to] = event.streams[0];
   };
