@@ -39,20 +39,18 @@ const DebateModal = ({ isModalOpen, setIsModalOpen, roomId }: Props) => {
           setUser(response.data.user);
           setParticipant(response.data.user);
           if (user && room) {
-            createParticipant(room?.id, user?.id, 'GUEST');
+            createParticipant(roomId, user?.id, 'GUEST');
           } else {
             throw new Error('userId or room id is null');
           }
         } else {
           // User becomes Participant and has GUEST rights
           setIsLoggedIn(false);
-          if (!user && room) {
-            // Our Guest User in the Database is '7573787b-4a33-4667-bbad-64d2189a76d1'
-            const STATIC_GUESTID = '7573787b-4a33-4667-bbad-64d2189a76d1';
-            createParticipant(room?.id, STATIC_GUESTID, 'GUEST');
-          } else {
-            throw new Error('userId or room id is null');
-          }
+
+          // Our Guest User in the Database is '7573787b-4a33-4667-bbad-64d2189a76d1'
+
+          const STATIC_GUESTID = '7573787b-4a33-4667-bbad-64d2189a76d1';
+          createParticipant(roomId, STATIC_GUESTID, 'GUEST');
         }
       } catch (error) {
         console.error('Error auth status: ', error);

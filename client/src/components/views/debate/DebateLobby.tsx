@@ -4,7 +4,7 @@ import DebateModal from './DebateModal';
 type Props = {};
 
 const DebateLobby = (props: Props) => {
-  const roomId = 'deb5d54b-0763-4b17-93c4-aff31a8e2902';
+  const roomId = '68d05c10-af89-4fe4-9b3e-9c9ea84ae7d5';
   const handleOpenModal = () => {
     setIsModalOpen(true);
   };

@@ -111,7 +111,7 @@ export const CREATE_PARTICIPANT_MUTATION = gql`
   mutation CreateParticipant(
     $roomId: ID!
     $userId: ID!
-    $role: Role!
+    $role: RoleEnum!
     $isSpeaking: Boolean!
   ) {
     createParticipant(
