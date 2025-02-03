@@ -19,7 +19,6 @@ export default function Header() {
   >(null);
 
   const closeOverlay = () => {
-    console.log('🛑 Closing overlay');
     setOverlayType(null);
   };
 
@@ -49,8 +48,6 @@ export default function Header() {
           />
         </div>
       </div>
-
-      <Modal type={overlayType} onClose={closeOverlay} />
     </>
   );
 }
