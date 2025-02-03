@@ -239,13 +239,13 @@ const DebateRoom = (props: Props) => {
     },
     [stream]
   );
-  // useEffect(() => {
-  //   return () => {
-  //     Object.values(peersRef.current).forEach((peer) => peer.close());
-  //     setPeers({});
-  //     setStreams({});
-  //   };
-  // }, []);
+  useEffect(() => {
+    return () => {
+      Object.values(peersRef.current).forEach((peer) => peer.close());
+      setPeers({});
+      setStreams({});
+    };
+  }, []);
   return (
     <div>
       <h2>{username} - Debate Room</h2>
