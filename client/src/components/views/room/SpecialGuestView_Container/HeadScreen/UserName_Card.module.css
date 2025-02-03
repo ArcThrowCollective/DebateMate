@@ -1,19 +1,9 @@
-<<<<<<< HEAD
 .usernameheadContainer {
   position: relative;
-=======
-* {
-  padding: 0;
-  margin: 0;
-}
-
-.usernameheadContainer {
->>>>>>> 41c665d404bb1604eb3d3142677e0e84265aec7b
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-<<<<<<< HEAD
   top: 100px;
 }
 
@@ -41,32 +31,10 @@
   border-radius: 0px 30px 30px 0px;
   margin-left: 350px;
   /* margin-top: 50px; */
-=======
-  /* z-index: 10; */
-}
-
-.leftcarduser {
-	display: flex;
-  align-items: center;
-	justify-content: space-between;
-	background: linear-gradient(90deg, #C362FF 0%, rgba(0, 0, 0, 0) 66%, #6D25FF 100%);
-  background-image: url("src/assets/room-img/LeftCardUser.svg");
-	width: 185px;
-	
-}
-.rightcarduser {
-  display: flex;
-  align-items: center;
-	justify-content: space-between;
-	background: linear-gradient(90deg, #6D25FF 0%, rgba(0, 0, 0, 0) 66%, #C362FF 100%);
-	background-image: url("src/assets/room-img/RightCardUser.svg");
-	width: 185px;
->>>>>>> 41c665d404bb1604eb3d3142677e0e84265aec7b
 }
 
 .usernameLeft,
 .usernameRight {
-<<<<<<< HEAD
   font-size: 30px;
   font-weight: bold;
   color: #e4e5ea;
@@ -74,28 +42,11 @@
 }
 
 .avataruserleftcardheadIcon,
-=======
-	
-  font-size: 16px;
-  font-weight: bold;
-  color: white;
-  padding: 0 20px;
-}
-
-.avataruserleftcardheadIcon {
-	width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid white;
-}
->>>>>>> 41c665d404bb1604eb3d3142677e0e84265aec7b
 .avataruserrightcardheadIcon {
   width: 50px;
   height: 50px;
   border-radius: 50%;
   object-fit: cover;
-<<<<<<< HEAD
   border: 3px solid white;
   background-color: #d0cece;
 }
@@ -109,7 +60,3 @@
   position: absolute;
   top: -190px;
 }
-=======
-  border: 2px solid white;
-}
->>>>>>> 41c665d404bb1604eb3d3142677e0e84265aec7b

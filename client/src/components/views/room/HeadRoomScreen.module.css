@@ -1,5 +1,4 @@
 .HeadRoomScreenContainer {
-<<<<<<< HEAD
   width: 100vw;
   display: flex;
   flex-direction: column;
@@ -22,23 +21,3 @@
   width: 300px; /* Ajusta según sea necesario */
   margin: 0 auto; /* Centra horizontalmente */
 }
-=======
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Centra horizontalmente */
-    justify-content: center; /* Centra verticalmente */
-    height: 100vh; /* Asegura que el contenedor ocupe toda la altura de la pantalla */
-    width: 100%; /* Asegura que el contenedor ocupe toda la anchura */
-}
-
-.UserNameCardContainer {
-    display: flex;
-    justify-content: center; /* Centra horizontalmente */
-    align-items: center; /* Centra verticalmente */
-    width: 100%; /* Asegura que el contenedor ocupe toda la anchura */
-}
-.UserName_Card {
-    width: 300px; /* Ajusta según sea necesario */
-    margin: 0 auto; /* Centra horizontalmente */
-}
->>>>>>> 41c665d404bb1604eb3d3142677e0e84265aec7b

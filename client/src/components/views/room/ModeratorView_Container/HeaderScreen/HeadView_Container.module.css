@@ -1,18 +1,11 @@
 .headscreenIcon {
-<<<<<<< HEAD
   width: 100vh;
   height: 200px;
   object-fit: cover;
-=======
-  	width: 100vh; 
-    height: 200px;
-    object-fit: cover; 
->>>>>>> 41c665d404bb1604eb3d3142677e0e84265aec7b
 }
 
 .nametopic {
   display: flex;
-<<<<<<< HEAD
   padding-top: 40px;
 }
 
@@ -72,64 +65,3 @@
   color: white;
   margin: 0;
 }
-=======
- padding-top: 40px;
-}
-
-.personicon {
-  	width: 24px;
-    height: 24px;
-}
-
-.liveboxIcon {
-  	width: 48px;
-    height: 21.5px;
-}
-
-.liveContainer {
-  	display: flex;
-    align-items: center;
-    gap: 8px; /* Espaciado entre los elementos */
-    position: absolute;
-    top: 61px;
-    left: 40px;
-    width: auto;
-    height: 24px;
-    font-size: 20px;
-}
-.debateLogoIcon {
-  	position: absolute;
-  	top: 26px;
-  	left: 40px;
-  	width: 165.1px;
-  	height: 24.8px;
-}
-.headviewContainer {
-    width: 100vw;
-    height: 20vh;
-    position: fixed;
-    /* top: 0;
-    left: 0; */
-    background-image: url("src/assets/room-img/HeadScreenDark.svg");
-    background-size: cover; /* Se ajusta automáticamente */
-    background-position: center;
-    background-repeat: no-repeat;
-    z-index: 1000;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    /* padding: 0 40px; */
-  	
-  	/* font-size: 3.2em; */
-  	/* line-height: 3; */
-  	color: #fff;
-}
-
-.totalonline {
-    font-size: 20px;
-    color: white;
-    margin: 0;
-}
-
->>>>>>> 41c665d404bb1604eb3d3142677e0e84265aec7b

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /* .circletimer {
   position: absolute;
   height: 100%;
@@ -39,40 +38,3 @@
   font-weight: bold;
   text-align: center;
 }
-=======
-.circletimer {
-  	position: relative;
-  	height: 100%;
-  	width: 130px;
-  	border-radius: 50%;
-  	background-color: rgba(1, 1, 1, 0.7);
-  	border: 8px solid #fff;
-  	box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.b {
-  	position: absolute;
-  	font-size: 50px;
-    font-weight: bolder;
-    text-align: center;
-    
-}
-
-.TimerContainer {
-  	width: auto;
-  	position: relative;
-  	height: 130px;
-    padding-left: 30px;
-    padding-right: 30px;
-  	
-  	
-  	color: #fff;
-  	font-family: 'Titillium Web';
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
->>>>>>> 41c665d404bb1604eb3d3142677e0e84265aec7b

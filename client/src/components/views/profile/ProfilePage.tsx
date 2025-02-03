@@ -1,8 +1,5 @@
 import { FaUserCircle } from 'react-icons/fa';
-<<<<<<< HEAD
-=======
 import './ProfilePage.css';
->>>>>>> 41c665d404bb1604eb3d3142677e0e84265aec7b
 
 interface ProfilePageProps {
   profileId: string;
@@ -10,13 +7,6 @@ interface ProfilePageProps {
 
 export default function ChannelPage({ profileId }: ProfilePageProps) {
   return (
-<<<<<<< HEAD
-    <div>
-      <FaUserCircle className="avatar" size="2rem" />
-      <h1 className="text-3xl">{profileId}</h1>
-      <p>Stats and stuff</p>
-    </div>
-=======
     <>
       <div className="background__shape"></div>
       <div id="profilePage">
@@ -44,6 +34,5 @@ export default function ChannelPage({ profileId }: ProfilePageProps) {
         </div>
       </div>
     </>
->>>>>>> 41c665d404bb1604eb3d3142677e0e84265aec7b
   );
 }
