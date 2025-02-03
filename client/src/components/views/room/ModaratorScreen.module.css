@@ -71,9 +71,9 @@
 }
 
 .request_Container {
+  position: absolute;
   height: 50px;
-  text-align: left;
-  margin-right: 40px;
+  width: auto;
   font-size: 18px;
   color: #000;
   font-family: 'Titillium Web';
@@ -81,4 +81,9 @@
   justify-content: space-around;
   align-items: center;
   gap: 20px;
+}
+
+.Button55Debate {
+  font-size: 3rem;
+  color: var(--white);
 }

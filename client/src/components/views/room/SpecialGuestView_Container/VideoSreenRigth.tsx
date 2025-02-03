@@ -28,7 +28,7 @@ function VideoScreenRigth() {
               className={styles.PlayVideoRigth}
               onClick={() => setPlaying(!playing)}
             >
-              {playing ? 'Pause' : 'On'}
+              {playing ? 'x' : '>'}
             </button>
 
             <button

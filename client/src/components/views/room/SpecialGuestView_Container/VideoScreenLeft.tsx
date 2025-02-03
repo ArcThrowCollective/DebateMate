@@ -1,12 +1,16 @@
 import ReactPlayer from 'react-player/lazy';
 import styles from './VideoScreenRigth.module.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BsMicMute } from 'react-icons/bs';
 
-function VideoScreenLeft() {
+function VideoScreenLeft({ muteVideos }) {
   const [playing, setPlaying] = useState(false);
   const [muted, setMuted] = useState(true);
   const [offVideo, setOffVideo] = useState(false);
+
+  useEffect(() => {
+    setMuted(muteVideos);
+  }, [muteVideos]);
 
   return (
     <div className={styles.VideoScreenContainer}>
@@ -22,13 +26,12 @@ function VideoScreenLeft() {
             muted={muted}
           />
 
-          {/* Contenedor de botones flotantes */}
           <div className={styles.VideoControls}>
             <button
               className={styles.PlayVideoRigth}
               onClick={() => setPlaying(!playing)}
             >
-              {playing ? 'Pause' : 'On'}
+              {playing ? 'x' : '>'}
             </button>
 
             <button

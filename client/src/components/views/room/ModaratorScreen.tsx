@@ -3,6 +3,9 @@ import styles from './ModaratorScreen.module.css';
 import { useState } from 'react';
 import RequestContainer from './ModeratorView_Container/FooterControl/RequestContainer';
 import FooterScreenContainer from './ModeratorView_Container/FooterControl/FooterScreen_Container';
+// import { PiBoxingGlove } from 'react-icons/pi';
+import { PiBoxingGloveFill } from 'react-icons/pi';
+
 function ModaratorScreen() {
   const [playing, setPlaying] = useState(false);
   const [muted, setMuted] = useState(true);
@@ -10,14 +13,15 @@ function ModaratorScreen() {
 
   return (
     <div className={styles.VideoModaratorScreenContainer}>
-      <div>
-        <FooterScreenContainer />
-      </div>
       <div className={styles.request_Container}>
         <RequestContainer />
       </div>
+      <div>
+        <FooterScreenContainer />
+      </div>
       {!offVideo ? (
         <>
+          MuteVideoRight
           <ReactPlayer
             className={styles.VideoScreenRigth}
             url="https://youtu.be/qCXupXXXncM?si=VRZgKcixZaDf9No7"
@@ -27,21 +31,21 @@ function ModaratorScreen() {
             playing={playing}
             muted={muted}
           />
-
           {/* Controles de video dentro de ModaratorScreen */}
           <div className={styles.VideoModaratorControls}>
             <button
               className={styles.PlayVideoRigth}
               onClick={() => setPlaying(!playing)}
             >
-              {playing ? 'Pause' : 'On'}
+              {playing ? '>' : 'On'}
             </button>
 
             <button
               className={styles.MuteVideoRight}
               onClick={() => setMuted(!muted)}
             >
-              {muted ? 'Unmute' : 'Mute'}
+              <PiBoxingGloveFill size={40} color="E4E5EA" opacity={0.7} />
+              {muted ? '' : ''}
             </button>
 
             <button

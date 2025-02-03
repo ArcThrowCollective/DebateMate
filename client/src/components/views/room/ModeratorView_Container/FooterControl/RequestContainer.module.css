@@ -50,7 +50,6 @@
 .request_Container {
   height: 50px;
   text-align: left;
-  margin-right: 40px;
   font-size: 18px;
   color: #000;
   font-family: 'Titillium Web';
@@ -58,6 +57,9 @@
   justify-content: space-around;
   align-items: center;
   gap: 20px;
+  opacity: 0.6;
+  position: absolute;
+  bottom: 140px;
 }
 
 .butonnorequestContainer {

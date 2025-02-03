@@ -1,27 +1,16 @@
-/* .circletimer {
-  position: absolute;
-  height: 100%;
-  width: 130px;
-  border-radius: 50%;
-  background-color: rgba(1, 1, 1, 0.7);
-  border: 8px solid #fff;
-  box-sizing: border-box;
+.TheContainer {
+  position: relative;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
 }
-.b {
-  position: absolute;
-  font-size: 50px;
-  font-weight: bolder;
-  text-align: center;
-} */
 
 .TimerContainer {
-  top: 50%;
+  display: flex;
+  left: 50%;
+  top: 18%;
   width: auto;
-  position: absolute;
-  height: 130px;
+  position: fixed;
+  height: auto;
   padding-left: 30px;
   padding-right: 30px;
   transform: translate(-50%, -50%);
@@ -33,8 +22,53 @@
   align-items: center;
 }
 
+.timerControls {
+  position: fixed;
+  top: 50;
+  left: 0;
+  width: 100vw;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 1000;
+}
+
+.controlButton {
+  margin-top: 710px;
+  margin-left: 10px;
+  background-color: #6d25ff;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.controlButton:hover {
+  background-color: #c362ff;
+}
+
 .timerNumber {
   font-size: 80px;
   font-weight: bold;
   text-align: center;
+}
+
+.toggleButton {
+  background-color: #ff4b4b;
+  color: white;
+  border: none;
+  /* padding: 8px 15px; */
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  /* margin-bottom: 10px; */
+}
+
+.toggleButton:hover {
+  background-color: #d43f3f;
 }

@@ -2,13 +2,13 @@ import { FunctionComponent } from 'react';
 import styles from '../FooterControl/RequestContainer.module.css';
 import { ImCancelCircle } from 'react-icons/im';
 import { FaRegCheckCircle } from 'react-icons/fa';
-import { MdFrontHand } from 'react-icons/md';
+import { MdOutlineFrontHand } from 'react-icons/md';
 
 const RequestContainer: FunctionComponent = () => {
   return (
     <div className={styles.request_Container}>
       <div className={styles.requestspeak}>
-        <MdFrontHand className={styles.handIconRequest} />
+        <MdOutlineFrontHand className={styles.handIconRequest} />
         <div className={styles.userName}>JEAN</div>
       </div>
 
