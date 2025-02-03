@@ -19,8 +19,11 @@ type Participant = {
 };
 const DebateRoom = (props: Props) => {
   const [searchParams] = useSearchParams();
-  const userName = searchParams.get('username');
-  const roomId = searchParams.get('roomid'); // was id
+  // TODO: reset to searchParams
+  // const userName = searchParams.get('username');
+  // const roomId = searchParams.get('roomid'); // was id
+  const userName = 'username';
+  const roomId = 'roomid'; // was id
   const room = 'test';
   // Collect all sockets, peers and streams in objects
   const socketRef = useRef<Socket | null>(null);
@@ -54,7 +57,7 @@ const DebateRoom = (props: Props) => {
       auth: { userName, roomId },
     });
     socketRef.current = socket;
-    console.log('Your socket id is: ', socketRef.current);
+    console.log('Your socket id is: ', socketRef.current.id);
 
     // one-to-one: get remote ID (on new user joining room)
     socket.on('requestOffer', async (requestOffer) => {
@@ -64,22 +67,12 @@ const DebateRoom = (props: Props) => {
         remotePeerSocketId.current
       );
 
-      // FIX: NEED TO ADD TRACKS TO SEND OUT ICE CANDIDATES
-      const localStream = await navigator.mediaDevices.getUserMedia({
-        video: true,
-        audio: false,
-      });
-      // Push tracks from local stream to peer connection
-      localStream.getTracks().forEach((track) => {
-        peer.addTrack(track, localStream);
-      });
-
       // create offer
       peer
         .createOffer()
         .then((offer) => {
           peer.setLocalDescription(offer);
-          console.log(`... setting localDescription`);
+          console.log(`... set localDescription with created offer`);
           socketRef.current?.emit('offer', {
             offer,
             from: socketRef.current?.id,
@@ -108,6 +101,27 @@ const DebateRoom = (props: Props) => {
         },
       ],
     });
+
+    // TODO remove: initially created new local stream for peer connection
+    // (async () => {
+    //   const localStream = await navigator.mediaDevices.getUserMedia({
+    //     video: true,
+    //     audio: false,
+    //   });
+    //   // Push tracks from local stream to peer connection
+    //   localStream.getTracks().forEach((track) => {
+    //     peer.addTrack(track, localStream);
+    //   });
+    // })();
+    // Push tracks from local stream to peer connection
+    if (streamLoc) {
+      streamLoc.getTracks().forEach((track) => {
+        peer.addTrack(track, streamLoc);
+      });
+      console.log('+ local stream tracks added to peer connection');
+    } else {
+      console.log('WARNING: no local stream found to add to peer connection');
+    }
 
     peer.onicecandidate = (event) => {
       console.log('onicecandidate triggered');
@@ -215,8 +229,6 @@ const DebateRoom = (props: Props) => {
       socket.disconnect();
     };
   }, []);
-
-  // se
 
   return (
     <>
