@@ -6,11 +6,17 @@ export const getParticipants = async () => {
 };
 
 export const createParticipant = async (
-  participant: Omit<Participants, 'id' | 'joinedAt'>,
+  participant: Omit<Participants, 'id' | 'joinedAt'>
 ) => {
   return await prisma.participants.create({
     data: {
       ...participant,
     },
+  });
+};
+
+export const getParticipantByUserId = async (userId: string) => {
+  return await prisma.participants.findFirst({
+    where: { userId },
   });
 };
