@@ -26,6 +26,7 @@ const DebateRoom = (props: Props) => {
   const peersRef = useRef<PeerConnections>({});
   const streamsRef = useRef<Streams>({});
   const streamLeftRef = useRef<MediaStream>();
+  const streamLoc = useRef<MediaStream>();
   const streamRightRef = useRef<MediaStream>();
   // const [peers, setPeers] = useState<PeerConnections>({});
   // const [streams, setStreams] = useState<Streams>({});
@@ -33,13 +34,14 @@ const DebateRoom = (props: Props) => {
   const userStreamHasBeenCreated = useRef<boolean>(false);
   // set up <video> Refs
   const {
-    stream: streamLoc,
+    stream: streamLocal,
     error: errorLoc,
     videoRef: videoRefLoc,
   } = useUserMedia({
     video: true,
     audio: false,
   });
+  if (streamLocal) streamLoc.current = streamLocal;
   const videoRefRem = useRef<HTMLVideoElement>(null);
 
   // one-to-one variables (temporary)
@@ -106,20 +108,6 @@ const DebateRoom = (props: Props) => {
     //     peer.addTrack(track, localStream);
     //   });
     // })();
-
-    // Push tracks from local stream to each peer connection
-    // TODO: flag "broadcasting" or "is speaker"
-    if (streamLoc) {
-      streamLoc.getTracks().forEach((track) => {
-        for (let peerId in peersRef.current) {
-          peersRef.current[peerId].addTrack(track, streamLoc);
-        }
-      });
-      console.log('+ local stream tracks added to peer connection');
-    } else {
-      console.log('WARNING: no local stream found to add to peer connection');
-      console.log(streamLoc);
-    }
 
     // handle offer
     socketRef.current?.on(
@@ -191,6 +179,9 @@ const DebateRoom = (props: Props) => {
         }
         // TODO: this is a test - set local stream directly on answer
         streamRightRef.current = streamsRef.current[from];
+        console.log(
+          `V set streamRightRef.current to ${streamsRef.current[from]} from ${from}`
+        );
         videoRefRem.current!.srcObject = streamRightRef.current;
       }
     );
@@ -224,11 +215,28 @@ const DebateRoom = (props: Props) => {
     };
   }, []);
 
+  // Push tracks from local stream to each peer connection
+  // TODO: flag "broadcasting" or "is speaker"
+  function attachStreamLoc() {
+    if (streamLoc.current) {
+      streamLoc.current.getTracks().forEach((track) => {
+        for (let peerId in peersRef.current) {
+          peersRef.current[peerId].addTrack(track, streamLoc.current);
+        }
+      });
+      console.log('+ local stream tracks added to peer connection');
+    } else {
+      console.log('WARNING: no local stream found to add to peer connection');
+      console.log(streamLoc.current);
+    }
+  }
+
   return (
     <>
       <div>
+        <button onClick={attachStreamLoc}>ATTACH LOCAL STREAM</button>
         <VideoChat
-          stream={streamLoc}
+          stream={streamLoc.current}
           error={errorLoc}
           videoRef={videoRefLoc}
         ></VideoChat>
