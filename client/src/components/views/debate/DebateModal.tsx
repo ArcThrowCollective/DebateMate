@@ -1,10 +1,10 @@
 import { useDispatch } from 'react-redux';
 import { navigateToDebateScreen } from '../../../state/navigation/navigationSlice';
 
-import { CREATE_PARTICIPANT_MUTATION } from '../../../utils/graphqlclient';
+import { createParticipant } from '../../../utils/graphqlclient';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { AuthUser } from '../../../types/debate';
+import { AuthUser, Participant } from '../../../types/debate';
 import { fetchRoomById } from '../../../utils/graphqlclient';
 import { Room } from '../../../types/debate';
 
@@ -17,7 +17,8 @@ type Props = {
 const DebateModal = ({ isModalOpen, setIsModalOpen, roomId }: Props) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [room, setRoom] = useState<Room | null>(null);
-  const [participant, setParticipant] = useState<AuthUser | null>(null);
+  const [participant, setParticipant] = useState<Participant | null>(null);
+  const [user, setUser] = useState<AuthUser | null>(null);
   const dispatch = useDispatch();
 
   const handleCloseModal = () => {
@@ -33,11 +34,25 @@ const DebateModal = ({ isModalOpen, setIsModalOpen, roomId }: Props) => {
         });
         console.log(response.data);
         if (response.data.isAuthenticated) {
+          // User exists becomes Participant and has MEMBER rights
           setIsLoggedIn(true);
-
+          setUser(response.data.user);
           setParticipant(response.data.user);
+          if (user && room) {
+            createParticipant(room?.id, user?.id, 'GUEST');
+          } else {
+            throw new Error('userId or room id is null');
+          }
         } else {
+          // User becomes Participant and has GUEST rights
           setIsLoggedIn(false);
+          if (!user && room) {
+            // Our Guest User in the Database is '7573787b-4a33-4667-bbad-64d2189a76d1'
+            const STATIC_GUESTID = '7573787b-4a33-4667-bbad-64d2189a76d1';
+            createParticipant(room?.id, STATIC_GUESTID, 'GUEST');
+          } else {
+            throw new Error('userId or room id is null');
+          }
         }
       } catch (error) {
         console.error('Error auth status: ', error);
