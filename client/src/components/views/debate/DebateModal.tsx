@@ -4,7 +4,7 @@ import { navigateToDebateScreen } from '../../../state/navigation/navigationSlic
 import { createParticipant } from '../../../utils/graphqlclient';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { AuthUser, Participant } from '../../../types/debate';
+import { AuthUser } from '../../../types/debate';
 import { fetchRoomById } from '../../../utils/graphqlclient';
 import { Room } from '../../../types/debate';
 
@@ -17,10 +17,9 @@ type Props = {
 const DebateModal = ({ isModalOpen, setIsModalOpen, roomId }: Props) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [room, setRoom] = useState<Room | null>(null);
-  const [participant, setParticipant] = useState<Participant | null>(null);
   const [user, setUser] = useState<AuthUser | null>(null);
   const dispatch = useDispatch();
-
+  const STATIC_GUESTID = '7573787b-4a33-4667-bbad-64d2189a76d1'; // Just a test id for the guest user
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
@@ -37,7 +36,6 @@ const DebateModal = ({ isModalOpen, setIsModalOpen, roomId }: Props) => {
           // User exists becomes Participant and has MEMBER rights
           setIsLoggedIn(true);
           setUser(response.data.user);
-          setParticipant(response.data.user);
           if (user && room) {
             createParticipant(roomId, user?.id, 'GUEST');
           } else {
@@ -46,11 +44,6 @@ const DebateModal = ({ isModalOpen, setIsModalOpen, roomId }: Props) => {
         } else {
           // User becomes Participant and has GUEST rights
           setIsLoggedIn(false);
-
-          // Our Guest User in the Database is '7573787b-4a33-4667-bbad-64d2189a76d1'
-
-          const STATIC_GUESTID = '7573787b-4a33-4667-bbad-64d2189a76d1';
-          createParticipant(roomId, STATIC_GUESTID, 'GUEST');
         }
       } catch (error) {
         console.error('Error auth status: ', error);
@@ -75,9 +68,12 @@ const DebateModal = ({ isModalOpen, setIsModalOpen, roomId }: Props) => {
     //TODO Pass the correct room id
     if (isLoggedIn && user) {
       //TODO Additional call to graphql for more information
+      createParticipant(roomId, user.id, 'MEMBER');
       dispatch(navigateToDebateScreen({ user, room }));
     } else {
       // User who tries to view without authentication is a GUEST
+      // Our Guest User in the Database is '7573787b-4a33-4667-bbad-64d2189a76d1'
+      createParticipant(roomId, STATIC_GUESTID, 'GUEST');
       dispatch(navigateToDebateScreen({ user, room }));
     }
   };

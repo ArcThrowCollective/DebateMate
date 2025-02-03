@@ -133,7 +133,7 @@ export const CREATE_PARTICIPANT_MUTATION = gql`
 export const createParticipant = async (
   roomId: string,
   userId: string,
-  role: 'GUEST' | 'MODERATOR' | 'SPEAKER' | 'LISTENER'
+  role: 'GUEST' | 'MODERATOR' | 'SPEAKER' | 'LISTENER' | 'MEMBER'
 ) => {
   try {
     const { data } = await client.mutate({

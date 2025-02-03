@@ -6,16 +6,31 @@ import { FaMicrophoneAlt } from 'react-icons/fa';
 import { FaThumbsUp } from 'react-icons/fa';
 import { RootState } from '../../../state/store';
 import { useSelector } from 'react-redux';
+import { useSubscription } from '@apollo/client';
+import { PARTICIPANTS_UPDATED_SUBSCRIPTION } from '../../../utils/graphqlpubsubclient';
+import { useEffect, useState } from 'react';
+import { Participant } from '../../../types/debate';
 
 type Props = {};
 
 const DebateRoom = (props: Props) => {
   const { user, room } = useSelector((state: RootState) => state.navigation);
+  const [participant, setParticipant] = useState<Participant | null>(null);
   const { stream, error, videoRef } = useUserMedia({
     video: true,
     audio: false,
   });
-  console.log(user, room);
+  const { data } = useSubscription(PARTICIPANTS_UPDATED_SUBSCRIPTION, {
+    variables: { room },
+  });
+  console.log(data, user, room);
+
+  useEffect(() => {
+    if (data && data.participantsUpdated) {
+      console.log('Participant updated:', data.participantsUpdated);
+      setParticipant(data.participantsUpdated);
+    }
+  }, [data]);
   return (
     <div className="bg-slate-400 relative min-h-screen flex flex-col justify-between">
       <VideoChat stream={stream} error={error} videoRef={videoRef} />
