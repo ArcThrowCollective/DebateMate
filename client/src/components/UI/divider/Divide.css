@@ -1,0 +1,7 @@
+.divide {
+  height: 2px;
+  width: 90%;
+  background: var(--gradient-purple);
+
+  margin: 1rem;
+}

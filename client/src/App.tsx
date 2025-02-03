@@ -28,6 +28,60 @@ const roomData = [
       avatarUrl: '',
     },
   },
+  {
+    topic: 'The Universe is Infinite',
+    imageUrl:
+      'https://www.nwpc.com/wp-content/uploads/2022/05/placeholder-image-gray-3x2-1.png',
+    channelInfo: {
+      name: 'AstroTalks',
+      avatarUrl: '',
+    },
+  },
+  {
+    topic: 'The Universe is Infinite',
+    imageUrl:
+      'https://www.nwpc.com/wp-content/uploads/2022/05/placeholder-image-gray-3x2-1.png',
+    channelInfo: {
+      name: 'AstroTalks',
+      avatarUrl: '',
+    },
+  },
+  {
+    topic: 'The Universe is Infinite',
+    imageUrl:
+      'https://www.nwpc.com/wp-content/uploads/2022/05/placeholder-image-gray-3x2-1.png',
+    channelInfo: {
+      name: 'AstroTalks',
+      avatarUrl: '',
+    },
+  },
+  {
+    topic: 'The Universe is Infinite',
+    imageUrl:
+      'https://www.nwpc.com/wp-content/uploads/2022/05/placeholder-image-gray-3x2-1.png',
+    channelInfo: {
+      name: 'AstroTalks',
+      avatarUrl: '',
+    },
+  },
+  {
+    topic: 'The Universe is Infinite',
+    imageUrl:
+      'https://www.nwpc.com/wp-content/uploads/2022/05/placeholder-image-gray-3x2-1.png',
+    channelInfo: {
+      name: 'AstroTalks',
+      avatarUrl: '',
+    },
+  },
+  {
+    topic: 'The Universe is Infinite',
+    imageUrl:
+      'https://www.nwpc.com/wp-content/uploads/2022/05/placeholder-image-gray-3x2-1.png',
+    channelInfo: {
+      name: 'AstroTalks',
+      avatarUrl: '',
+    },
+  },
 ];
 
 function App() {
@@ -38,14 +92,8 @@ function App() {
   return (
     <Dashboard>
       <Header />
-      <section className="flex flex-col self-center w-[90vw] gap-10 text-center">
-        {currentPage === 'home' && (
-          <>
-            <h1 className="text-3xl font-bold">Active Topics</h1>
-            <RoomList rooms={roomData} />
-          </>
-        )}
-
+      <section className="">
+        {currentPage === 'home' && <RoomList rooms={roomData} />}
         {currentPage === 'channel' && <ChannelPage channelId={channelId!} />}
         {currentPage === 'profile' && <ProfilePage profileId={profileId!} />}
         {currentPage === 'room' && <Room roomId={roomId!} />}
