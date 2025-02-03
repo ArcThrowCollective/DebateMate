@@ -25,9 +25,9 @@ const DebateRoom = (props: Props) => {
   const socketRef = useRef<Socket | null>(null);
   const peersRef = useRef<PeerConnections>({});
   const streamsRef = useRef<Streams>({});
-  const streamLeftRef = useRef<MediaStream>();
-  const streamLoc = useRef<MediaStream>();
-  const streamRightRef = useRef<MediaStream>();
+  const streamLeftRef = useRef<MediaStream>(new MediaStream());
+  const streamLoc = useRef<MediaStream>(new MediaStream());
+  const streamRightRef = useRef<MediaStream>(new MediaStream());
   // const [peers, setPeers] = useState<PeerConnections>({});
   // const [streams, setStreams] = useState<Streams>({});
   const [username, setUserName] = useState<string>('');
@@ -179,12 +179,13 @@ const DebateRoom = (props: Props) => {
           await peer.setRemoteDescription(new RTCSessionDescription(answer));
           console.log(`... set remoteDescritption`);
         }
-        // TODO: this is a test - set local stream directly on answer
-        streamRightRef.current = streamsRef.current[from];
-        console.log(
-          `V set streamRightRef.current to ${streamsRef.current[from]} from ${from}`
-        );
-        videoRefRem.current!.srcObject = streamRightRef.current;
+        // // TODO: this is a test - set local stream directly on answer
+        // streamRightRef.current = streamsRef.current[from];
+        // console.log(
+        //   `V set streamRightRef.current to ${streamsRef.current[from]} from ${from}`
+        // );
+        // console.log(streamsRef.current[from]);
+        // videoRefRem.current!.srcObject = streamRightRef.current;
       }
     );
     socket.on(
@@ -241,6 +242,7 @@ const DebateRoom = (props: Props) => {
         console.log(`*** setting videoRef to: `, streamsRef.current[peerId]);
       }
     }
+    console.log(streamLoc);
   }
 
   return (
@@ -257,12 +259,12 @@ const DebateRoom = (props: Props) => {
           error={null}
           videoRef={videoRefRem}
         ></VideoChat>
-        <video
+        {/* <video
           ref={videoRefRem}
           autoPlay
           playsInline
           style={{ width: '400px', border: '1px solid black' }}
-        ></video>
+        ></video> */}
       </div>
     </>
   );

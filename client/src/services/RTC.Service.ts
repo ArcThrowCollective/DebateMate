@@ -42,7 +42,7 @@ async function createConnection(connProps: connProps) {
     console.log('onicecandidate triggered');
     if (event.candidate) {
       console.log(`o Sending ICE candidate to ${connProps.to}`);
-      // console.log(`... candidate: ${event.candidate}`);
+      console.log(event.candidate);
       connProps.from.emit('ice-candidate', {
         candidate: event.candidate,
         from: connProps.from.id,
@@ -60,6 +60,8 @@ async function createConnection(connProps: connProps) {
       event.streams[0]
     );
     // TODO: check if there are more streams than [0] ?
+    console.log('----------peer.ontrack');
+    console.log(event.streams);
     connProps.streamsRef.current[connProps.to] = event.streams[0];
   };
 
