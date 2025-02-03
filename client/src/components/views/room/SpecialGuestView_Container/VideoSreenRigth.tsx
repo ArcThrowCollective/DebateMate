@@ -8,7 +8,7 @@ function VideoScreenRigth() {
   const [offVideo, setOffVideo] = useState(false);
 
   return (
-    <div className={styles.VideoScreenContainer}>
+    <div className={styles.VideoScreenContainer} style={{ zIndex: 10000 }}>
       {!offVideo ? (
         <>
           <ReactPlayer

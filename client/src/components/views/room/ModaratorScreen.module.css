@@ -1,0 +1,68 @@
+.VideoScreenContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  z-index: 1;
+  /* pointer-events: none; */
+
+  position: relative;
+  flex-wrap: wrap;
+  /* margin-bottom: 92px; */
+}
+
+.VideoScreenRigth {
+  display: flex;
+  width: 20%;
+  height: 20%;
+  max-width: 600px;
+  max-height: 600px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.VideoControls {
+  position: absolute;
+  bottom: 255px;
+  /* left: 50%; */
+  /* transform: translate(-50%, -50%); */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 15px;
+  z-index: 9999; /* Asegura que los botones estén sobre el video */
+  /* background-color: rgba(0, 0, 0, 0.5); */
+  background: linear-gradient(
+    180deg,
+    rgba(81, 74, 92, 0.5) 0%,
+    rgba(53, 47, 65, 0.5) 50%,
+    rgba(26, 21, 39, 0.5) 100%
+  );
+
+  /* padding: 10px; */
+  border-radius: 10px;
+  width: 100vw;
+  height: 91px;
+}
+
+.PlayVideoRigth,
+.MuteVideoRight,
+.OffVideoRight {
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  z-index: 10000;
+  position: relative;
+}
+
+.PlayVideoRigth:hover,
+.MuteVideoRight:hover,
+.OffVideoRight:hover {
+  background-color: rgba(0, 0, 0, 0.9);
+}
