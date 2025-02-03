@@ -19,13 +19,15 @@ import { PubSub, PubSubEngine } from 'graphql-subscriptions';
 
 const pubsub: PubSubEngine = new PubSub();
 
-const RoleEnum = new GraphQLEnumType({
-  name: 'Role',
+export const RoleEnum = new GraphQLEnumType({
+  name: 'RoleEnum',
   values: {
     GUEST: { value: 'GUEST' },
     MODERATOR: { value: 'MODERATOR' },
     SPEAKER: { value: 'SPEAKER' },
     LISTENER: { value: 'LISTENER' },
+    ADMIN: { value: 'ADMIN' },
+    MEMBER: { value: 'MEMBER' },
   },
 });
 
@@ -67,7 +69,7 @@ export const participantMutation = {
     args: {
       roomId: { type: new GraphQLNonNull(GraphQLID) },
       userId: { type: new GraphQLNonNull(GraphQLID) },
-      role: { type: GraphQLString },
+      role: { type: new GraphQLNonNull(RoleEnum) },
       isSpeaking: { type: GraphQLBoolean },
     },
     resolve: async (
@@ -82,7 +84,7 @@ export const participantMutation = {
     args: {
       roomId: { type: new GraphQLNonNull(GraphQLID) },
       userId: { type: new GraphQLNonNull(GraphQLID) },
-      role: { type: RoleEnum },
+      role: { type: new GraphQLNonNull(RoleEnum) },
     },
     resolve: async (
       _: unknown,

@@ -13,6 +13,11 @@ export const verifyAuthToken = (
       return next();
     }
 
+    if (req.body.query?.includes('CreateParticipant')) {
+      // It should be possible to create participants
+      return next();
+    }
+
     /*
     ----- Use this for Authorization headers instead of cookies -----
     const authorizationHeader = req.headers.authorization;

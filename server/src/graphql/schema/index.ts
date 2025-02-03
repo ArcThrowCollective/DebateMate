@@ -6,6 +6,7 @@ import {
   participantQuery,
   participantMutation,
   participantSubscription,
+  RoleEnum,
 } from './participantSchema';
 import { notificationQuery, notificationMutation } from './notificationSchema';
 import {
@@ -54,4 +55,5 @@ export const schema = new GraphQLSchema({
   query: QueryType,
   mutation: MutationType,
   subscription: SubscriptionType,
+  types: [RoleEnum],
 });
