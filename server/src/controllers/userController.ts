@@ -1,7 +1,7 @@
 import { Response, Request } from 'express';
 import jwt from 'jsonwebtoken';
 import config from '../../config/env_config';
-import { UserStore } from '../models/user';
+import { UserStore } from '../Models/user';
 import { Prisma } from '@prisma/client';
 import { NONAME } from 'dns';
 
