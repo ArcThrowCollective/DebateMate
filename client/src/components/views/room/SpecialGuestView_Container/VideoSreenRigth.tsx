@@ -1,6 +1,7 @@
 import ReactPlayer from 'react-player/lazy';
 import styles from './VideoScreenRigth.module.css';
 import { useState } from 'react';
+import { BsMicMute } from 'react-icons/bs';
 
 function VideoScreenRigth() {
   const [playing, setPlaying] = useState(false);
@@ -8,11 +9,11 @@ function VideoScreenRigth() {
   const [offVideo, setOffVideo] = useState(false);
 
   return (
-    <div className={styles.VideoScreenContainer} style={{ zIndex: 10000 }}>
+    <div className={styles.VideoScreenContainer}>
       {!offVideo ? (
         <>
           <ReactPlayer
-            className={styles.VideoScreenRigth}
+            className={styles.VideoScreenPlayer}
             url="https://youtube.com/shorts/Zmc-kE5fN4k?si=V20DURqR0bqyH_sP"
             width="100%"
             height="100%"
@@ -34,7 +35,8 @@ function VideoScreenRigth() {
               className={styles.MuteVideoRight}
               onClick={() => setMuted(!muted)}
             >
-              {muted ? 'Unmute' : 'Mute'}
+              <BsMicMute className={styles.buttonBeMute} />
+              {muted ? '' : ''}
             </button>
 
             <button

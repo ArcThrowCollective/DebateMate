@@ -1,16 +1,17 @@
-.VideoScreenContainer {
+.VideoModaratorScreenContainer {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   height: 100vh;
   width: 100vw;
-  z-index: 1;
+  z-index: 1000;
   /* pointer-events: none; */
 
-  position: relative;
-  flex-wrap: wrap;
-  /* margin-bottom: 92px; */
+  position: absolute;
+  bottom: 160px;
+  height: auto;
+  /* flex-wrap: wrap; */
 }
 
 .VideoScreenRigth {
@@ -23,21 +24,22 @@
   overflow: hidden;
 }
 
-.VideoControls {
-  position: absolute;
-  bottom: 255px;
+.VideoModaratorControls {
+  position: fixed;
+  bottom: 0;
+  left: 0;
   /* left: 50%; */
   /* transform: translate(-50%, -50%); */
   display: flex;
   flex-direction: row;
   justify-content: center;
   gap: 15px;
-  z-index: 9999; /* Asegura que los botones estén sobre el video */
+  z-index: 10000; /* Asegura que los botones estén sobre el video */
   /* background-color: rgba(0, 0, 0, 0.5); */
   background: linear-gradient(
     180deg,
-    rgba(81, 74, 92, 0.5) 0%,
-    rgba(53, 47, 65, 0.5) 50%,
+    rgba(81, 74, 92, 0.5) 30%,
+    rgba(53, 47, 65, 0.5) 80%,
     rgba(26, 21, 39, 0.5) 100%
   );
 
@@ -65,4 +67,17 @@
 .MuteVideoRight:hover,
 .OffVideoRight:hover {
   background-color: rgba(0, 0, 0, 0.9);
+}
+
+.request_Container {
+  height: 50px;
+  text-align: left;
+  margin-right: 40px;
+  font-size: 18px;
+  color: #000;
+  font-family: 'Titillium Web';
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 20px;
 }

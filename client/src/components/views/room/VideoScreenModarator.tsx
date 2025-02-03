@@ -1,6 +1,6 @@
 import styles from './VideoSreenModarator.module.css';
 import HeadRoomScreen from './HeadRoomScreen';
-import FooterModaratorControlContain from './ModeratorView_Container/FooterControl/FooterModaratorControl_Container';
+// import FooterModaratorControlContain from './ModeratorView_Container/FooterControl/FooterModaratorControl_Container';
 import { FunctionComponent } from 'react';
 import VideoScreenRigth from './SpecialGuestView_Container/VideoSreenRigth';
 import VideoScreenLeft from './SpecialGuestView_Container/VideoScreenLeft';
@@ -10,6 +10,7 @@ const VideoScreenModarator: FunctionComponent = () => {
   return (
     <div className={styles.VideoScreenModaratorContainer}>
       <div className={styles.VideoRoomScreen}>
+        <ModaratorScreen />
         <VideoScreenLeft />
         <VideoScreenRigth />
       </div>
@@ -17,10 +18,10 @@ const VideoScreenModarator: FunctionComponent = () => {
       <div className={styles.HeadRoomScreen}>
         <HeadRoomScreen />
       </div>
-      <div className={styles.FooterRoomScreen}>
-        <ModaratorScreen />
+      <div></div>
+      {/* <div className={styles.FooterRoomScreen}>
         <FooterModaratorControlContain />
-      </div>
+      </div> */}
     </div>
   );
 };

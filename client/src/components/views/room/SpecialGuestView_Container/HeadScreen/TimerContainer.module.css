@@ -1,4 +1,4 @@
-.circletimer {
+/* .circletimer {
   position: absolute;
   height: 100%;
   width: 130px;
@@ -15,19 +15,26 @@
   font-size: 50px;
   font-weight: bolder;
   text-align: center;
-}
+} */
 
 .TimerContainer {
-  top: 0;
+  top: 50%;
   width: auto;
-  position: relative;
+  position: absolute;
   height: 130px;
   padding-left: 30px;
   padding-right: 30px;
+  transform: translate(-50%, -50%);
 
   color: #fff;
   font-family: 'Titillium Web';
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.timerNumber {
+  font-size: 80px;
+  font-weight: bold;
+  text-align: center;
 }

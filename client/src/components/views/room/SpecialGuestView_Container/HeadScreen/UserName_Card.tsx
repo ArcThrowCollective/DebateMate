@@ -14,7 +14,9 @@ const UserName_Card: FunctionComponent = () => {
         <BattleLine />
       </div>
 
-      <TimerContainer />
+      <div className={styles.TimerContainer}>
+        <TimerContainer />
+      </div>
 
       <div className={styles.rightcarduser}>
         <div className={styles.usernameRight}>BEN</div>

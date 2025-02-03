@@ -9,8 +9,7 @@
   flex-wrap: wrap;
 }
 
-.VideoScreenLeft,
-.VideoScreenRigth {
+.VideoScrenPlayer {
   display: flex;
   width: 20%;
   height: 50vh;
@@ -19,16 +18,17 @@
 
 .VideoControls {
   position: absolute;
-  bottom: 255px;
+  bottom: 25px;
   left: 50%;
   transform: translate(-50%, -50%);
   display: flex;
   flex-direction: row;
-  gap: 15px;
-  z-index: 9999; /* Asegura que los botones estén sobre el video */
-  background-color: rgba(0, 0, 0, 0.5);
+  gap: 25px;
+  z-index: 10000; /* Asegura que los botones estén sobre el video */
+  /* background-color: rgba(0, 0, 0, 0.5); */
   padding: 10px;
-  border-radius: 10px;
+  border-radius: 50px;
+  pointer-events: auto;
 }
 
 .PlayVideoRigth,
@@ -38,15 +38,29 @@
   color: white;
   border: none;
   padding: 10px 15px;
-  border-radius: 5px;
+  border-radius: 50px;
   cursor: pointer;
   font-size: 16px;
   z-index: 10000;
   position: relative;
+  height: 4rem;
+  width: 4rem;
+
+  color: var(--white);
+  background: var(--gradient-dark);
+  box-shadow: var(--box-shadow);
+
+  border-radius: 100%;
 }
 
 .PlayVideoRigth:hover,
 .MuteVideoRight:hover,
 .OffVideoRight:hover {
   background-color: rgba(0, 0, 0, 0.9);
+}
+
+.buttonBeMute {
+  color: var(--white);
+  font-size: 30px;
+  opacity: 0.8;
 }
