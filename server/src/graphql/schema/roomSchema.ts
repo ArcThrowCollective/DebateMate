@@ -1,20 +1,19 @@
 import {
   GraphQLObjectType,
   GraphQLString,
-  GraphQLBoolean,
   GraphQLList,
   GraphQLID,
   GraphQLNonNull,
 } from 'graphql';
-import { Debates } from '@prisma/client';
+import { Rooms } from '@prisma/client';
 import {
-  getDebates,
-  createDebate,
-} from '../../controllers/graphql/debateController';
+  getRooms,
+  createRoom,
+} from '../../controllers/graphql/roomsController';
 import { channelType } from './channelSchema';
 
-export const debateType = new GraphQLObjectType({
-  name: 'Debate',
+export const roomsType = new GraphQLObjectType({
+  name: 'Room',
   fields: {
     id: { type: GraphQLID },
     topic: { type: GraphQLString },
@@ -27,18 +26,18 @@ export const debateType = new GraphQLObjectType({
   },
 });
 
-export const debateQuery = {
-  debates: {
-    type: new GraphQLList(debateType),
+export const roomsQuery = {
+  rooms: {
+    type: new GraphQLList(roomsType),
     resolve: async () => {
-      return await getDebates();
+      return await getRooms();
     },
   },
 };
 
-export const debateMutation = {
+export const roomsMutation = {
   createDebate: {
-    type: debateType,
+    type: roomsType,
     args: {
       topic: { type: new GraphQLNonNull(GraphQLString) },
       channelId: { type: new GraphQLNonNull(GraphQLID) },
@@ -47,9 +46,9 @@ export const debateMutation = {
     },
     resolve: async (
       _: unknown,
-      debate: Omit<Debates, 'id' | 'createdAt' | 'updatedAt'>,
+      room: Omit<Rooms, 'id' | 'createdAt' | 'updatedAt'>
     ) => {
-      return await createDebate(debate);
+      return await createRoom(room);
     },
   },
 };

@@ -16,8 +16,11 @@ export const channelType = new GraphQLObjectType({
   name: 'Channel',
   fields: {
     id: { type: GraphQLID },
-    title: { type: GraphQLString },
+    name: { type: GraphQLString },
     description: { type: GraphQLString },
+    imageUrl: { type: GraphQLString },
+    channel_image: { type: GraphQLString },
+    avatarUrl: { type: GraphQLString },
     is_public: { type: GraphQLBoolean },
     createdAt: { type: GraphQLString },
     updatedAt: { type: GraphQLString },
@@ -40,7 +43,7 @@ export const channelMutation = {
   createChannel: {
     type: channelType,
     args: {
-      title: { type: GraphQLString },
+      name: { type: GraphQLString },
       description: { type: GraphQLString },
       is_public: { type: GraphQLBoolean },
     },

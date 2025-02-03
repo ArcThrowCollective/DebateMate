@@ -1,7 +1,7 @@
 import { GraphQLSchema, GraphQLObjectType } from 'graphql';
 import { userQuery, userMutation } from './userSchema';
 import { channelQuery, channelMutation } from './channelSchema';
-import { debateQuery, debateMutation } from './debateSchema';
+import { roomsQuery, roomsMutation } from './roomSchema';
 import { participantQuery, participantMutation } from './participantSchema';
 import { notificationQuery, notificationMutation } from './notificationSchema';
 import {
@@ -18,7 +18,7 @@ const QueryType = new GraphQLObjectType({
   fields: {
     ...userQuery,
     ...channelQuery,
-    ...debateQuery,
+    ...roomsQuery,
     ...participantQuery,
     ...notificationQuery,
     ...requestToSpeakQuery,
@@ -31,7 +31,7 @@ const MutationType = new GraphQLObjectType({
   fields: {
     ...userMutation,
     ...channelMutation,
-    ...debateMutation,
+    ...roomsMutation,
     ...participantMutation,
     ...notificationMutation,
     ...requestToSpeakMutation,

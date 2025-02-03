@@ -4,16 +4,21 @@
   "main": "dist/server.js",
   "type": "module",
   "scripts": {
+    "migrate:dev": "APP_ENV=dev dotenv -e .env.dev -- npx prisma migrate dev",
+    "migrate:prod": "APP_ENV=prod dotenv -e .env.prod -- npx prisma migrate deploy",
+    "generate:dev": "APP_ENV=dev dotenv -e .env.dev -- npx prisma generate",
+    "generate:prod": "APP_ENV=prod dotenv -e .env.prod -- npx prisma generate",
+    "seed:dev": "APP_ENV=dev dotenv -e .env.dev -- npx prisma db seed",
+    "seed:prod": "APP_ENV=prod dotenv -e .env.prod -- npx prisma db seed",
     "build": "npx tsc",
-    "start": "node dist/server.js",
-    "dev": "nodemon src/server.ts",
-    "prod": "tsx src/server.ts",
+    "start": "tsx src/server.ts",
     "lint": "eslint . -f visualstudio --ext .js,.jsx,.ts,.tsx",
     "test": "jest",
     "test:watch": "jest --watch"
   },
   "prisma": {
-    "seed": "tsx prisma/seed.ts"
+    "seed": "tsx prisma/seed.ts",
+    "schema": "prisma/schema.prisma"
   },
   "keywords": [],
   "author": "",
@@ -51,6 +56,7 @@
     "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
+    "dotenv-cli": "^8.0.0",
     "express": "^4.21.2",
     "graphql": "^16.10.0",
     "graphql-http": "^1.22.4",
