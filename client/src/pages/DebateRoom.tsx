@@ -1,66 +1,126 @@
-import React, { useEffect, useRef, useState, useCallback } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import VideoChat from '../components/VideoChat';
 import useUserMedia from '../hooks/useUserMedia';
+import { createConnection } from '../services/RTC.Service';
 import { io, Socket } from 'socket.io-client';
 import { useSearchParams } from 'react-router-dom';
+import env from '../../env';
+
 type Props = {};
 type PeerConnections = { [id: string]: RTCPeerConnection };
-type Streams = {
-  [id: string]: {
-    stream?: MediaStream;
-    candidates: RTCIceCandidateInit[];
-  };
-};
+type Streams = { [id: string]: MediaStream };
 type Participant = {
   socketId: string;
   userName: string;
 };
 const DebateRoom = (props: Props) => {
   const [searchParams] = useSearchParams();
-  const userName = searchParams.get('username');
-  const id = searchParams.get('id');
+  // TODO: reset to searchParams
+  // const userName = searchParams.get('username');
+  // const roomId = searchParams.get('roomid'); // was id
+  const userName = 'username';
+  const roomId = 'roomid'; // was id
   const room = 'test';
   // Collect all sockets, peers and streams in objects
   const socketRef = useRef<Socket | null>(null);
   const peersRef = useRef<PeerConnections>({});
   const streamsRef = useRef<Streams>({});
-  const [peers, setPeers] = useState<PeerConnections>({});
-  const [streams, setStreams] = useState<Streams>({});
+  // const [peers, setPeers] = useState<PeerConnections>({});
+  // const [streams, setStreams] = useState<Streams>({});
   const [username, setUserName] = useState<string>('');
-  const { stream, error, videoRef } = useUserMedia({
+  const userStreamHasBeenCreated = useRef<boolean>(false);
+  // set up <video> Refs
+  const {
+    stream: streamLoc,
+    error: errorLoc,
+    videoRef: videoRefLoc,
+  } = useUserMedia({
     video: true,
     audio: false,
   });
+  const videoRefRem = useRef<HTMLVideoElement>(null);
+
+  // one-to-one variables (temporary)
+  const remotePeerSocketId = useRef<string>('TMP REMOTE ID');
+  const remoteStream = useRef<Streams>();
+
+  // run all connection logic once
   useEffect(() => {
-    if (!id || !userName) return;
-    setUserName(userName);
-    const socket = io('https://194.164.53.5:8181', {
-      auth: { userName, id },
+    // create socket
+    // setUserName(userName);
+    const socket = io(`https://${env.SIGNAL_HOST}:${env.SIGNAL_PORT}`, {
+      auth: { userName, roomId },
     });
     socketRef.current = socket;
-    console.log('Your socket id is: ', socketRef.current);
-    socket.emit('joinRoom', room);
-    console.log(`Joining room: ${room}`);
-    socket.on('roomParticipants', (participants: Participant[]) => {
-      console.log(`:busts_in_silhouette: Participants in room:`, participants);
-      participants.forEach(({ socketId }) => {
-        if (!peersRef.current[socketId] && socketId !== socket.id) {
-          console.log(`:clapper: Creating peer connection for ${socketId}`);
-          createPeerConnection(socketId, true);
-        }
-      });
-    });
-    socket.on(
-      'roomParticipants',
-      (participants: { socketId: string; userName: string }[]) => {
-        participants.forEach(({ socketId }) => {
-          if (!peersRef.current[socketId] && socketId !== socket.id) {
-            createPeerConnection(socketId, true);
-          }
+    console.log('Your socket id is: ', socketRef.current.id);
+
+    // one-to-one: get remote ID (on new user joining room)
+    socket.on('requestOffer', async (requestOffer) => {
+      console.log(`i got requestOffer for new user: ${requestOffer.newUser}`);
+
+      // Create connection and update state list
+      if (!peersRef.current[requestOffer.newUser]) {
+        createConnection({
+          from: socketRef.current,
+          to: requestOffer.newUser,
+          room: room,
+          peersRef: peersRef,
+          streamsRef: streamsRef,
         });
       }
-    );
-    socket.on(
+      console.log(peersRef.current);
+      const peer = peersRef.current[requestOffer.newUser];
+
+      // create offer
+      peer
+        .createOffer()
+        .then((offer) => {
+          peer.setLocalDescription(offer);
+          console.log(`... set localDescription with created offer`);
+          socketRef.current?.emit('offer', {
+            offer,
+            from: socketRef.current?.id,
+            to: requestOffer.newUser,
+            room,
+          });
+          console.log(`Sent offer to ${requestOffer.newUser}`);
+        })
+        .catch((error) => console.error('Error creating offer:', error));
+      // peersRef.current[remotePeerSocketId.current] = peer;
+    });
+
+    // join room
+    socket.emit('joinRoom', room);
+    console.log(`Joining room: ${room}`);
+
+    // TODO remove: initially created new local stream for peer connection
+    // (async () => {
+    //   const localStream = await navigator.mediaDevices.getUserMedia({
+    //     video: true,
+    //     audio: false,
+    //   });
+    //   // Push tracks from local stream to peer connection
+    //   localStream.getTracks().forEach((track) => {
+    //     peer.addTrack(track, localStream);
+    //   });
+    // })();
+
+    // Push tracks from local stream to each peer connection
+    // TODO: flag "broadcasting" or "is speaker"
+    if (streamLoc) {
+      streamLoc.getTracks().forEach((track) => {
+        for (let peerId in peersRef.current) {
+          peersRef.current[peerId].addTrack(track, streamLoc);
+        }
+      });
+      console.log('+ local stream tracks added to peer connection');
+    } else {
+      console.log('WARNING: no local stream found to add to peer connection');
+      console.log(streamLoc);
+    }
+
+    // handle offer
+    socketRef.current?.on(
       'offer',
       async ({
         offer,
@@ -69,30 +129,35 @@ const DebateRoom = (props: Props) => {
         offer: RTCSessionDescriptionInit;
         from: string;
       }) => {
-        console.log(`Received offer from ${from}`);
-        if (!peersRef.current[from]) {
-          createPeerConnection(from, false);
+        const offerFrom = from;
+        if (!offerFrom) {
+          console.log('WARNING: received offer from UNDEFINED');
+          return;
         }
-        // Sets the remote peer
-        const peer = peersRef.current[from];
-        await peer.setRemoteDescription(new RTCSessionDescription(offer));
-        console.log(`:white_check_mark: Remote description set for ${from}`);
-        if (streamsRef.current[from]?.candidates) {
-          console.log(`Adding stored ICE candidates for ${from}`);
-          streamsRef.current[from].candidates.forEach(async (candidate) => {
-            await peer.addIceCandidate(new RTCIceCandidate(candidate));
+        console.log(`i received offer from ${offerFrom}`);
+        if (!peersRef.current[offerFrom]) {
+          createConnection({
+            from: socketRef.current,
+            to: offerFrom,
+            room: room,
+            peersRef: peersRef,
+            streamsRef: streamsRef,
           });
-          streamsRef.current[from].candidates = [];
+          console.log(`# created connection to ${offerFrom}`);
         }
-        // Create answer
+        const peer = peersRef.current[offerFrom];
+        await peer.setRemoteDescription(new RTCSessionDescription(offer));
+        console.log(`R Remote description set for ${offerFrom}`);
+        // create answer
         const answer = await peer.createAnswer();
         await peer.setLocalDescription(answer);
         socket.emit('answer', {
           answer,
           from: socketRef.current?.id,
-          to: from,
+          to: offerFrom,
           room,
         });
+        console.log(`o Sent answer to ${offerFrom}`);
       }
     );
     socket.on(
@@ -106,20 +171,23 @@ const DebateRoom = (props: Props) => {
         from: string;
         room: string;
       }) => {
-        console.log(`Received answer from ${from} in ${room}`);
+        if (!peersRef.current[from]) {
+          // createConnection({
+          //   from: socketRef.current,
+          //   to: answerFrom,
+          //   room: room,
+          // setPeers: setPeers,
+          // });
+          console.log(`WARNING: got answer from non-connected: ${from}`);
+        }
         const peer = peersRef.current[from];
+        console.log(`i received answer from ${from} in ${room}`);
         if (peer) {
           await peer.setRemoteDescription(new RTCSessionDescription(answer));
+          console.log(`... set remoteDescritption`);
         }
       }
     );
-    socket.on('requestOffer', ({ newUser }) => {
-      console.log(`:large_green_circle: Request to send offer to ${newUser}`);
-      // Check if a connection exists, if not create one
-      if (!peersRef.current[newUser] && socketRef.current?.id) {
-        createPeerConnection(socketRef.current.id, true); // Set as Initiator and socketId as peer information
-      }
-    });
     socket.on(
       'ice-candidate',
       async ({
@@ -129,129 +197,43 @@ const DebateRoom = (props: Props) => {
         candidate: RTCIceCandidateInit;
         from: string;
       }) => {
-        console.log(`Received ICE candidate from ${from}`);
+        if (!peersRef.current[from]) {
+          // createConnection({
+          //   from: socketRef.current,
+          //   to: answerFrom,
+          //   room: room,
+          //   setPeers: setPeers,
+          // });
+          console.log(`WARNING: got cand from non-connected: ${from}`);
+        }
         const peer = peersRef.current[from];
-        if (!peer) {
-          console.warn(
-            `:warning: Peer connection for ${from} not found, storing candidate...`
-          );
-          // Store the ICE candidate for later use
-          if (!streamsRef.current[from]) {
-            streamsRef.current[from] = { stream: undefined, candidates: [] };
-          }
-          streamsRef.current[from].candidates.push(candidate);
-        }
-        // only add ice candidate if remoteDescription exists
-        if (!peer.remoteDescription) {
-          console.warn(
-            `:warning: No remote description for ${from}, delaying ICE candidate...`
-          );
-          setTimeout(
-            () => peer.addIceCandidate(new RTCIceCandidate(candidate)),
-            100
-          );
-        } else {
-          await peer.addIceCandidate(new RTCIceCandidate(candidate));
-          console.log(
-            `:white_check_mark: Successfully added ICE candidate from ${from}`
-          );
-        }
+        console.log(`i received ICE candidate from ${from}`);
+        await peer.addIceCandidate(new RTCIceCandidate(candidate));
+        console.log(`Successfully added ICE candidate from ${from}`);
       }
     );
     return () => {
       socket.emit('leaveRoom', room);
       socket.disconnect();
     };
-  }, [username]);
-  const createPeerConnection = useCallback(
-    (peerId: string, isInitiator: boolean) => {
-      const peer = new RTCPeerConnection({
-        iceServers: [{ urls: 'stun:stun.l.google.com:19302' }],
-      });
-      peersRef.current[peerId] = peer;
-      peer.onicecandidate = (event) => {
-        if (event.candidate) {
-          console.log(
-            `:arrow_up_small: Sending ICE candidate to ${peerId}:`,
-            event.candidate
-          );
-          socketRef.current?.emit('ice-candidate', {
-            candidate: event.candidate,
-            from: socketRef.current?.id,
-            to: peerId,
-            room,
-          });
-          console.log(`Sent ICE candidate to ${peerId}`);
-        } else {
-          console.log(':warning: No more ICE candidates.');
-        }
-      };
-      peer.ontrack = (event) => {
-        console.log(`Received remote track from ${peerId}`);
-        if (!streamsRef.current[peerId]) {
-          // note: redundant
-          streamsRef.current[peerId] = { candidates: [] };
-        }
-        if (!streamsRef.current[peerId]) {
-          streamsRef.current[peerId] = {
-            stream: event.streams[0],
-            candidates: [],
-          };
-        } else {
-          streamsRef.current[peerId].stream = event.streams[0];
-        }
-        setStreams((prev) => ({
-          ...prev,
-          [peerId]: { ...streamsRef.current[peerId] },
-        }));
-      };
-      if (stream) {
-        stream.getTracks().forEach((track) => peer.addTrack(track, stream));
-      }
-      if (isInitiator && peerId !== socketRef.current?.id) {
-        //Only send offer if theres another peer
-        peer
-          .createOffer()
-          .then((offer) => {
-            peer.setLocalDescription(offer);
-            socketRef.current?.emit('offer', {
-              offer,
-              from: userName,
-              to: peerId,
-              room,
-            });
-            console.log(`Sent offer to ${peerId}`);
-          })
-          .catch((error) => console.error('Error creating offer:', error));
-      }
-      peersRef.current[peerId] = peer;
-      setPeers((prev) => ({ ...prev, [peerId]: peer }));
-    },
-    [stream]
-  );
-  useEffect(() => {
-    return () => {
-      Object.values(peersRef.current).forEach((peer) => peer.close());
-      setPeers({});
-      setStreams({});
-    };
   }, []);
+
   return (
-    <div>
-      <h2>{username} - Debate Room</h2>
-      <VideoChat stream={stream} error={error} videoRef={videoRef} />
+    <>
       <div>
-        <h3>Participants</h3>
-        {Object.keys(streams).map((peerId) => (
-          <video
-            key={peerId}
-            ref={(el) => el && (el.srcObject = streams[peerId])}
-            autoPlay
-            playsInline
-          />
-        ))}
+        <VideoChat
+          stream={streamLoc}
+          error={errorLoc}
+          videoRef={videoRefLoc}
+        ></VideoChat>
+        <VideoChat
+          stream={streamsRef.current[remotePeerSocketId.current]?.stream}
+          error={null}
+          videoRef={videoRefRem}
+        ></VideoChat>
       </div>
-    </div>
+    </>
   );
 };
+
 export default DebateRoom;
