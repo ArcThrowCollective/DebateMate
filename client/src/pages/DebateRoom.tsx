@@ -25,6 +25,8 @@ const DebateRoom = (props: Props) => {
   const socketRef = useRef<Socket | null>(null);
   const peersRef = useRef<PeerConnections>({});
   const streamsRef = useRef<Streams>({});
+  const streamLeftRef = useRef<MediaStream>();
+  const streamRightRef = useRef<MediaStream>();
   // const [peers, setPeers] = useState<PeerConnections>({});
   // const [streams, setStreams] = useState<Streams>({});
   const [username, setUserName] = useState<string>('');
@@ -147,10 +149,11 @@ const DebateRoom = (props: Props) => {
         }
         const peer = peersRef.current[offerFrom];
         await peer.setRemoteDescription(new RTCSessionDescription(offer));
-        console.log(`R Remote description set for ${offerFrom}`);
+        console.log(`... set remote description with offer from ${offerFrom}`);
         // create answer
         const answer = await peer.createAnswer();
         await peer.setLocalDescription(answer);
+        console.log(`... set local description with answer to ${offerFrom}`);
         socket.emit('answer', {
           answer,
           from: socketRef.current?.id,
@@ -186,6 +189,9 @@ const DebateRoom = (props: Props) => {
           await peer.setRemoteDescription(new RTCSessionDescription(answer));
           console.log(`... set remoteDescritption`);
         }
+        // TODO: this is a test - set local stream directly on answer
+        streamRightRef.current = streamsRef.current[from];
+        videoRefRem.current!.srcObject = streamRightRef.current;
       }
     );
     socket.on(
@@ -227,7 +233,7 @@ const DebateRoom = (props: Props) => {
           videoRef={videoRefLoc}
         ></VideoChat>
         <VideoChat
-          stream={streamsRef.current[remotePeerSocketId.current]?.stream}
+          stream={streamRightRef.current}
           error={null}
           videoRef={videoRefRem}
         ></VideoChat>
