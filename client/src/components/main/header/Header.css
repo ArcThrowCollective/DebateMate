@@ -1,9 +1,6 @@
-#header {
+header {
   background: var(--white);
-  box-shadow: var(--box-shadow);
-
-  display: flex;
-  justify-content: space-between;
+  /* box-shadow: var(--box-shadow); */
   padding: 1rem;
 }
 
@@ -11,8 +8,12 @@
   cursor: pointer;
 }
 
-.header_logo {
-  height: 1.4rem;
-  align-self: center;
-  cursor: pointer;
+.logo {
+  width: clamp(4rem, 60%, 10rem);
+}
+
+.border-bottom__purple {
+  height: 2px;
+  width: 100%;
+  background: var(--gradient-purple);
 }

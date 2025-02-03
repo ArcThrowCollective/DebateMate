@@ -1,5 +1,7 @@
+import { FaUserCircle } from 'react-icons/fa';
+import ViewerCount from '../badges/ViewerCount';
 import './Room.css';
-import { FaRegEye, FaUserCircle } from 'react-icons/fa';
+
 import { RoomData } from './RoomList';
 
 interface RoomProps {
@@ -16,12 +18,7 @@ export default function Room({ roomID, roomData }: RoomProps): JSX.Element {
       >
         <div id="liveLabel">LIVE</div>
 
-        <div id="viewerCountLabel">
-          <div className="icon">
-            <FaRegEye size="1rem" />
-          </div>
-          <div className="count">100</div>
-        </div>
+        <ViewerCount viewers={100} />
       </div>
 
       <div className="room__textArea">

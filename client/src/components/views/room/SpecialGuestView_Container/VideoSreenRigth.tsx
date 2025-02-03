@@ -54,7 +54,7 @@ function VideoScreenRigth() {
             className={styles.PlayVideoRigth}
             onClick={() => setOffVideo(false)}
           >
-            OnLive
+            Live
           </button>
         </div>
       )}

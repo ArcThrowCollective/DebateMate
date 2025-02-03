@@ -61,8 +61,13 @@ export const Form: React.FC<FormProps> = ({
             <div className="input-container">
               <input
                 type="text"
+<<<<<<< HEAD
                 name="name"
                 placeholder="Enter name"
+=======
+                name="username"
+                placeholder="Enter a username"
+>>>>>>> 41c665d404bb1604eb3d3142677e0e84265aec7b
                 required
               />
             </div>

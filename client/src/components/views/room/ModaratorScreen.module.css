@@ -52,7 +52,7 @@
 .PlayVideoRigth,
 .MuteVideoRight,
 .OffVideoRight {
-  background-color: rgba(0, 0, 0, 0.8);
+  /* background-color: rgba(0, 0, 0, 0.8); */
   color: white;
   border: none;
   padding: 10px 15px;
@@ -61,6 +61,7 @@
   font-size: 16px;
   z-index: 10000;
   position: relative;
+  --purple__card: linear-gradient(to top, #6d25ff 0%, #cf82ff 50%);
 }
 
 .PlayVideoRigth:hover,

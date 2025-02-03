@@ -11,14 +11,14 @@ import {
   getRequestsToSpeak,
   createRequestToSpeak,
 } from '../../controllers/graphql/requestToSpeakController';
-import { debateType } from './debateSchema';
+import { roomsType } from './roomSchema';
 import { participantType } from './participantSchema';
 
 export const requestToSpeakType = new GraphQLObjectType({
   name: 'RequestToSpeak',
   fields: {
     id: { type: GraphQLID },
-    debate: { type: debateType },
+    debate: { type: roomsType },
     debateId: { type: GraphQLID },
     participant: { type: participantType },
     participantId: { type: GraphQLID },
@@ -49,7 +49,7 @@ export const requestToSpeakMutation = {
     },
     resolve: async (
       _: unknown,
-      requestToSpeak: Omit<Requests_To_Speak, 'id'>,
+      requestToSpeak: Omit<Requests_To_Speak, 'id'>
     ) => {
       return await createRequestToSpeak(requestToSpeak);
     },

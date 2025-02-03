@@ -1,7 +1,14 @@
 import express from 'express';
-import { registerUser, loginUser } from '../controllers/userController';
+import {
+  registerUser,
+  loginUser,
+  logoutUser,
+  authStatus,
+} from '../controllers/userController';
 
 export const router = express.Router();
 
-router.post('/form/signup', registerUser);
-router.post('/form/login', loginUser);
+router.post('/signup', registerUser);
+router.post('/login', loginUser);
+router.post('/logout', logoutUser);
+router.get('/auth/status', authStatus);

@@ -49,12 +49,12 @@ function VideoScreenLeft() {
         </>
       ) : (
         <div className={styles.VideoOffMessage}>
-          <p>Off Live</p>
+          <p>Off</p>
           <button
             className={styles.PlayVideoRigth}
             onClick={() => setOffVideo(false)}
           >
-            OnLive
+            Live
           </button>
         </div>
       )}

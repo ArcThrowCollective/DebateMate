@@ -1,4 +1,5 @@
 .footerscreenusersIcon {
+<<<<<<< HEAD
   width: 100vw;
   height: 149px;
   opacity: 0.5;
@@ -130,6 +131,127 @@
       rgba(195, 98, 255, 0.3) 66%,
       rgba(109, 37, 255, 0.5) 100%
     );
+=======
+		width: 100vw;
+  	height: 149px;
+		opacity: 0.5;
+		object-fit: cover;
+		z-index: 500;
+}
+.userright1AvatarIcon {
+  	position: absolute;
+  	top: 28px;
+  	left: 1267px;
+  	border-radius: 500px;
+  	width: 100px;
+  	height: 100px;
+  	object-fit: cover;
+}
+.userright2AvatarIcon {
+  	position: absolute;
+  	top: 28px;
+  	left: 1151px;
+  	border-radius: 500px;
+  	width: 100px;
+  	height: 100px;
+  	object-fit: contain;
+}
+.userleft1AvatarIcon {
+  	position: absolute;
+  	top: 28px;
+  	left: 0px;
+  	border-radius: 500px;
+  	width: 100px;
+  	height: 100px;
+  	object-fit: cover;
+}
+.moderatoravatarIcon {
+  	position: absolute;
+  	top: 20px;
+  	left: 621px;
+  	border-radius: 500px;
+  	width: 125px;
+  	height: 125px;
+  	object-fit: cover;
+}
+.userleft2AvatarIcon {
+  	position: absolute;
+  	top: 28px;
+  	left: 116px;
+  	border-radius: 50px;
+  	width: 100px;
+  	height: 100px;
+  	object-fit: cover;
+}
+.userright3AvatarIcon {
+  	position: absolute;
+  	top: 28px;
+  	right: 232px;
+  	border-radius: 50px;
+  	width: 100px;
+  	height: 100px;
+  	object-fit: cover;
+}
+.participantsContainer {
+   position: absolute;
+   top: 100%; /* Lo coloca en la mitad del contenedor padre */
+   left: 10%; /* Lo coloca en la mitad del eje horizontal */
+   
+   /* width: 1367px; */
+   height: 128px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.ModeratorRoom {
+	position: absolute;
+	width: 100vw;
+	height: 50vw;
+	bottom: 0;
+	left: 0;
+	background-image: url("src/assets/room-img/modaratorBen.png");
+	background-size: cover; /* Ajusta la imagen sin deformarla */
+	background-position: center;
+	background-repeat: no-repeat;
+	opacity: 0.6; /* Ajusta la opacidad si es necesario */
+	z-index: 800; /* Debe estar detrás de los demás elementos */
+}
+
+.footerscreenContainer {
+		width: 100vw;
+		background-image: url("src/assets/room-img/FooterScreenUsers.png");
+		height: 149px;
+		position: fixed;
+		bottom: 91px; /* Justo encima del footer principal */
+		left: 0;
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
+		z-index: 900;
+		
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		background: linear-gradient(180deg, #C362FF 0%, rgba(0,0,0,0) 66%, #6D25FF 100%);
+    background-size: 200% 200%;
+    animation: gradientMove 5s infinite alternate ease-in-out;
+		
+	}
+
+@keyframes gradientMove {
+  0% {
+    background: linear-gradient(180deg,rgba(0,0,0,0.2) 0%, rgba(195,98,255,0.3) 66%, rgba(109,37,255,0.5) 100%);
+    background-position: 0% 100%;
+  }
+  50% {
+    background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(195,98,255,0.3) 66%, rgba(109,37,255,0.5) 100%);
+    background-position: 100% 0%;
+  }
+  100% {
+    background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(195,98,255,0.3) 66%, rgba(109,37,255,0.5) 100%);
+>>>>>>> 41c665d404bb1604eb3d3142677e0e84265aec7b
     background-position: 0% 100%;
   }
 }

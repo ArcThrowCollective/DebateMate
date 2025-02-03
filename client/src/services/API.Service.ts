@@ -9,10 +9,11 @@ export const submitFormData = async (
   formData: Record<string, any>
 ) => {
   try {
-    const response = await axios.post(`${URL}/api`, formData, {
+    const response = await axios.post(`${URL}/${formType}`, formData, {
       headers: {
         'Content-Type': 'application/json',
       },
+      withCredentials: true, // store the cookie information for authentication
     });
     console.log(`Form submited successfully:`, response.data);
     return response.data; // Return API response

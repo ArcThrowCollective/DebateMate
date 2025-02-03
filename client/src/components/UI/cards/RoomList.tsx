@@ -1,4 +1,5 @@
 import Room from './Room';
+import Divide from '../divider/Divide';
 
 interface ChannelInfo {
   name: string;
@@ -21,6 +22,7 @@ export const RoomList: React.FC<RoomListProps> = ({ rooms }) => {
       {rooms.map((roomData, index) => (
         <Room key={index} roomID={index} roomData={roomData} />
       ))}
+      <Divide />
     </div>
   );
 };

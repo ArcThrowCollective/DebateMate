@@ -7,13 +7,21 @@ export const verifyAuthToken = (
   next: NextFunction
 ): void => {
   try {
-    if (req.body.query?.includes('GetPublicChannels')) {
+    if (req.body.query?.includes('PublicQuery')) {
       // all channels should be shown on the landingpage without any authentication
       // this makes sure GetPublicChannel request get their response
       return next();
     }
 
+    if (req.body.query?.includes('CreateParticipant')) {
+      // It should be possible to create participants
+      return next();
+    }
+
+    /*
+    ----- Use this for Authorization headers instead of cookies -----
     const authorizationHeader = req.headers.authorization;
+    
 
     if (!authorizationHeader) {
       res.status(401).json({ message: 'Authorization header is missing' });
@@ -21,6 +29,9 @@ export const verifyAuthToken = (
     }
 
     const token = authorizationHeader?.split(' ')[1];
+    */
+
+    const token = req.cookies.accessToken;
 
     if (!token) {
       res.status(401).json({ message: 'Unauthorized' });

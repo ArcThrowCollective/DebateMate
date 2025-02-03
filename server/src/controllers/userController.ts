@@ -8,7 +8,7 @@ const userStore = new UserStore();
 
 export const registerUser = async (
   req: Request,
-  res: Response,
+  res: Response
 ): Promise<void> => {
   try {
     const { email, username, password } = req.body;
@@ -38,7 +38,7 @@ export const registerUser = async (
       config.ACCESS_TOKEN_SECRET as string,
       {
         expiresIn: '1h',
-      },
+      }
     );
 
     res.status(201).json({ accessToken, user: createdUser });
@@ -65,8 +65,14 @@ export const loginUser = async (req: Request, res: Response) => {
 
     const accessToken = jwt.sign(
       { id: user.id, email: user.email },
-      config.ACCESS_TOKEN_SECRET as string,
+      config.ACCESS_TOKEN_SECRET as string
     );
+
+    res.cookie('accessToken', accessToken, {
+      httpOnly: true,
+
+      maxAge: 15 * 60 * 1000, // 15 min
+    });
 
     //TODO Refreshtoken implementation
 
@@ -74,5 +80,32 @@ export const loginUser = async (req: Request, res: Response) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: error });
+  }
+};
+
+export const logoutUser = async (req: Request, res: Response) => {
+  try {
+    res.clearCookie('accessToken');
+    res.status(200).json({ message: 'Logged out' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: error });
+  }
+};
+
+export const authStatus = async (req: Request, res: Response) => {
+  // Check the authentication status
+  const token = req.cookies.accessToken;
+  if (!token) {
+    res.json({ isAuthenticated: false, user: null });
+    return;
+  }
+
+  try {
+    const decode = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET!);
+    res.json({ isAuthenticated: true, user: decode });
+  } catch (error) {
+    console.error(error);
+    res.json({ isAuthenticated: false, user: null });
   }
 };

@@ -1,4 +1,5 @@
 .buttonLike {
+<<<<<<< HEAD
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -47,3 +48,73 @@
 .buttonReact {
   gap: 20px;
 }
+=======
+  	/* position: absolute;
+  	top: 0px;
+  	left: 0px; */
+  	width: 50px;
+  	height: 50px;
+
+		background-color: transparent;
+		mask-image: url("src/assets/room-img/Buttonlike.svg");
+		mask-repeat: no-repeat;
+		mask-size: cover;
+		border: none;
+		cursor: pointer;
+		background-color: rgb(130, 250, 175);
+}
+
+.buttonUnlike {
+  	/* position: absolute;
+  	top: 0px;
+  	left: 70px; */
+  	width: 50px;
+  	height: 50px;
+
+		background-color: transparent;
+		mask-image: url("src/assets/room-img/ButtonUnlike.svg");
+		mask-repeat: no-repeat;
+		mask-size: cover;
+		border: none;
+		cursor: pointer;
+		background-color: rgb(245, 184, 112);
+
+}
+.buttonhandupIcon {
+  	/* height: 100%;
+  	width: 41.67%;
+  	top: 0%;
+  	right: 0%;
+  	bottom: 0%;
+  	left: 58.33%;
+  	max-width: 100%;
+  	overflow: hidden;
+  	max-height: 100%; */
+
+		
+		background-color: transparent;
+		mask-image: url("src/assets/room-img/ButtonHandUp.svg");
+		mask-repeat: no-repeat;
+		mask-size: cover;
+		border: none;
+		cursor: pointer;
+		background-color: rgb(233, 233, 238);
+    
+}
+.buttonsreactContainer {
+  	width: 100%;
+  	/* position: relative; */
+  	height: 50px;
+		display: flex;
+		justify-content: space-between;
+		/* align-items: center; */
+		/* position: absolute; */
+		gap: 30px;
+		/* transform: translateX(-50%); */
+		/* left: 50%; */
+}
+
+.buttonReact {
+	gap: 20px;
+}
+>>>>>>> 41c665d404bb1604eb3d3142677e0e84265aec7b

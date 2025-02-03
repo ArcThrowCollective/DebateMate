@@ -1,8 +1,13 @@
 import { GraphQLSchema, GraphQLObjectType } from 'graphql';
 import { userQuery, userMutation } from './userSchema';
 import { channelQuery, channelMutation } from './channelSchema';
-import { debateQuery, debateMutation } from './debateSchema';
-import { participantQuery, participantMutation } from './participantSchema';
+import { roomsQuery, roomsMutation } from './roomSchema';
+import {
+  participantQuery,
+  participantMutation,
+  participantSubscription,
+  RoleEnum,
+} from './participantSchema';
 import { notificationQuery, notificationMutation } from './notificationSchema';
 import {
   requestToSpeakQuery,
@@ -18,7 +23,7 @@ const QueryType = new GraphQLObjectType({
   fields: {
     ...userQuery,
     ...channelQuery,
-    ...debateQuery,
+    ...roomsQuery,
     ...participantQuery,
     ...notificationQuery,
     ...requestToSpeakQuery,
@@ -31,7 +36,7 @@ const MutationType = new GraphQLObjectType({
   fields: {
     ...userMutation,
     ...channelMutation,
-    ...debateMutation,
+    ...roomsMutation,
     ...participantMutation,
     ...notificationMutation,
     ...requestToSpeakMutation,
@@ -39,7 +44,16 @@ const MutationType = new GraphQLObjectType({
   },
 });
 
+const SubscriptionType = new GraphQLObjectType({
+  name: 'Subscription',
+  fields: {
+    ...participantSubscription,
+  },
+});
+
 export const schema = new GraphQLSchema({
   query: QueryType,
   mutation: MutationType,
+  subscription: SubscriptionType,
+  types: [RoleEnum],
 });

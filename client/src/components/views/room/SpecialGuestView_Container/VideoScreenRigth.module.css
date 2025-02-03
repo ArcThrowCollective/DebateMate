@@ -45,7 +45,7 @@
   position: relative;
   height: 4rem;
   width: 4rem;
-
+  text-align: center;
   color: var(--white);
   background: var(--gradient-dark);
   box-shadow: var(--box-shadow);
@@ -56,11 +56,12 @@
 .PlayVideoRigth:hover,
 .MuteVideoRight:hover,
 .OffVideoRight:hover {
-  background-color: rgba(0, 0, 0, 0.9);
+  background-color: #cf82ff(0, 0, 0, 1);
 }
 
 .buttonBeMute {
   color: var(--white);
   font-size: 30px;
   opacity: 0.8;
+  text-align: center;
 }
