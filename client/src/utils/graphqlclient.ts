@@ -4,7 +4,7 @@ import {
   InMemoryCache,
   gql,
 } from '@apollo/client';
-import { Channel, Room } from '../types/debate';
+import { Channel, Participant, Room } from '../types/debate';
 
 const link = createHttpLink({
   uri: `${import.meta.env.VITE_APP_API_URL}/api/`,
@@ -73,4 +73,76 @@ export const fetchRoomById = async (roomId: string | number): Promise<Room> => {
   }
 
   return data.room;
+};
+
+export const fetchParticipantByUserId = async (
+  userId: string
+): Promise<Participant> => {
+  const GET_PARTICIPANT_BY_USERID = gql`
+    query GetParticipant($userId: ID!) {
+      participant(userId: $userId) {
+        id
+        roomId
+        userId
+        role
+        isSpeaking
+        joinedAt
+      }
+    }
+  `;
+
+  const { data } = await client.query<{ participant: Participant }>({
+    query: GET_PARTICIPANT_BY_USERID,
+    variables: { userId: String(userId) },
+    fetchPolicy: 'no-cache',
+    context: {
+      credentials: 'include',
+    },
+  });
+
+  if (!data.participant) {
+    throw new Error(`Participant with userId "${userId}" not found`);
+  }
+
+  return data.participant;
+};
+
+export const CREATE_PARTICIPANT_MUTATION = gql`
+  mutation CreateParticipant(
+    $roomId: ID!
+    $userId: ID!
+    $role: Role!
+    $isSpeaking: Boolean!
+  ) {
+    createParticipant(
+      roomId: $roomId
+      userId: $userId
+      role: $role
+      isSpeaking: $isSpeaking
+    ) {
+      id
+      roomId
+      userId
+      role
+      isSpeaking
+      joinedAt
+    }
+  }
+`;
+
+export const createParticipant = async (
+  roomId: string,
+  userId: string,
+  role: 'GUEST' | 'MODERATOR' | 'SPEAKER' | 'LISTENER'
+) => {
+  try {
+    const { data } = await client.mutate({
+      mutation: CREATE_PARTICIPANT_MUTATION,
+      variables: { roomId, userId, role, isSpeaking: false },
+    });
+    return data.createParticipant;
+  } catch (error) {
+    console.error('Error creating participant:', error);
+    throw error;
+  }
 };

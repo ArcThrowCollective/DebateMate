@@ -1,5 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { navigateToDebateScreen } from '../../../state/navigation/navigationSlice';
+
+import { CREATE_PARTICIPANT_MUTATION } from '../../../utils/graphqlclient';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { AuthUser } from '../../../types/debate';
@@ -15,7 +17,7 @@ type Props = {
 const DebateModal = ({ isModalOpen, setIsModalOpen, roomId }: Props) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [room, setRoom] = useState<Room | null>(null);
-  const [user, setUser] = useState<AuthUser | null>(null);
+  const [participant, setParticipant] = useState<AuthUser | null>(null);
   const dispatch = useDispatch();
 
   const handleCloseModal = () => {
@@ -23,7 +25,7 @@ const DebateModal = ({ isModalOpen, setIsModalOpen, roomId }: Props) => {
   };
 
   useEffect(() => {
-    // check if a user is logged in
+    // check if a user is logged in (per sending auth cookie)
     const checkAuthStatus = async () => {
       try {
         const response = await axios.get('http://127.0.0.1:3000/auth/status', {
@@ -32,7 +34,8 @@ const DebateModal = ({ isModalOpen, setIsModalOpen, roomId }: Props) => {
         console.log(response.data);
         if (response.data.isAuthenticated) {
           setIsLoggedIn(true);
-          setUser(response.data.user);
+
+          setParticipant(response.data.user);
         } else {
           setIsLoggedIn(false);
         }
