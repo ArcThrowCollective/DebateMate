@@ -1,29 +1,28 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface StreamState {
-  remoteStreamLeft: MediaStream;
-  remoteStreamRight: MediaStream;
+  streamLeft: MediaStream;
+  streamRight: MediaStream;
 }
 
 const initialState: StreamState = {
-  remoteStreamLeft: new MediaStream(),
-  remoteStreamRight: new MediaStream(),
+  streamLeft: new MediaStream(),
+  streamRight: new MediaStream(),
 };
 
 const streamSlice = createSlice({
   name: 'stream',
   initialState,
   reducers: {
-    setRemoteStreamLeft: (state, action: PayloadAction<MediaStream>) => {
-      state.remoteStreamLeft = action.payload;
+    setStreamLeft: (state, action: PayloadAction<MediaStream>) => {
+      state.streamLeft = action.payload;
     },
-    setRemoteStreamRight: (state, action: PayloadAction<MediaStream>) => {
-      state.remoteStreamRight = action.payload;
+    setStreamRight: (state, action: PayloadAction<MediaStream>) => {
+      state.streamRight = action.payload;
     },
   },
 });
 
-export const { setRemoteStreamLeft, setRemoteStreamRight } =
-  streamSlice.actions;
+export const { setStreamLeft, setStreamRight } = streamSlice.actions;
 
 export default streamSlice.reducer;

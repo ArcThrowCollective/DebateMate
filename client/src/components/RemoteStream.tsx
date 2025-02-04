@@ -2,10 +2,7 @@ import { useRef, useEffect, useState } from 'react';
 import { io, Socket } from 'socket.io-client';
 import env from '../../env';
 import { useDispatch } from 'react-redux';
-import {
-  setRemoteStreamLeft,
-  setRemoteStreamRight,
-} from '../state/stream/streamSlice';
+import { setStreamLeft, setStreamRight } from '../state/stream/streamSlice';
 
 type Props = {
   roomId: string;
@@ -32,7 +29,7 @@ export default function RemoteStream(props: Props) {
       video: props.video || true,
       audio: props.audio || false,
     });
-    dispatch(setRemoteStreamLeft(localStream));
+    dispatch(setStreamLeft(localStream));
   })();
 
   // run all connection logic once
@@ -115,7 +112,7 @@ export default function RemoteStream(props: Props) {
     peer.ontrack = (event) => {
       console.log(`= Received remote track from ${socketIdRemote.current}`);
       videoRefRem.current!.srcObject = event.streams[0];
-      dispatch(setRemoteStreamRight(event.streams[0]));
+      dispatch(setStreamRight(event.streams[0]));
     };
 
     // handle offer
