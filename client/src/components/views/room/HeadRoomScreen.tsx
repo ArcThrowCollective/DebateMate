@@ -1,14 +1,15 @@
-import { FunctionComponent } from "react";
-import HeadViewContainer from "./SpecialGuestView_Container/HeadScreen/HeadView_Container";
-import UserName_Card from "./SpecialGuestView_Container/HeadScreen/UserName_Card"
-import styles from "./HeadRoomScreen.module.css"
+import { FunctionComponent } from 'react';
+import HeadViewScreenContainer from './SpecialGuestView_Container/HeadScreen/HeadViewScreen_Container';
+import UserName_Card from './SpecialGuestView_Container/HeadScreen/UserName_Card';
+import styles from './HeadRoomScreen.module.css';
 
-const  HeadRoomScreen:FunctionComponent = () => {
+const HeadRoomScreen: FunctionComponent = () => {
   return (
     <div className={styles.HeadRoomScreenContainer}>
-      <HeadViewContainer />
+      <HeadViewScreenContainer />
+
       <div className={styles.UserNameCardContainer}>
-      <UserName_Card />
+        <UserName_Card />
       </div>
     </div>
   );

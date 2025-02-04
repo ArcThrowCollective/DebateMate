@@ -12,6 +12,7 @@ import {
   getParticipants,
   createParticipant,
   getParticipantByUserId,
+  getAllParticipants,
 } from '../../controllers/graphql/participantController';
 import { roomsType } from './roomSchema';
 import { userType } from './userSchema';
@@ -50,6 +51,15 @@ export const participantQuery = {
     type: new GraphQLList(participantType),
     resolve: async () => {
       return await getParticipants();
+    },
+  },
+  participantsByRoom: {
+    type: new GraphQLList(participantType),
+    args: {
+      roomId: { type: new GraphQLNonNull(GraphQLID) },
+    },
+    resolve: async (_: unknown, { roomId }: { roomId: string }) => {
+      return await getAllParticipants(roomId);
     },
   },
   participant: {

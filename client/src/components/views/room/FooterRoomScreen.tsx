@@ -1,9 +1,11 @@
-import { FunctionComponent } from "react";
-import FooterControlContain from "./SpecialGuestView_Container/FooterControl/FooterControl_Container";
+import { FunctionComponent } from 'react';
+import FooterControlContain from './SpecialGuestView_Container/FooterControl/FooterControl_Container';
 
-const FooterRoomScreen:FunctionComponent = () => {
+const FooterRoomScreen: FunctionComponent = () => {
   return (
-    <FooterControlContain />
+    <div>
+      <FooterControlContain />
+    </div>
   );
 };
 

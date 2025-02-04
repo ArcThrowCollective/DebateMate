@@ -1,38 +1,31 @@
-.buttonLike {
+.buttonBeVideoOff {
   width: 50px;
   height: 50px;
   border-radius: 50%;
   font-size: 50px;
-  padding-bottom: 5px;
-
-  border: none;
   cursor: pointer;
   background-color: rgb(130, 250, 175);
   opacity: 0.8;
 }
 
-.buttonUnlike {
+.buttonBeMute {
   width: 50px;
   height: 50px;
   border-radius: 50%;
   font-size: 50px;
   background-color: rgb(245, 184, 112);
   font-size: 50px;
-  padding-top: 5px;
-
-  border: none;
   cursor: pointer;
   opacity: 0.8;
 }
-.buttonhandupIcon {
+.buttonBoxingGlove {
   font-size: 50px;
   width: 50px;
   border-radius: 50%;
   margin-left: 40px;
-  border: none;
+
   cursor: pointer;
   background-color: rgb(233, 233, 238);
-  padding: 4px;
   opacity: 0.8;
 }
 .buttonsreactContainer {
@@ -40,10 +33,12 @@
   height: 50px;
   display: flex;
   justify-content: space-between;
-  gap: 30px;
   background: transparent;
 }
 
-.buttonReact {
-  gap: 20px;
+.buttonsControl {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
 }

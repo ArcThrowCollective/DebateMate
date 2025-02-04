@@ -5,6 +5,12 @@ export const getParticipants = async () => {
   return await prisma.participants.findMany();
 };
 
+export const getAllParticipants = async (roomId: string) => {
+  return await prisma.participants.findMany({
+    where: { roomId },
+  });
+};
+
 export const createParticipant = async (
   participant: Omit<Participants, 'id' | 'joinedAt'>
 ) => {

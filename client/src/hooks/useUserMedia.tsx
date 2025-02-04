@@ -16,7 +16,7 @@ const useUserMedia = (constraints: MediaStreamConstraints) => {
         console.log(supportedConstraints);
         setStream(userStream);
       } catch (err) {
-        setError('Failed to access media devices.');
+        setError('Failed to access media devices.' + err);
       }
     };
 
