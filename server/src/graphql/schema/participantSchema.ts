@@ -13,7 +13,7 @@ import {
   createParticipant,
   getParticipantByUserId,
   getAllParticipants,
-  removedParticipant,
+  removeParticipant,
 } from '../../controllers/graphql/participantController';
 import { roomsType } from './roomSchema';
 import { userType } from './userSchema';
@@ -104,7 +104,9 @@ export const participantMutation = {
       pubsub.publish(`PARTICIPANTS_UPDATED_${roomId}`, {
         participantsUpdated: { roomId, userId },
       });
-
+      if (!removedParticipant) {
+        console.log('No participants found');
+      }
       return removedParticipant;
     },
   },

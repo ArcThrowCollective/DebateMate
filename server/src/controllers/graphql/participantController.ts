@@ -41,7 +41,7 @@ export const removeParticipant = async (
     return participant;
   } catch (error) {
     console.error('Error removing participant:', error);
-    throw new Error('Failed to remove participant');
+    return null;
   }
 };
 

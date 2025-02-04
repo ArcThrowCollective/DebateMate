@@ -18,6 +18,10 @@ export const verifyAuthToken = (
       return next();
     }
 
+    if (req.body.query?.includes('RemoveParticipant')) {
+      return next();
+    }
+
     /*
     ----- Use this for Authorization headers instead of cookies -----
     const authorizationHeader = req.headers.authorization;
