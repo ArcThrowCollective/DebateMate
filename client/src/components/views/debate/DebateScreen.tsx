@@ -20,17 +20,17 @@ const DebateRoom = (props: Props) => {
     video: true,
     audio: false,
   });
-  const { data } = useSubscription(PARTICIPANTS_UPDATED_SUBSCRIPTION, {
+  /*const { data } = useSubscription(PARTICIPANTS_UPDATED_SUBSCRIPTION, {
     variables: { room },
-  });
-  console.log(data, user, room);
+  });*/
+  /*console.log(data, user, room);
 
   useEffect(() => {
     if (data && data.participantsUpdated) {
       console.log('Participant updated:', data.participantsUpdated);
       setParticipant(data.participantsUpdated);
     }
-  }, [data]);
+  }, [data]);*/
   return (
     <div className="bg-slate-400 relative min-h-screen flex flex-col justify-between">
       <VideoChat stream={stream} error={error} videoRef={videoRef} />

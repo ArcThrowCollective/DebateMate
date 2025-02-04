@@ -25,7 +25,7 @@ const wsLink = new GraphQLWsLink(
 );*/
 
 export const client = new ApolloClient({
-  link: wsLink,
+  link: httpLink,
   cache: new InMemoryCache(),
 });
 
