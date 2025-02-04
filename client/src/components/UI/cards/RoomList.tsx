@@ -1,28 +1,22 @@
 import Room from './Room';
-import Divide from '../divider/Divide';
+import { Room as RoomType } from '../../../types/debate';
 
-interface ChannelInfo {
-  name: string;
-  avatarUrl: string;
+export interface RoomListProps {
+  rooms: RoomType[];
 }
 
-export interface RoomData {
-  topic: string;
-  imageUrl: string;
-  channelInfo: ChannelInfo;
-}
+export const RoomList: React.FC<{ rooms: RoomType[] }> = ({ rooms }) => {
+  if (!rooms || rooms.length === 0) {
+    return <p>No rooms available.</p>;
+  }
 
-interface RoomListProps {
-  rooms: RoomData[];
-}
+  console.log('Rooms:', rooms);
 
-export const RoomList: React.FC<RoomListProps> = ({ rooms }) => {
   return (
     <div className="flex flex-wrap justify-center gap-6 p-4">
-      {rooms.map((roomData, index) => (
-        <Room key={index} roomID={index} roomData={roomData} />
+      {rooms.map((room) => (
+        <Room key={room.id} roomID={room.id} roomData={room} />
       ))}
-      <Divide />
     </div>
   );
 };

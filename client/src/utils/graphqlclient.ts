@@ -16,8 +16,37 @@ export const client = new ApolloClient({
   link,
 });
 
+export const fetchRoomData = async (): Promise<Room[]> => {
+  const GET_PUBLIC_ROOMS = gql`
+    query PublicQuery {
+      rooms {
+        id
+        topic
+        channel {
+          name
+          avatarUrl
+          imageUrl
+        }
+      }
+    }
+  `;
+
+  try {
+    const { data } = await client.query<{ rooms: Room[] }>({
+      query: GET_PUBLIC_ROOMS,
+    });
+
+    console.log('✅ API Response:', data); // ✅ Debug log
+    return data.rooms || []; // ✅ Ensure it always returns an array
+  } catch (error) {
+    console.error('❌ Error fetching rooms:', error);
+    return [];
+  }
+};
+
 // Any public query bypasses auth
 export const fetchData = async (): Promise<Channel[]> => {
+  console.log('Now fetching data...');
   const GET_PUBLIC_CHANNELS = gql`
     query PublicQuery {
       rooms {
@@ -32,11 +61,17 @@ export const fetchData = async (): Promise<Channel[]> => {
     }
   `;
 
-  const { data } = await client.query<{ rooms: Channel[] }>({
-    query: GET_PUBLIC_CHANNELS,
-  });
+  try {
+    const { data } = await client.query<{ rooms: Channel[] }>({
+      query: GET_PUBLIC_CHANNELS,
+    });
 
-  return data.rooms;
+    console.log('GraphQL Query Response:', data);
+    return data.rooms;
+  } catch (error) {
+    console.error('Error fetching channels data:', error);
+    throw error;
+  }
 };
 
 export const fetchRoomById = async (roomId: string | number): Promise<Room> => {
