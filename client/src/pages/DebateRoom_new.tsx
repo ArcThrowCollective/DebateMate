@@ -238,13 +238,11 @@ const DebateRoom = (props: Props) => {
       console.log(`*** checking peer ${peerId} for track`);
       if (peersRef.current[peerId]) {
         streamRightRef.current = streamsRef.current[peerId];
-        // videoRefRem.current!.srcObject = streamRightRef.current;
-        videoRefRem.current!.srcObject = streamsRef.current[peerId];
+        videoRefRem.current!.srcObject = streamRightRef.current;
         console.log(`*** setting videoRef to: `, streamsRef.current[peerId]);
       }
     }
-    console.log('Local Stream: -----------------');
-    console.log(streamLoc.current);
+    console.log(streamLoc);
   }
 
   return (
@@ -256,17 +254,17 @@ const DebateRoom = (props: Props) => {
           error={errorLoc}
           videoRef={videoRefLoc}
         ></VideoChat>
-        {/* <VideoChat
+        <VideoChat
           stream={streamRightRef.current}
           error={null}
           videoRef={videoRefRem}
-        ></VideoChat> */}
-        <video
+        ></VideoChat>
+        {/* <video
           ref={videoRefRem}
           autoPlay
           playsInline
           style={{ width: '400px', border: '1px solid black' }}
-        ></video>
+        ></video> */}
       </div>
     </>
   );
