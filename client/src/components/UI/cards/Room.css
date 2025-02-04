@@ -86,13 +86,6 @@
 .count {
 }
 
-#Avatar {
-  font-size: 2rem;
-  color: var(--white);
-  border-radius: 100%;
-  box-shadow: var(--box-shadow);
-}
-
 #topic__title {
 }
 
