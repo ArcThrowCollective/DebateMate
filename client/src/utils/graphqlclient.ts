@@ -5,7 +5,6 @@ import {
   gql,
 } from '@apollo/client';
 import { Channel, Participant, Room } from '../types/debate';
-import { RoomData } from '../components/UI/cards/RoomList';
 
 const link = createHttpLink({
   uri: `${import.meta.env.VITE_APP_API_URL}/api/`,
@@ -17,8 +16,8 @@ const client = new ApolloClient({
   link,
 });
 
-export const fetchRoomData = async (): Promise<RoomData[]> => {
-  const GET_PUBLIC_CHANNELS = gql`
+export const fetchRoomData = async (): Promise<Room[]> => {
+  const GET_PUBLIC_ROOMS = gql`
     query PublicQuery {
       rooms {
         id
@@ -33,14 +32,14 @@ export const fetchRoomData = async (): Promise<RoomData[]> => {
   `;
 
   try {
-    const { data } = await client.query<{ rooms: RoomData[] }>({
-      query: GET_PUBLIC_CHANNELS,
+    const { data } = await client.query<{ rooms: Room[] }>({
+      query: GET_PUBLIC_ROOMS,
     });
 
-    console.log('Fetched data:', data.rooms);
-    return data.rooms; // ✅ Ensure only returning the array, not `{ rooms: ... }`
+    console.log('✅ API Response:', data); // ✅ Debug log
+    return data.rooms || []; // ✅ Ensure it always returns an array
   } catch (error) {
-    console.error('Error fetching data:', error);
+    console.error('❌ Error fetching rooms:', error);
     return [];
   }
 };

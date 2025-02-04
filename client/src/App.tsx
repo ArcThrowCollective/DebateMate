@@ -1,12 +1,13 @@
 import './App.css';
 import Header from './components/main/header/Header.tsx';
-import { RoomData, RoomList } from './components/UI/cards/RoomList.tsx';
+import { RoomList } from './components/UI/cards/RoomList.tsx';
 import { Dashboard } from './components/main/dashboard/Dashboard.tsx';
 import Footer from './components/main/footer/Footer.tsx';
 import { useSelector } from 'react-redux';
 import { RootState } from './state/store.ts';
 import ChannelPage from './components/views/channel/ChannelPage.tsx';
 import ProfilePage from './components/views/profile/ProfilePage.tsx';
+import { Room as RoomType } from './types/debate.ts';
 import Room from './components/views/room/room.tsx';
 import DebateLobby from './components/views/debate/DebateLobby.tsx';
 import DebateScreen from './components/views/debate/DebateScreen.tsx';
@@ -19,7 +20,7 @@ function App() {
   );
 
   // State to store fetched rooms
-  const [roomData, setRoomData] = useState<RoomData[]>([]);
+  const [roomData, setRoomData] = useState<RoomType[]>([]);
 
   // Fetch rooms when App loads
   useEffect(() => {
@@ -35,7 +36,7 @@ function App() {
     };
 
     getRooms();
-  }, [roomData]);
+  }, []); // ✅ Empty array ensures it runs only once when the component mounts
 
   return (
     <Dashboard>
