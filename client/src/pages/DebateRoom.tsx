@@ -113,8 +113,8 @@ const DebateRoom = (props: Props) => {
       console.log('onicecandidate triggered');
       if (event.candidate) {
         console.log(
-          `o Sending ICE candidate to ${remotePeerSocketId.current}:`,
-          event.candidate
+          `o Sending ICE candidate to ${remotePeerSocketId.current}:`
+          // event.candidate
         );
         socketRef.current?.emit('ice-candidate', {
           candidate: event.candidate,
@@ -160,7 +160,8 @@ const DebateRoom = (props: Props) => {
       }) => {
         console.log(`Received offer from ${from}`);
 
-        // TODO NEW: ADD TRACKS BEFORE SENDING OUT ANSWER
+        // TODO NEW: ADD TRACKS BEFORE SENDING OUT ANSWER and set remote socket id
+        remotePeerSocketId.current = from;
         const localStream = await navigator.mediaDevices.getUserMedia({
           video: true,
           audio: false,
