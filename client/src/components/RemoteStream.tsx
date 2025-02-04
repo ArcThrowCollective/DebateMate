@@ -1,14 +1,22 @@
 import { useRef, useEffect, useState } from 'react';
 import { io, Socket } from 'socket.io-client';
 import env from '../../env';
+import { useDispatch } from 'react-redux';
+import {
+  setRemoteStreamLeft,
+  setRemoteStreamRight,
+} from '../state/stream/streamSlice';
 
 type Props = {
   roomId: string;
   userName: string;
+  video?: boolean;
+  audio?: boolean;
 };
 type PeerConnections = { [id: string]: RTCPeerConnection };
 
 export default function RemoteStream(props: Props) {
+  const dispatch = useDispatch();
   const room = props.roomId;
   const userName = props.userName;
   // Collect socket IDs and peers in objects
@@ -17,6 +25,15 @@ export default function RemoteStream(props: Props) {
   const peersRef = useRef<PeerConnections>({});
   // set up <video> Refs
   const videoRefRem = useRef<HTMLVideoElement>(null);
+
+  // set left stream to local webcam stream
+  (async () => {
+    const localStream = await navigator.mediaDevices.getUserMedia({
+      video: props.video || true,
+      audio: props.audio || false,
+    });
+    dispatch(setRemoteStreamLeft(localStream));
+  })();
 
   // run all connection logic once
   useEffect(() => {
@@ -34,8 +51,8 @@ export default function RemoteStream(props: Props) {
 
       // Push tracks from local stream to peer connection
       const localStream = await navigator.mediaDevices.getUserMedia({
-        video: true,
-        audio: false,
+        video: props.video || true,
+        audio: props.audio || false,
       });
       console.log('= Adding local stream tracks too peer connection');
       localStream.getTracks().forEach((track) => {
@@ -98,6 +115,7 @@ export default function RemoteStream(props: Props) {
     peer.ontrack = (event) => {
       console.log(`= Received remote track from ${socketIdRemote.current}`);
       videoRefRem.current!.srcObject = event.streams[0];
+      dispatch(setRemoteStreamRight(event.streams[0]));
     };
 
     // handle offer
@@ -118,8 +136,8 @@ export default function RemoteStream(props: Props) {
 
         // Push tracks from local stream to peer connection
         const localStream = await navigator.mediaDevices.getUserMedia({
-          video: true,
-          audio: false,
+          video: props.video || true,
+          audio: props.audio || false,
         });
         console.log('= Adding local stream tracks too peer connection');
         localStream.getTracks().forEach((track) => {
@@ -183,9 +201,5 @@ export default function RemoteStream(props: Props) {
   }, []);
 
   // JSX //
-  return (
-    <>
-      <video ref={videoRefRem} autoPlay playsInline />
-    </>
-  );
+  return <>{/* <video ref={videoRefRem} autoPlay playsInline /> */}</>;
 }
