@@ -1,15 +1,19 @@
-import { FunctionComponent } from "react";
-import HeadRoomScreen from "./HeadRoomScreen";
-import FooterRoomScreen from "./FooterRoomScreen";
+import { FunctionComponent } from 'react';
+// import HeadRoomScreen from './HeadRoomScreen';
+// import FooterRoomScreen from './FooterRoomScreen';
+import styles from './Room.module.css';
+import RoomModarator from './VideoScreenModarator';
 
-const  Room:FunctionComponent = () => {
+interface RoomProps {
+  roomId: string;
+}
+
+const Room: FunctionComponent<RoomProps> = () => {
   return (
     <>
-    <div >
-      <HeadRoomScreen />
-      {/* here Vido stuff */}
-      <FooterRoomScreen />
-    </div>
+      <div className={styles.RoomContainer}>
+        <RoomModarator />
+      </div>
     </>
   );
 };

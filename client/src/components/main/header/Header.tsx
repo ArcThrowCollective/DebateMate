@@ -53,6 +53,8 @@ export default function Header() {
         <div className="border-bottom__purple"></div>
         <Modal type={overlayType} onClose={closeOverlay} />
       </div>
+
+      <Modal type={overlayType} onClose={closeOverlay} />
     </>
   );
 }

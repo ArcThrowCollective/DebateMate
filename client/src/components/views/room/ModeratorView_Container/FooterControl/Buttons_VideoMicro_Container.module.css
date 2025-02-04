@@ -1,32 +1,41 @@
 .buttonvideoIcon {
-  	position: absolute;
-  	height: 100%;
-  	width: 41.67%;
-  	top: 0%;
-  	right: 0%;
-  	bottom: 0%;
-  	left: 58.33%;
-  	max-width: 100%;
-  	/* overflow: hidden; */
-  	max-height: 100%;
-		cursor: pointer;
+  font-size: 30px;
+  position: absolute;
+  height: 100%;
+  border-radius: 50%;
+  width: 50px;
+  padding: 10px;
+
+  top: 0%;
+  right: 0%;
+  bottom: 0%;
+  left: 58.33%;
+  max-width: 100%;
+  color: rgb(229, 230, 234);
+  max-height: 100%;
+  cursor: pointer;
+  background-color: rgb(80, 75, 91);
+  opacity: 0.8;
 }
 .buttonmicroIcon {
-  	position: absolute;
-  	height: 100%;
-  	width: 41.67%;
-  	top: 0%;
-  	right: 58.33%;
-  	bottom: 0%;
-  	left: 0%;
-  	max-width: 100%;
-  	/* overflow: hidden; */
-  	max-height: 100%;
-		cursor: pointer;
+  position: absolute;
+  height: 100%;
+  width: 50px;
+  border-radius: 50%;
+  padding: 10px;
+  top: 0%;
+  right: 58.33%;
+  bottom: 0%;
+  left: 0%;
+  max-width: 100%;
+  color: rgb(229, 230, 234);
+  background-color: rgb(80, 75, 91);
+  max-height: 100%;
+  cursor: pointer;
+  opacity: 0.8;
 }
 .buttonsVideomicroContainer {
-  	width: 100%;
-  	position: relative;
-  	height: 50px;
+  width: 100%;
+  position: relative;
+  height: 50px;
 }
-

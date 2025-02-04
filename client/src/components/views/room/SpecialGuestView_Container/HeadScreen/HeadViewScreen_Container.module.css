@@ -1,0 +1,67 @@
+.nametopic {
+  position: absolute;
+  display: flex;
+  color: rgba(26, 21, 39, 0.9);
+  font-weight: bolder;
+  left: 16px;
+  top: 100px;
+}
+
+.live {
+  /* position: absolute; */
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  color: rgb(245, 184, 112);
+  background-color: rgba(53, 47, 65, 0.9);
+  background-size: 40px;
+  height: 20px;
+  margin-left: 16px;
+}
+.viewersIcon {
+  width: 20px;
+  display: flex;
+  font-weight: bolder;
+  /* position: absolute; */
+  margin-left: 6px;
+  margin-right: 6px;
+  color: rgb(245, 184, 112);
+}
+
+.totalonline {
+  display: flex;
+  /* position: absolute; */
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0;
+  color: rgba(53, 47, 65, 1);
+}
+
+.live_Container {
+  width: 100px;
+  /* position: absolute; */
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  /* justify-content: space-around; */
+}
+
+.headviewContainer {
+  width: 100vw;
+  height: 180px;
+  padding-top: 20px;
+
+  /* position: relative; */
+  display: flex;
+  flex-direction: column;
+
+  font-size: 3.2em;
+  line-height: normal;
+  color: #fff;
+  background: linear-gradient(
+    180deg,
+    rgba(26, 21, 39, 0.8) 5%,
+    rgba(53, 47, 65, 0.5) 30%,
+    rgba(224, 222, 228, 0.1) 65%
+  );
+}

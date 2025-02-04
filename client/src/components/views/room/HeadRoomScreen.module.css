@@ -1,19 +1,23 @@
 .HeadRoomScreenContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Centra horizontalmente */
-    justify-content: center; /* Centra verticalmente */
-    height: 100vh; /* Asegura que el contenedor ocupe toda la altura de la pantalla */
-    width: 100%; /* Asegura que el contenedor ocupe toda la anchura */
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra horizontalmente */
+  justify-content: center; /* Centra verticalmente */
+  height: auto;
+  position: relative;
+  /* background: linear-gradient(180deg, #e0dee4 0%, #352f41 50%, #1a1527 100%);
+  opacity: 0.1;
+  animation: gradientMoves 5s infinite alternate ease-in-out; */
 }
 
 .UserNameCardContainer {
-    display: flex;
-    justify-content: center; /* Centra horizontalmente */
-    align-items: center; /* Centra verticalmente */
-    width: 100%; /* Asegura que el contenedor ocupe toda la anchura */
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente */
+  width: 100%; /* Asegura que el contenedor ocupe toda la anchura */
 }
 .UserName_Card {
-    width: 300px; /* Ajusta según sea necesario */
-    margin: 0 auto; /* Centra horizontalmente */
+  width: 300px; /* Ajusta según sea necesario */
+  margin: 0 auto; /* Centra horizontalmente */
 }

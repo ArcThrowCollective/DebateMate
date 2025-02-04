@@ -1,0 +1,89 @@
+.VideoModaratorScreenContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  z-index: 1000;
+  /* pointer-events: none; */
+
+  position: absolute;
+  bottom: 160px;
+  height: auto;
+  /* flex-wrap: wrap; */
+}
+
+.VideoScreenRigth {
+  display: flex;
+  width: 20%;
+  height: 20%;
+  max-width: 600px;
+  max-height: 600px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.VideoModaratorControls {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  /* left: 50%; */
+  /* transform: translate(-50%, -50%); */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 15px;
+  z-index: 10000; /* Asegura que los botones estén sobre el video */
+  /* background-color: rgba(0, 0, 0, 0.5); */
+  background: linear-gradient(
+    180deg,
+    rgba(81, 74, 92, 0.5) 30%,
+    rgba(53, 47, 65, 0.5) 80%,
+    rgba(26, 21, 39, 0.5) 100%
+  );
+
+  /* padding: 10px; */
+  border-radius: 10px;
+  width: 100vw;
+  height: 91px;
+}
+
+.PlayVideoRigth,
+.MuteVideoRight,
+.OffVideoRight {
+  /* background-color: rgba(0, 0, 0, 0.8); */
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  z-index: 10000;
+  position: relative;
+  --purple__card: linear-gradient(to top, #6d25ff 0%, #cf82ff 50%);
+}
+
+.PlayVideoRigth:hover,
+.MuteVideoRight:hover,
+.OffVideoRight:hover {
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+.request_Container {
+  position: absolute;
+  height: 50px;
+  width: auto;
+  font-size: 18px;
+  color: #000;
+  font-family: 'Titillium Web';
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 20px;
+}
+
+.Button55Debate {
+  font-size: 3rem;
+  color: var(--white);
+}
