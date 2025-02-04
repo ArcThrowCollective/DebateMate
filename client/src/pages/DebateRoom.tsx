@@ -66,7 +66,7 @@ const DebateRoom = (props: Props) => {
 
       // Create connection and update state list
       if (!peersRef.current[requestOffer.newUser]) {
-        createConnection({
+        await createConnection({
           from: socketRef.current,
           to: requestOffer.newUser,
           room: room,
@@ -203,13 +203,17 @@ const DebateRoom = (props: Props) => {
         from: string;
       }) => {
         if (!peersRef.current[from]) {
-          // createConnection({
-          //   from: socketRef.current,
-          //   to: answerFrom,
-          //   room: room,
-          //   setPeers: setPeers,
-          // });
-          console.log(`WARNING: got cand from non-connected: ${from}`);
+          createConnection({
+            from: socketRef.current,
+            to: from,
+            room: room,
+            peersRef: peersRef,
+            streamsRef: streamsRef,
+            streamLoc: streamLoc.current,
+          });
+          console.log(
+            `#### WARNING: got candidate from non-connected: ${from}`
+          );
         }
         const peer = peersRef.current[from];
         console.log(`i received ICE candidate from ${from}`);
@@ -267,11 +271,11 @@ const DebateRoom = (props: Props) => {
           error={errorLoc}
           videoRef={videoRefLoc}
         ></VideoChat>
-        {/* <VideoChat
+        <VideoChat
           stream={streamRightRef.current}
           error={null}
           videoRef={videoRefRem}
-        ></VideoChat> */}
+        ></VideoChat>
         <video
           ref={videoRefRem}
           autoPlay
