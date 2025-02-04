@@ -5,6 +5,7 @@ import {
   gql,
 } from '@apollo/client';
 import { Channel, Participant, Room } from '../types/debate';
+import { RoomData } from '../components/UI/cards/RoomList';
 
 const link = createHttpLink({
   uri: `${import.meta.env.VITE_APP_API_URL}/api/`,
@@ -16,8 +17,7 @@ const client = new ApolloClient({
   link,
 });
 
-// Any public query bypasses auth
-export const fetchData = async (): Promise<Channel[]> => {
+export const fetchRoomData = async (): Promise<RoomData[]> => {
   const GET_PUBLIC_CHANNELS = gql`
     query PublicQuery {
       rooms {
@@ -32,11 +32,47 @@ export const fetchData = async (): Promise<Channel[]> => {
     }
   `;
 
-  const { data } = await client.query<{ rooms: Channel[] }>({
-    query: GET_PUBLIC_CHANNELS,
-  });
+  try {
+    const { data } = await client.query<{ rooms: RoomData[] }>({
+      query: GET_PUBLIC_CHANNELS,
+    });
 
-  return data.rooms;
+    console.log('Fetched data:', data.rooms);
+    return data.rooms; // ✅ Ensure only returning the array, not `{ rooms: ... }`
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    return [];
+  }
+};
+
+// Any public query bypasses auth
+export const fetchData = async (): Promise<Channel[]> => {
+  console.log('Now fetching data...');
+  const GET_PUBLIC_CHANNELS = gql`
+    query PublicQuery {
+      rooms {
+        id
+        topic
+        channel {
+          name
+          avatarUrl
+          imageUrl
+        }
+      }
+    }
+  `;
+
+  try {
+    const { data } = await client.query<{ rooms: Channel[] }>({
+      query: GET_PUBLIC_CHANNELS,
+    });
+
+    console.log('GraphQL Query Response:', data);
+    return data.rooms;
+  } catch (error) {
+    console.error('Error fetching channels data:', error);
+    throw error;
+  }
 };
 
 export const fetchRoomById = async (roomId: string | number): Promise<Room> => {

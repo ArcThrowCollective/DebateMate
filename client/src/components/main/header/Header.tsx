@@ -38,7 +38,7 @@ export default function Header() {
               {/* This is a test */}
               testRoom
             </button>
-            <button onClick={() => dispatch(navigateToRoom('Number1 User'))}>
+            <button onClick={() => dispatch(navigateToRoom('Username'))}>
               TempRoom
             </button>
             <button onClick={() => setOverlayType('login')}>Login</button>
