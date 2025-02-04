@@ -271,12 +271,13 @@ const DebateRoom = (props: Props) => {
           error={errorLoc}
           videoRef={videoRefLoc}
         ></VideoChat>
-        <VideoChat
+        {/* <VideoChat
           stream={streamRightRef.current}
           error={null}
           videoRef={videoRefRem}
-        ></VideoChat>
+        ></VideoChat> */}
         <video
+          id={'remote'}
           ref={videoRefRem}
           autoPlay
           playsInline

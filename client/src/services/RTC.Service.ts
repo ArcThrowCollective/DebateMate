@@ -59,6 +59,11 @@ async function createConnection(connProps: connProps) {
       `i received remote track from ${connProps.to}:`,
       event.streams[0]
     );
+    if (event.track.kind === 'video') {
+      console.log('Track kind: video');
+    } else {
+      console.log('!!!!!!!!!!!! Track kind: ', event.track.kind);
+    }
     // TODO: check if there are more streams than [0] ?
     console.log('----------peer.ontrack');
     console.log(event.streams);
