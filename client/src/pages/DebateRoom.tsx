@@ -129,23 +129,25 @@ const DebateRoom = (props: Props) => {
 
     peer.ontrack = (event) => {
       console.log(`Received remote track from ${remotePeerSocketId.current}`);
-      if (!streamsRef.current[remotePeerSocketId.current]) {
-        streamsRef.current[remotePeerSocketId.current] = {
-          stream: event.streams[0],
-          candidates: [],
-        };
-      } else {
-        streamsRef.current[remotePeerSocketId.current].stream =
-          event.streams[0];
-        // set remote video ref here for <VideoChat>
-        videoRefRem.current!.srcObject = event.streams[0];
-      }
-      setStreams((prev) => ({
-        ...prev,
-        [remotePeerSocketId.current]: {
-          ...streamsRef.current[remotePeerSocketId.current],
-        },
-      }));
+      // if (!streamsRef.current[remotePeerSocketId.current]) {
+      //   streamsRef.current[remotePeerSocketId.current] = {
+      //     stream: event.streams[0],
+      //     candidates: [],
+      //   };
+      // } else {
+      //   streamsRef.current[remotePeerSocketId.current].stream =
+      //     event.streams[0];
+      //   // set remote video ref here for <VideoChat>
+      //   videoRefRem.current!.srcObject = event.streams[0];
+      // }
+      // setStreams((prev) => ({
+      //   ...prev,
+      //   [remotePeerSocketId.current]: {
+      //     ...streamsRef.current[remotePeerSocketId.current],
+      //   },
+      // }));
+      // TODO NEW: simplify to only set the videoRef to the remote track
+      videoRefRem.current!.srcObject = event.streams[0];
     };
 
     // handle offer
