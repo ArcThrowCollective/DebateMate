@@ -159,6 +159,17 @@ const DebateRoom = (props: Props) => {
         from: string;
       }) => {
         console.log(`Received offer from ${from}`);
+
+        // TODO NEW: ADD TRACKS BEFORE SENDING OUT ANSWER
+        const localStream = await navigator.mediaDevices.getUserMedia({
+          video: true,
+          audio: false,
+        });
+        // Push tracks from local stream to peer connection
+        localStream.getTracks().forEach((track) => {
+          peer.addTrack(track, localStream);
+        });
+
         // see line 73 of prototype:
         // IF NOT already sent an offer to the remotePeer, createConnection(remote, FALSE)
         await peer.setRemoteDescription(new RTCSessionDescription(offer));
