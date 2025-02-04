@@ -21,6 +21,30 @@ export const createParticipant = async (
   });
 };
 
+export const removeParticipant = async (
+  userId: string,
+  roomId: string
+): Promise<Participants | null> => {
+  try {
+    const participant = await prisma.participants.findFirst({
+      where: { userId, roomId },
+    });
+
+    if (!participant) {
+      throw new Error('Participant not found');
+    }
+
+    await prisma.participants.delete({
+      where: { id: participant.id },
+    });
+
+    return participant;
+  } catch (error) {
+    console.error('Error removing participant:', error);
+    throw new Error('Failed to remove participant');
+  }
+};
+
 export const getParticipantByUserId = async (userId: string) => {
   return await prisma.participants.findFirst({
     where: { userId },

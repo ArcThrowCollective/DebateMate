@@ -13,6 +13,7 @@ import {
   createParticipant,
   getParticipantByUserId,
   getAllParticipants,
+  removedParticipant,
 } from '../../controllers/graphql/participantController';
 import { roomsType } from './roomSchema';
 import { userType } from './userSchema';
@@ -89,6 +90,25 @@ export const participantMutation = {
       return await createParticipant(participant);
     },
   },
+  removeParticipant: {
+    type: participantType,
+    args: {
+      userId: { type: new GraphQLNonNull(GraphQLID) },
+      roomId: { type: new GraphQLNonNull(GraphQLID) },
+    },
+    resolve: async (
+      _: unknown,
+      { userId, roomId }: { userId: string; roomId: string }
+    ) => {
+      const removedParticipant = await removeParticipant(userId, roomId);
+      pubsub.publish(`PARTICIPANTS_UPDATED_${roomId}`, {
+        participantsUpdated: { roomId, userId },
+      });
+
+      return removedParticipant;
+    },
+  },
+
   joinRoom: {
     type: participantType,
     args: {
