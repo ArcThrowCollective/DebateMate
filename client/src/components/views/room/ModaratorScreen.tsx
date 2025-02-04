@@ -9,6 +9,15 @@ function ModaratorScreen() {
   const [muted, setMuted] = useState(true);
   const [offVideo, setOffVideo] = useState(false);
 
+  const handleMuteToggle = () => {
+    console.log('Mute button clicked:', muted);
+    setMuted((prevMuted) => {
+      const newMuted = !prevMuted;
+      console.log('New muted state:', newMuted);
+      return newMuted;
+    });
+  };
+
   return (
     <div className={styles.VideoModaratorScreenContainer}>
       <div className={styles.request_Container}>
@@ -19,7 +28,6 @@ function ModaratorScreen() {
       </div>
       {!offVideo ? (
         <>
-          MuteVideoRight
           <ReactPlayer
             className={styles.VideoScreenRigth}
             url="https://youtu.be/qCXupXXXncM?si=VRZgKcixZaDf9No7"
@@ -29,20 +37,20 @@ function ModaratorScreen() {
             playing={playing}
             muted={muted}
           />
-          {/* Controles de video dentro de ModaratorScreen */}
+          {/* Controles de video */}
           <div className={styles.VideoModaratorControls}>
             <button
               className={styles.PlayVideoRigth}
               onClick={() => setPlaying(!playing)}
             >
-              {playing ? 'Pausa' : 'Play'}
+              {playing ? 'Pause' : 'Play'}
             </button>
 
             <button
               className={styles.MuteVideoRight}
-              onClick={() => setMuted(!muted)}
+              onClick={handleMuteToggle} // ✅ Corrección del evento de clic
             >
-              {muted ? 'Mute' : 'UnMute'}
+              {muted ? 'UnMute' : 'Mute'}
             </button>
 
             <button
