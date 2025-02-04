@@ -32,6 +32,7 @@ const DebateRoom = (props: Props) => {
   // const [streams, setStreams] = useState<Streams>({});
   const [username, setUserName] = useState<string>('');
   const userStreamHasBeenCreated = useRef<boolean>(false);
+  const [connectionGo, setConnectionGo] = useState<boolean>(false);
   // set up <video> Refs
   const {
     stream: streamLocal,
@@ -50,6 +51,7 @@ const DebateRoom = (props: Props) => {
 
   // run all connection logic once
   useEffect(() => {
+    if (!connectionGo) return;
     // create socket
     // setUserName(userName);
     const socket = io(`https://${env.SIGNAL_HOST}:${env.SIGNAL_PORT}`, {
@@ -75,6 +77,9 @@ const DebateRoom = (props: Props) => {
       }
       console.log(peersRef.current);
       const peer = peersRef.current[requestOffer.newUser];
+
+      // attach local stream to peer connections
+      // attachStreamLoc(); // already handled in createConnection?
 
       // create offer
       peer
@@ -216,10 +221,11 @@ const DebateRoom = (props: Props) => {
       socket.emit('leaveRoom', room);
       socket.disconnect();
     };
-  }, []);
+  }, [connectionGo]);
 
   // Push tracks from local stream to each peer connection
   // TODO: flag "broadcasting" or "is speaker"
+  // TODO: test if already attached
   function attachStreamLoc() {
     if (streamLoc.current) {
       streamLoc.current.getTracks().forEach((track) => {
@@ -246,11 +252,16 @@ const DebateRoom = (props: Props) => {
     console.log('Local Stream: -----------------');
     console.log(streamLoc.current);
   }
+  function connectSignaling() {
+    setConnectionGo(true);
+  }
 
   return (
     <>
       <div>
-        <button onClick={attachStreamRem}>ATTACH REMOTE STREAM</button>
+        <button onClick={attachStreamLoc}> ATTACH LOCAL STREAM </button>
+        <button onClick={connectSignaling}> CONNECT SIGNALING </button>
+        <button onClick={attachStreamRem}> ATTACH REMOTE STREAM </button>
         <VideoChat
           stream={streamLoc.current}
           error={errorLoc}
