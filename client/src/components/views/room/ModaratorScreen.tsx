@@ -3,8 +3,6 @@ import styles from './ModaratorScreen.module.css';
 import { useState } from 'react';
 import RequestContainer from './ModeratorView_Container/FooterControl/RequestContainer';
 import FooterScreenContainer from './ModeratorView_Container/FooterControl/FooterScreen_Container';
-// import { PiBoxingGlove } from 'react-icons/pi';
-import { PiBoxingGloveFill } from 'react-icons/pi';
 
 function ModaratorScreen() {
   const [playing, setPlaying] = useState(false);
@@ -25,8 +23,8 @@ function ModaratorScreen() {
           <ReactPlayer
             className={styles.VideoScreenRigth}
             url="https://youtu.be/qCXupXXXncM?si=VRZgKcixZaDf9No7"
-            width="125px"
-            height="125px"
+            width="135px"
+            height="135px"
             loop={true}
             playing={playing}
             muted={muted}
@@ -37,15 +35,14 @@ function ModaratorScreen() {
               className={styles.PlayVideoRigth}
               onClick={() => setPlaying(!playing)}
             >
-              {playing ? '>' : 'On'}
+              {playing ? 'Pausa' : 'Play'}
             </button>
 
             <button
               className={styles.MuteVideoRight}
               onClick={() => setMuted(!muted)}
             >
-              <PiBoxingGloveFill size={40} color="E4E5EA" opacity={0.7} />
-              {muted ? '' : ''}
+              {muted ? 'Mute' : 'UnMute'}
             </button>
 
             <button

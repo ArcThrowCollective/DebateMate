@@ -14,7 +14,7 @@ function VideoScreenRigth() {
         <>
           <ReactPlayer
             className={styles.VideoScreenPlayer}
-            url="https://youtube.com/shorts/Zmc-kE5fN4k?si=V20DURqR0bqyH_sP"
+            url="https://youtube.com/shorts/hqekUpBJ8oI?si=mgroWkizQjrBOAVE"
             width="100%"
             height="100%"
             loop={true}
@@ -23,6 +23,7 @@ function VideoScreenRigth() {
           />
 
           {/* Contenedor de botones flotantes */}
+
           <div className={styles.VideoControls}>
             <button
               className={styles.PlayVideoRigth}

@@ -52,7 +52,9 @@
 .PlayVideoRigth,
 .MuteVideoRight,
 .OffVideoRight {
-  /* background-color: rgba(0, 0, 0, 0.8); */
+  padding: 12px 18px;
+  width: auto;
+  min-width: 80px;
   color: white;
   border: none;
   padding: 10px 15px;
@@ -67,7 +69,8 @@
 .PlayVideoRigth:hover,
 .MuteVideoRight:hover,
 .OffVideoRight:hover {
-  background-color: rgba(0, 0, 0, 0.9);
+  cursor: pointer;
+  background-color: rgba(207, 130, 255, 0.3);
 }
 
 .request_Container {
@@ -81,9 +84,4 @@
   justify-content: space-around;
   align-items: center;
   gap: 20px;
-}
-
-.Button55Debate {
-  font-size: 3rem;
-  color: var(--white);
 }

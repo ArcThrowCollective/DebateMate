@@ -3,7 +3,12 @@ import styles from './VideoScreenRigth.module.css';
 import { useEffect, useState } from 'react';
 import { BsMicMute } from 'react-icons/bs';
 
-function VideoScreenLeft({ muteVideos }) {
+type Props = {
+  muteVideos: boolean;
+  streamUrl?: string;
+};
+
+function VideoScreenLeft({ muteVideos, streamUrl }: Props) {
   const [playing, setPlaying] = useState(false);
   const [muted, setMuted] = useState(true);
   const [offVideo, setOffVideo] = useState(false);
@@ -12,13 +17,18 @@ function VideoScreenLeft({ muteVideos }) {
     setMuted(muteVideos);
   }, [muteVideos]);
 
+  const validStreamUrl =
+    typeof streamUrl === 'string' && streamUrl.trim() !== ''
+      ? streamUrl
+      : 'https://youtu.be/U3xCr4AtFfs';
+
   return (
     <div className={styles.VideoScreenContainer}>
       {!offVideo ? (
         <>
           <ReactPlayer
             className={styles.VideoScreenPlayer}
-            url="https://youtube.com/shorts/XU0kJIi-JN8?si=Vz-XniEVLaRFleP8"
+            url={validStreamUrl}
             width="100%"
             height="100%"
             loop={true}

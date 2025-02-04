@@ -49,6 +49,7 @@
   color: var(--white);
   background: var(--gradient-dark);
   box-shadow: var(--box-shadow);
+  opacity: 0.6;
 
   border-radius: 100%;
 }
