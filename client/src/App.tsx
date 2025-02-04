@@ -10,6 +10,8 @@ import ProfilePage from './components/views/profile/ProfilePage.tsx';
 import Room from './components/views/room/room.tsx';
 import DebateLobby from './components/views/debate/DebateLobby.tsx';
 import DebateScreen from './components/views/debate/DebateScreen.tsx';
+import { ApolloProvider } from '@apollo/client';
+import { client } from './utils/graphqlclient';
 
 const roomData = [
   {
@@ -101,7 +103,9 @@ function App() {
         {currentPage === 'room' && <Room roomId={roomId!} />}
         {/* This are test navigations */}
         {currentPage === 'debatelobby' && <DebateLobby />}
-        {currentPage === 'debatescreen' && <DebateScreen />}
+        <ApolloProvider client={client}>
+          {currentPage === 'debatescreen' && <DebateScreen />}
+        </ApolloProvider>
       </section>
       <Footer />
     </Dashboard>

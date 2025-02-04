@@ -11,7 +11,7 @@ const link = createHttpLink({
   credentials: 'include',
 });
 
-const client = new ApolloClient({
+export const client = new ApolloClient({
   cache: new InMemoryCache(),
   link,
 });
@@ -143,6 +143,70 @@ export const createParticipant = async (
     return data.createParticipant;
   } catch (error) {
     console.error('Error creating participant:', error);
+    throw error;
+  }
+};
+
+export const REMOVE_PARTICIPANT_MUTATION = gql`
+  mutation RemoveParticipant($roomId: ID!, $userId: ID!) {
+    removeParticipant(roomId: $roomId, userId: $userId) {
+      id
+      roomId
+      userId
+    }
+  }
+`;
+
+export const removeParticipant = async (roomId: string, userId: string) => {
+  try {
+    const { data } = await client.mutate({
+      mutation: REMOVE_PARTICIPANT_MUTATION,
+      variables: { roomId, userId },
+    });
+    console.log(data);
+    if (!data.removedParticipant) {
+      throw Error('No participant found');
+    }
+    return data.removeParticipant;
+  } catch (error) {
+    console.error('Error removing participant:', error);
+    return null;
+  }
+};
+
+export const fetchParticipantsByRoomId = async (
+  roomId: string
+): Promise<Participant[]> => {
+  const GET_PARTICIPANTS_BY_ROOM_ID = gql`
+    query PublicQuery($roomId: ID!) {
+      participantsByRoom(roomId: $roomId) {
+        id
+        roomId
+        userId
+        role
+        isSpeaking
+        joinedAt
+      }
+    }
+  `;
+
+  try {
+    const { data } = await client.query<{ participantsByRoom: Participant[] }>({
+      query: GET_PARTICIPANTS_BY_ROOM_ID,
+      variables: { roomId },
+      fetchPolicy: 'no-cache',
+      context: {
+        credentials: 'include',
+      },
+    });
+
+    if (!data.participantsByRoom) {
+      throw new Error(`No participants found: ${roomId}`);
+    }
+
+    return data.participantsByRoom;
+  } catch (error) {
+    console.error('Error fetching participants:', error);
     throw error;
   }
 };

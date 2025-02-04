@@ -19,11 +19,14 @@ const DebateModal = ({ isModalOpen, setIsModalOpen, roomId }: Props) => {
   const [room, setRoom] = useState<Room | null>(null);
   const [user, setUser] = useState<AuthUser | null>(null);
   const dispatch = useDispatch();
-  const STATIC_GUESTID = '7573787b-4a33-4667-bbad-64d2189a76d1'; // Just a test id for the guest user
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
-
+  const STATIC_GUEST: AuthUser = {
+    id: '7573787b-4a33-4667-bbad-64d2189a76d1',
+    email: 'GUEST',
+    iat: 'GUEST',
+  };
   useEffect(() => {
     // check if a user is logged in (per sending auth cookie)
     const checkAuthStatus = async () => {
@@ -73,8 +76,14 @@ const DebateModal = ({ isModalOpen, setIsModalOpen, roomId }: Props) => {
     } else {
       // User who tries to view without authentication is a GUEST
       // Our Guest User in the Database is '7573787b-4a33-4667-bbad-64d2189a76d1'
-      createParticipant(roomId, STATIC_GUESTID, 'GUEST');
-      dispatch(navigateToDebateScreen({ user, room }));
+      // Just a test id for the guest user
+      createParticipant(roomId, STATIC_GUEST.id, 'GUEST');
+      const participant = {
+        user: user || STATIC_GUEST, // if its not a user then GUEST
+        room,
+      };
+
+      dispatch(navigateToDebateScreen(participant));
     }
   };
   return (
