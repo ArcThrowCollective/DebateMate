@@ -13,81 +13,8 @@ import DebateLobby from './components/views/debate/DebateLobby.tsx';
 import DebateScreen from './components/views/debate/DebateScreen.tsx';
 import { ApolloProvider } from '@apollo/client';
 import { client } from './utils/graphqlclient';
+import { TrackSpeakerVotes } from './components/UI/voting/Voting.tsx';
 
-const roomData = [
-  {
-    topic: 'The Universe is Infinite',
-    imageUrl:
-      'https://www.nwpc.com/wp-content/uploads/2022/05/placeholder-image-gray-3x2-1.png',
-    channelInfo: {
-      name: 'AstroTalks',
-      avatarUrl: '',
-    },
-  },
-  {
-    topic: 'The Universe is Infinite',
-    imageUrl:
-      'https://www.nwpc.com/wp-content/uploads/2022/05/placeholder-image-gray-3x2-1.png',
-    channelInfo: {
-      name: 'AstroTalks',
-      avatarUrl: '',
-    },
-  },
-  {
-    topic: 'The Universe is Infinite',
-    imageUrl:
-      'https://www.nwpc.com/wp-content/uploads/2022/05/placeholder-image-gray-3x2-1.png',
-    channelInfo: {
-      name: 'AstroTalks',
-      avatarUrl: '',
-    },
-  },
-  {
-    topic: 'The Universe is Infinite',
-    imageUrl:
-      'https://www.nwpc.com/wp-content/uploads/2022/05/placeholder-image-gray-3x2-1.png',
-    channelInfo: {
-      name: 'AstroTalks',
-      avatarUrl: '',
-    },
-  },
-  {
-    topic: 'The Universe is Infinite',
-    imageUrl:
-      'https://www.nwpc.com/wp-content/uploads/2022/05/placeholder-image-gray-3x2-1.png',
-    channelInfo: {
-      name: 'AstroTalks',
-      avatarUrl: '',
-    },
-  },
-  {
-    topic: 'The Universe is Infinite',
-    imageUrl:
-      'https://www.nwpc.com/wp-content/uploads/2022/05/placeholder-image-gray-3x2-1.png',
-    channelInfo: {
-      name: 'AstroTalks',
-      avatarUrl: '',
-    },
-  },
-  {
-    topic: 'The Universe is Infinite',
-    imageUrl:
-      'https://www.nwpc.com/wp-content/uploads/2022/05/placeholder-image-gray-3x2-1.png',
-    channelInfo: {
-      name: 'AstroTalks',
-      avatarUrl: '',
-    },
-  },
-  {
-    topic: 'The Universe is Infinite',
-    imageUrl:
-      'https://www.nwpc.com/wp-content/uploads/2022/05/placeholder-image-gray-3x2-1.png',
-    channelInfo: {
-      name: 'AstroTalks',
-      avatarUrl: '',
-    },
-  },
-];
 import { fetchRoomData } from './utils/graphqlclient.ts';
 import { useState, useEffect } from 'react';
 
@@ -123,7 +50,7 @@ function App() {
         {currentPage === 'channel' && <ChannelPage channelId={channelId!} />}
         {currentPage === 'profile' && <ProfilePage profileId={profileId!} />}
         {currentPage === 'room' && <Room roomId={roomId!} />}
-
+        <TrackSpeakerVotes speakerId="ben" />
         {/* Test navigations */}
         {currentPage === 'debatelobby' && <DebateLobby />}
         <ApolloProvider client={client}>
