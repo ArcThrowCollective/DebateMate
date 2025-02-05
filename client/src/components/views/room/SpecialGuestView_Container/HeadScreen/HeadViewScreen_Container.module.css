@@ -1,7 +1,7 @@
 .nametopic {
   position: absolute;
   display: flex;
-  color: rgba(26, 21, 39, 0.9);
+  color: rgba(242, 240, 245, 0.9);
   font-weight: bolder;
   left: 16px;
   top: 50px;
@@ -48,8 +48,8 @@
 
 .headviewContainer {
   width: 100vw;
-  height: 180px;
-  padding-top: 20px;
+  height: 200px;
+  padding-top: 35px;
 
   /* position: relative; */
   display: flex;
@@ -60,8 +60,8 @@
   color: #fff;
   background: linear-gradient(
     180deg,
-    rgba(26, 21, 39, 0.99) 6%,
-    rgba(53, 47, 65, 0.5) 40%,
-    rgba(224, 222, 228, 0.1) 80%
+    rgba(26, 21, 39, 0.9) 25%,
+    rgba(53, 47, 65, 0.7) 60%,
+    rgba(224, 222, 228, 0.2) 80%
   );
 }

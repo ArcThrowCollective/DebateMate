@@ -19,7 +19,7 @@
 
 .VideoControls {
   position: absolute;
-  bottom: 64px;
+  bottom: 0px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -30,13 +30,13 @@
   z-index: 99999;
   background: linear-gradient(
     180deg,
-    rgba(81, 74, 92, 0.8) 30%,
-    rgba(53, 47, 65, 0.8) 80%,
+    rgba(81, 74, 92, 0.8) 40px,
+    rgba(53, 47, 65, 0.8) 90%,
     rgba(26, 21, 39, 0.8) 100%
   );
   width: 50vw;
 
-  height: 93px;
+  height: 100px;
   pointer-events: auto;
 }
 
@@ -70,9 +70,109 @@
   transform: scale(1.1);
 }
 
+.dislike {
+  color: var(--dark-color);
+  font-size: 30px;
+  opacity: 0.8;
+  text-align: center;
+
+  border: none;
+  padding: 10px 15px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 16px;
+  z-index: 99999;
+  position: relative;
+  height: 4rem;
+  width: 4rem;
+  text-align: center;
+  background: #ffb662;
+  box-shadow: var(--box-shadow);
+  opacity: 0.7;
+  pointer-events: auto;
+  border-radius: 100%;
+}
+.like {
+  color: var(--dark-color);
+  font-size: 30px;
+
+  text-align: center;
+
+  border: none;
+  padding: 10px 15px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 16px;
+  z-index: 99999;
+  position: relative;
+  height: 4rem;
+  width: 4rem;
+  text-align: center;
+  background-color: rgb(130, 250, 175);
+  box-shadow: var(--box-shadow);
+  opacity: 0.7;
+  pointer-events: auto;
+  border-radius: 100%;
+}
 .buttonBeMute {
   color: var(--white);
   font-size: 30px;
   opacity: 0.8;
   text-align: center;
+}
+.footerscreenContainer {
+  pointer-events: none;
+  width: 100vw;
+  height: 60px;
+  position: fixed;
+  bottom: 91px;
+  left: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 900;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: linear-gradient(
+    180deg,
+    #c362ff 0%,
+    rgba(0, 0, 0, 0) 66%,
+    #6d25ff 100%
+  );
+  background-size: 200% 200%;
+  animation: gradientMove 5s infinite alternate ease-in-out;
+}
+
+@keyframes gradientMove {
+  0% {
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.2) 0%,
+      rgba(195, 98, 255, 0.3) 66%,
+      rgba(109, 37, 255, 0.5) 100%
+    );
+    background-position: 0% 100%;
+  }
+  50% {
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.2) 0%,
+      rgba(195, 98, 255, 0.3) 66%,
+      rgba(109, 37, 255, 0.5) 100%
+    );
+    background-position: 100% 0%;
+  }
+
+  100% {
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.2) 0%,
+      rgba(195, 98, 255, 0.3) 66%,
+      rgba(109, 37, 255, 0.5) 100%
+    );
+    background-position: 0% 100%;
+  }
 }

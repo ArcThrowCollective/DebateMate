@@ -66,7 +66,7 @@ const TimerContainer = ({ setMuteVideos = () => {} }) => {
               className={styles.controlButtonBoxin}
               onClick={() => setShowTimer((prev) => !prev)}
             >
-              <PiBoxingGloveFill size={40} color="E4E5EA" opacity={1} />
+              <PiBoxingGloveFill size={45} color="#6d25ff" opacity={0.7} />
               {showTimer ? '' : ''}
             </button>
             <button

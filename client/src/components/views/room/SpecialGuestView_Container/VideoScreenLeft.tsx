@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import styles from './VideoScreenRigth.module.css';
 import { BsMicMute } from 'react-icons/bs';
 import Stream from '../../../Stream';
+import { AiFillLike } from 'react-icons/ai';
+import { AiFillDislike } from 'react-icons/ai';
 
 type Props = {
   muteVideos: boolean;
@@ -47,7 +49,6 @@ function VideoScreenLeft({ muteVideos, streamUrl }: Props) {
             height="90%"
           /> */}
           <Stream></Stream>
-
           <div className={styles.VideoControls}>
             <button
               className={styles.PlayVideoRigth}
@@ -70,6 +71,16 @@ function VideoScreenLeft({ muteVideos, streamUrl }: Props) {
             >
               Off
             </button>
+            <button>
+              <AiFillDislike className={styles.dislike} />
+            </button>
+            <button>
+              <AiFillLike className={styles.like} />
+            </button>
+            <div className={styles.footerscreenContainer}>
+              <div className={styles.participantsContainer}></div>
+              <div className={styles.ModeratorRoom}></div>
+            </div>
           </div>
         </>
       ) : (

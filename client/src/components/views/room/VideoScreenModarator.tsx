@@ -22,18 +22,15 @@ const VideoScreenModarator: FunctionComponent = () => {
         <div>
           <HeadRoomScreen />
         </div>
-        <div>
+        {/* <div>
           <RequestContainer />
-        </div>
+        </div> */}
         <div className={styles.VideoRoomScreen}>
           {/* <ModaratorScreen stream={remoteStream} muteVideos={muteVideos} /> */}
           <VideoScreenLeft muteVideos={muteVideos} />
           <VideoScreenRigth muteVideos={muteVideos} />
         </div>
 
-        {/* <div className={styles.VideoRoomScreen}>
-          <FooterScreenContainer />
-        </div> */}
         <div className={styles.HeadRoomScreen}>{/* <HeadRoomScreen /> */}</div>
         {/* <TimerContainer setMuteVideos={setMuteVideos} /> */}
       </div>

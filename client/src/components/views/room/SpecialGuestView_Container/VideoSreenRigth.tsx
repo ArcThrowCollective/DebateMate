@@ -4,6 +4,8 @@ import { BsMicMute } from 'react-icons/bs';
 import RemoteStream from '../../../RemoteStream';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../state/store';
+import { AiFillLike } from 'react-icons/ai';
+import { AiFillDislike } from 'react-icons/ai';
 
 type Props = {
   muteVideos: boolean;
@@ -57,6 +59,12 @@ function VideoScreenRigth({ muteVideos, streamUrl }: Props) {
           ></RemoteStream>
 
           <div className={styles.VideoControls}>
+            <button>
+              <AiFillDislike className={styles.dislike} />
+            </button>
+            <button>
+              <AiFillLike className={styles.like} />
+            </button>
             <button
               className={styles.PlayVideoRigth}
               onClick={() => setPlaying(!playing)}
