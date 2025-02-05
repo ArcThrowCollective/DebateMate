@@ -1,8 +1,6 @@
 import { useRef, useEffect, useState } from 'react';
 import { io, Socket } from 'socket.io-client';
 import env from '../../env';
-import { useDispatch } from 'react-redux';
-import { setStreamLeft, setStreamRight } from '../state/stream/streamSlice';
 
 type Props = {
   roomId: string;
@@ -13,7 +11,6 @@ type Props = {
 type PeerConnections = { [id: string]: RTCPeerConnection };
 
 export default function RemoteStream(props: Props) {
-  const dispatch = useDispatch();
   const room = props.roomId;
   const userName = props.userName;
   // Collect socket IDs and peers in objects
@@ -22,15 +19,6 @@ export default function RemoteStream(props: Props) {
   const peersRef = useRef<PeerConnections>({});
   // set up <video> Refs
   const videoRefRem = useRef<HTMLVideoElement>(null);
-
-  // set left stream to local webcam stream
-  // (async () => {
-  //   const localStream = await navigator.mediaDevices.getUserMedia({
-  //     video: props.video || true,
-  //     audio: props.audio || false,
-  //   });
-  //   // dispatch(setStreamLeft(localStream));
-  // })();
 
   // run all connection logic once
   useEffect(() => {
@@ -112,7 +100,6 @@ export default function RemoteStream(props: Props) {
     peer.ontrack = (event) => {
       console.log(`= Received remote track from ${socketIdRemote.current}`);
       videoRefRem.current!.srcObject = event.streams[0];
-      // dispatch(setStreamRight(event.streams[0]));
     };
 
     // handle offer
