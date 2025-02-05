@@ -1,4 +1,4 @@
-import { FunctionComponent, useEffect } from 'react';
+import { FunctionComponent, useEffect, useState } from 'react';
 import styles from '../HeadScreen/HeadViewScreen_Container.module.css';
 import { GrView } from 'react-icons/gr';
 import { useSelector } from 'react-redux';
@@ -8,12 +8,13 @@ import { Room } from '../../../../../types/debate';
 
 const HeadViewScreenContainer: FunctionComponent = () => {
   const roomId = useSelector((state: RootState) => state.navigation.roomId);
-  let roomData: Room | null = null;
+  const [roomData, setRoomData] = useState<Room | null>(null);
   useEffect(() => {
     console.log(roomId);
     if (roomId) {
       (async () => {
-        roomData = await fetchRoomById(roomId);
+        const fetchedRoom = await fetchRoomById(roomId);
+        setRoomData(fetchedRoom);
       })();
     }
   }, []);
@@ -27,7 +28,7 @@ const HeadViewScreenContainer: FunctionComponent = () => {
         <div className={styles.totalonline}>24</div>
       </div>
 
-      <div className={styles.nametopic}>{roomData}</div>
+      <div className={styles.nametopic}>{roomData?.topic}</div>
     </div>
   );
 };
