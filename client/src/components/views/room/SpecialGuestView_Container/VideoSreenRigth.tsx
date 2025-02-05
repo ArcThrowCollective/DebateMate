@@ -13,15 +13,11 @@ function VideoScreenRigth() {
     <div className={styles.VideoScreenContainer}>
       {!offVideo ? (
         <>
-<<<<<<< HEAD
           <RemoteStream
             roomId="test"
             userName="testuser"
             audio={true}
           ></RemoteStream>
-=======
-          <RemoteStream roomId="test" userName="testuser"></RemoteStream>
->>>>>>> 12aaca6 (add Stream/RemoteStream components in VideoScreenLeft/Right)
           {/* <ReactPlayer
             className={styles.VideoScreenPlayer}
             url="https://youtube.com/shorts/Zmc-kE5fN4k?si=V20DURqR0bqyH_sP"
