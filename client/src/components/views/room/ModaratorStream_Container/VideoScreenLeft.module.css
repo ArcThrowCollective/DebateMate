@@ -4,45 +4,42 @@
   align-items: center;
   height: 100vh;
   width: 100vw;
-
   position: relative;
   flex-wrap: wrap;
 }
-.VideoRoomScreen {
-  bottom: 0;
-}
 
-.VideoScrenPlayer {
+.VideoScreenPlayer {
   display: flex;
-  width: auto;
+  width: 20%;
+  height: 50vh;
+  max-width: 600px;
 }
 
 .VideoControls {
   position: absolute;
-  bottom: 64px;
+  bottom: 25px;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: row;
   gap: 25px;
-  z-index: 99999;
+  z-index: 10000;
+  padding: 10px;
+  border-radius: 50px;
+  pointer-events: auto;
   background: linear-gradient(
     180deg,
-    rgba(81, 74, 92, 0.8) 30%,
-    rgba(53, 47, 65, 0.8) 80%,
-    rgba(26, 21, 39, 0.8) 100%
+    rgba(81, 74, 92, 0.5) 30%,
+    rgba(53, 47, 65, 0.5) 80%,
+    rgba(26, 21, 39, 0.5) 100%
   );
-  width: 50vw;
-
-  height: 93px;
-  pointer-events: auto;
+  width: 100vw;
+  height: 91px;
 }
 
-.PlayVideoRigth,
-.MuteVideoRight,
-.OffVideoRight {
+.PlayVideoLeft,
+.MuteVideoLeft,
+.OffVideoLeft {
   background-color: rgba(0, 0, 0, 0.8);
   color: white;
   border: none;
@@ -50,7 +47,7 @@
   border-radius: 50px;
   cursor: pointer;
   font-size: 16px;
-  z-index: 99999;
+  z-index: 10000;
   position: relative;
   height: 4rem;
   width: 4rem;
@@ -58,16 +55,14 @@
   color: var(--white);
   background: var(--gradient-dark);
   box-shadow: var(--box-shadow);
-  opacity: 0.8;
-  pointer-events: auto;
+  opacity: 0.6;
   border-radius: 100%;
 }
 
-.PlayVideoRigth:hover,
-.MuteVideoRight:hover,
-.OffVideoRight:hover {
+.PlayVideoLeft:hover,
+.MuteVideoLeft:hover,
+.OffVideoLeft:hover {
   background-color: #cf82ff(0, 0, 0, 1);
-  transform: scale(1.1);
 }
 
 .buttonBeMute {

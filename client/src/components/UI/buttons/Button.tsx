@@ -3,5 +3,11 @@ interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
 }
 
 export const Button: React.FC<ButtonProps> = ({ children, ...props }) => {
-  return <button {...props}>{children}</button>;
+  return (
+    <div className="border-gradient">
+      <button className="border-gradient-inner" {...props}>
+        {children}
+      </button>
+    </div>
+  );
 };
