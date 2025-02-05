@@ -20,6 +20,7 @@ export const TrackSpeakerVotes = ({ speakerId }: { speakerId: string }) => {
     (state: RootState) =>
       (state.votes as VotesState)[speakerId] ?? { up: 0, down: 0 }
   ); // redux
+
   const [timeLeft, setTimeLeft] = useState(55); // Countdown timer
   const [showModal, setShowModal] = useState(false);
   const [overlayType, setOverlayType] = useState<
@@ -64,7 +65,7 @@ export const TrackSpeakerVotes = ({ speakerId }: { speakerId: string }) => {
   };
 
   return (
-    <div className="flex flex-col items-center gap-4 p-4 rounded-lg shadow-md">
+    <div className="flex flex-col items-center gap-4 p-4 rounded-lg">
       <div className="flex gap-6">
         <button
           data-testid="btn__thumbs-up"
