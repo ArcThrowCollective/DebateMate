@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { submitFormData } from '../../../services/API.Service';
 
 interface FormProps extends React.FormHTMLAttributes<HTMLFormElement> {
-  type: 'signup' | 'login' | 'channel' | 'topic';
+  type: 'signup' | 'login' | 'channel' | 'topic' | 'vote';
   title?: string;
   onClose: () => void;
 }
@@ -23,6 +23,7 @@ export const Form: React.FC<FormProps> = ({
     login: 'Login',
     channel: 'Create a Channel',
     topic: 'Create a Topic',
+    vote: 'vote',
   };
 
   const [minRating, setMinRating] = useState(0);
