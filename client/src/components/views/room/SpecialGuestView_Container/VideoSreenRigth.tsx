@@ -2,6 +2,7 @@ import ReactPlayer from 'react-player/lazy';
 import styles from './VideoScreenRigth.module.css';
 import { useState } from 'react';
 import { BsMicMute } from 'react-icons/bs';
+import RemoteStream from '../../../RemoteStream';
 
 function VideoScreenRigth() {
   const [playing, setPlaying] = useState(false);
@@ -12,7 +13,8 @@ function VideoScreenRigth() {
     <div className={styles.VideoScreenContainer}>
       {!offVideo ? (
         <>
-          <ReactPlayer
+          <RemoteStream roomId="test" userName="testuser"></RemoteStream>
+          {/* <ReactPlayer
             className={styles.VideoScreenPlayer}
             url="https://youtube.com/shorts/Zmc-kE5fN4k?si=V20DURqR0bqyH_sP"
             width="100%"
@@ -20,7 +22,7 @@ function VideoScreenRigth() {
             loop={true}
             playing={playing}
             muted={muted}
-          />
+          /> */}
 
           {/* Contenedor de botones flotantes */}
           <div className={styles.VideoControls}>
