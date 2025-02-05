@@ -80,11 +80,16 @@ h6 {
 .border-gradient {
   position: relative;
   padding: 2px;
-
+  border-radius: var(--border-radius);
   background: var(--gradient-purple);
+  width: 200px;
 }
 
 .border-gradient-inner {
+  display: flex;
+  justify-content: center;
+  font-weight: 600;
+  color: var(--purple-color);
   background: var(--gradient-light);
   border-radius: inherit;
   padding: 8px 16px;
@@ -115,4 +120,7 @@ button {
 }
 .scrollbar-thin::-webkit-scrollbar-track {
   background-color: var(--dark-color);
+}
+
+.btn__accent {
 }
