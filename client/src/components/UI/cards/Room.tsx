@@ -28,6 +28,7 @@ export default function Room({ roomID, roomData }: RoomProps): JSX.Element {
       <div className="room__textArea">
         <Avatar userName={roomData.channel.name} />
         <h2 id="topic__title">{roomData.topic}</h2>
+        <span></span>
       </div>
 
       <button
