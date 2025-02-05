@@ -6,22 +6,21 @@
 }
 
 .TimerContainer {
-  top: 130px;
+  top: 0;
   display: flex;
   left: 50%;
   position: relative;
   width: auto;
-  position: fixed;
+  position: absolute;
   height: auto;
-  /* padding-left: 30px;
-  padding-right: 30px; */
   transform: translate(-50%, -50%);
-
   color: #fff;
   font-family: 'Titillium Web';
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 9999;
+  pointer-events: auto;
 }
 
 .timerControls {
@@ -43,11 +42,8 @@
   margin-top: 45px;
   align-items: center;
   gap: 55px;
-  /* position: absolute; */
   display: flex;
   justify-content: center;
-  /* top: 20px; */
-  /* transform: translateX(-50%); */
 }
 .controlButton {
   height: 35px;
@@ -90,19 +86,4 @@
   font-size: 60px;
   font-weight: bold;
   text-align: center;
-}
-
-.toggleButton {
-  background-color: #ff4b4b;
-  color: white;
-  border: none;
-  /* padding: 8px 15px; */
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 14px;
-  /* margin-bottom: 10px; */
-}
-
-.toggleButton:hover {
-  background-color: #d43f3f;
 }

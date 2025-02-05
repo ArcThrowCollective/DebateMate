@@ -5,8 +5,9 @@
   align-items: center;
   width: 100%;
   top: 100px;
-  opacity: 0.8;
-  z-index: 5;
+  opacity: 0.9;
+  z-index: 10000;
+  pointer-events: auto;
 }
 
 .leftcarduser {

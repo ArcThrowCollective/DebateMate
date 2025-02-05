@@ -4,7 +4,7 @@
   color: rgba(26, 21, 39, 0.9);
   font-weight: bolder;
   left: 16px;
-  top: 100px;
+  top: 50px;
 }
 
 .live {
@@ -60,8 +60,8 @@
   color: #fff;
   background: linear-gradient(
     180deg,
-    rgba(26, 21, 39, 0.8) 5%,
-    rgba(53, 47, 65, 0.5) 30%,
-    rgba(224, 222, 228, 0.1) 65%
+    rgba(26, 21, 39, 0.99) 6%,
+    rgba(53, 47, 65, 0.5) 40%,
+    rgba(224, 222, 228, 0.1) 80%
   );
 }

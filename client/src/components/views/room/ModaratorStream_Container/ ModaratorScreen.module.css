@@ -1,0 +1,96 @@
+.VideoModaratorScreenContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  z-index: 1000;
+  pointer-events: auto;
+  position: relative;
+  bottom: 160px;
+  height: 100vh;
+}
+
+.VideoScreenPlayer {
+  width: 100px;
+  height: 100px;
+  border-radius: 150%;
+  overflow: hidden;
+  position: relative;
+}
+.VideoScreenRigth {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 130px;
+  height: 130px;
+  border-radius: 150%;
+  overflow: hidden;
+  position: relative;
+}
+.VideoScreenRigth video {
+  object-fit: cover; /* 🔹 Asegura que el video se ajuste bien */
+  width: 100%;
+  height: 100%;
+}
+
+.VideoModaratorControls {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 15px;
+  z-index: 10000;
+  background: linear-gradient(
+    180deg,
+    rgba(81, 74, 92, 0.5) 30%,
+    rgba(53, 47, 65, 0.5) 80%,
+    rgba(26, 21, 39, 0.5) 100%
+  );
+
+  /* padding: 10px; */
+  border-radius: 10px;
+  width: 100vw;
+  height: 91px;
+}
+
+.PlayVideoRigth,
+.MuteVideoRight,
+.OffVideoRight {
+  padding: 12px 18px;
+  width: auto;
+  min-width: 80px;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  z-index: 10000;
+  position: relative;
+  --purple__card: linear-gradient(to top, #6d25ff 0%, #cf82ff 50%);
+}
+
+.PlayVideoRigth:hover,
+.MuteVideoRight:hover,
+.OffVideoRight:hover {
+  cursor: pointer;
+  background-color: rgba(207, 130, 255, 0.3);
+}
+
+.request_Container {
+  position: absolute;
+  height: 50px;
+  width: auto;
+  font-size: 18px;
+  color: #000;
+  font-family: 'Titillium Web';
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 20px;
+}

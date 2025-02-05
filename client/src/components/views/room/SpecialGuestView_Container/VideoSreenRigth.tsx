@@ -1,35 +1,57 @@
-import ReactPlayer from 'react-player/lazy';
+import { useEffect, useRef, useState } from 'react';
 import styles from './VideoScreenRigth.module.css';
-import { useState } from 'react';
 import { BsMicMute } from 'react-icons/bs';
 
-function VideoScreenRigth() {
-  const [playing, setPlaying] = useState(false);
+type Props = {
+  muteVideos: boolean;
+  streamUrl?: MediaStream | null;
+};
+
+function VideoScreenRigth({ muteVideos, streamUrl }: Props) {
+  const [playing, setPlaying] = useState(true);
   const [muted, setMuted] = useState(true);
   const [offVideo, setOffVideo] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    setMuted(muteVideos);
+  }, [muteVideos]);
+
+  useEffect(() => {
+    if (videoRef.current && streamUrl) {
+      videoRef.current.srcObject = streamUrl;
+      videoRef.current.muted = muted; // 🔹 Aplica `muted`
+      videoRef.current.loop = true; // 🔹 Activa `loop`
+      if (playing) {
+        videoRef.current.play();
+      } else {
+        videoRef.current.pause();
+      }
+    }
+  }, [streamUrl, playing, muted]);
 
   return (
     <div className={styles.VideoScreenContainer}>
       {!offVideo ? (
         <>
-          <ReactPlayer
+          {/* 🔹 `video` ahora soporta todas las opciones de `ReactPlayer` */}
+          <video
+            ref={videoRef}
             className={styles.VideoScreenPlayer}
-            url="https://youtube.com/shorts/hqekUpBJ8oI?si=mgroWkizQjrBOAVE"
-            width="100%"
-            height="100%"
-            loop={true}
-            playing={playing}
+            autoPlay
             muted={muted}
+            playsInline
+            loop
+            width="50%"
+            height="100%"
           />
-
-          {/* Contenedor de botones flotantes */}
 
           <div className={styles.VideoControls}>
             <button
               className={styles.PlayVideoRigth}
               onClick={() => setPlaying(!playing)}
             >
-              {playing ? 'x' : '>'}
+              {playing ? '||' : 'Play'}
             </button>
 
             <button
@@ -37,7 +59,7 @@ function VideoScreenRigth() {
               onClick={() => setMuted(!muted)}
             >
               <BsMicMute className={styles.buttonBeMute} />
-              {muted ? '' : ''}
+              {muted ? 'Unmute' : ''}
             </button>
 
             <button
@@ -50,7 +72,7 @@ function VideoScreenRigth() {
         </>
       ) : (
         <div className={styles.VideoOffMessage}>
-          <p>Off Live</p>
+          <p>Off</p>
           <button
             className={styles.PlayVideoRigth}
             onClick={() => setOffVideo(false)}

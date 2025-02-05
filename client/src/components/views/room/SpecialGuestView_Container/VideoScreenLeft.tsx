@@ -1,39 +1,49 @@
-import ReactPlayer from 'react-player/lazy';
+import { useEffect, useRef, useState } from 'react';
 import styles from './VideoScreenRigth.module.css';
-import { useEffect, useState } from 'react';
 import { BsMicMute } from 'react-icons/bs';
 
 type Props = {
   muteVideos: boolean;
-  streamUrl?: string;
+  streamUrl?: MediaStream | null;
 };
 
 function VideoScreenLeft({ muteVideos, streamUrl }: Props) {
-  const [playing, setPlaying] = useState(false);
+  const [playing, setPlaying] = useState(true);
   const [muted, setMuted] = useState(true);
   const [offVideo, setOffVideo] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     setMuted(muteVideos);
   }, [muteVideos]);
 
-  const validStreamUrl =
-    typeof streamUrl === 'string' && streamUrl.trim() !== ''
-      ? streamUrl
-      : 'https://youtu.be/U3xCr4AtFfs';
+  useEffect(() => {
+    if (videoRef.current && streamUrl) {
+      videoRef.current.srcObject = streamUrl;
+      videoRef.current.muted = muted; // 🔹 Aplica `muted`
+      videoRef.current.loop = true; // 🔹 Activa `loop`
+      if (playing) {
+        videoRef.current.play();
+      } else {
+        videoRef.current.pause();
+      }
+    }
+  }, [streamUrl, playing, muted]);
 
   return (
     <div className={styles.VideoScreenContainer}>
       {!offVideo ? (
         <>
-          <ReactPlayer
+          {/* 🔹 `video` ahora soporta todas las opciones de `ReactPlayer` */}
+          <video
+            ref={videoRef}
             className={styles.VideoScreenPlayer}
-            url={validStreamUrl}
-            width="100%"
-            height="100%"
-            loop={true}
-            playing={playing}
+            autoPlay
             muted={muted}
+            playsInline
+            loop
+            width="100%"
+            height="90%"
           />
 
           <div className={styles.VideoControls}>
@@ -41,7 +51,7 @@ function VideoScreenLeft({ muteVideos, streamUrl }: Props) {
               className={styles.PlayVideoRigth}
               onClick={() => setPlaying(!playing)}
             >
-              {playing ? 'x' : '>'}
+              {playing ? '||' : 'Play'}
             </button>
 
             <button
@@ -49,7 +59,7 @@ function VideoScreenLeft({ muteVideos, streamUrl }: Props) {
               onClick={() => setMuted(!muted)}
             >
               <BsMicMute className={styles.buttonBeMute} />
-              {muted ? '' : ''}
+              {muted ? 'Unmute' : ''}
             </button>
 
             <button
