@@ -27,7 +27,7 @@ export default function RemoteStream(props: Props) {
   (async () => {
     const localStream = await navigator.mediaDevices.getUserMedia({
       video: props.video || true,
-      audio: props.audio || false,
+      audio: props.audio || true,
     });
     dispatch(setStreamLeft(localStream));
   })();
@@ -198,5 +198,9 @@ export default function RemoteStream(props: Props) {
   }, []);
 
   // JSX //
-  return <>{/* <video ref={videoRefRem} autoPlay playsInline /> */}</>;
+  return (
+    <>
+      <video ref={videoRefRem} autoPlay playsInline />
+    </>
+  );
 }
