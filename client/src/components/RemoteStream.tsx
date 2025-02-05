@@ -24,13 +24,13 @@ export default function RemoteStream(props: Props) {
   const videoRefRem = useRef<HTMLVideoElement>(null);
 
   // set left stream to local webcam stream
-  (async () => {
-    const localStream = await navigator.mediaDevices.getUserMedia({
-      video: props.video || true,
-      audio: props.audio || true,
-    });
-    dispatch(setStreamLeft(localStream));
-  })();
+  // (async () => {
+  //   const localStream = await navigator.mediaDevices.getUserMedia({
+  //     video: props.video || true,
+  //     audio: props.audio || false,
+  //   });
+  //   // dispatch(setStreamLeft(localStream));
+  // })();
 
   // run all connection logic once
   useEffect(() => {
@@ -112,7 +112,7 @@ export default function RemoteStream(props: Props) {
     peer.ontrack = (event) => {
       console.log(`= Received remote track from ${socketIdRemote.current}`);
       videoRefRem.current!.srcObject = event.streams[0];
-      dispatch(setStreamRight(event.streams[0]));
+      // dispatch(setStreamRight(event.streams[0]));
     };
 
     // handle offer
