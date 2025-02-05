@@ -1,8 +1,23 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useEffect, useState } from 'react';
 import styles from '../HeadScreen/HeadViewScreen_Container.module.css';
 import { GrView } from 'react-icons/gr';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../../../state/store';
+import { fetchRoomById } from '../../../../../utils/graphqlclient';
+import { Room } from '../../../../../types/debate';
 
 const HeadViewScreenContainer: FunctionComponent = () => {
+  const roomId = useSelector((state: RootState) => state.navigation.roomId);
+  const [roomData, setRoomData] = useState<Room | null>(null);
+  useEffect(() => {
+    console.log(roomId);
+    if (roomId) {
+      (async () => {
+        const fetchedRoom = await fetchRoomById(roomId);
+        setRoomData(fetchedRoom);
+      })();
+    }
+  }, []);
   return (
     <div className={styles.headviewContainer}>
       <div className={styles.live_Container}>
@@ -13,7 +28,7 @@ const HeadViewScreenContainer: FunctionComponent = () => {
         <div className={styles.totalonline}>24</div>
       </div>
 
-      <div className={styles.nametopic}>FLAT EARTH</div>
+      <div className={styles.nametopic}>{roomData?.topic}</div>
     </div>
   );
 };
