@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import styles from './TimerContainer.module.css';
 import { CountdownCircleTimer } from 'react-countdown-circle-timer';
+import { PiBoxingGloveFill } from 'react-icons/pi';
 
-const TimerContainer = ({ setMuteVideos }) => {
+const TimerContainer = ({ setMuteVideos = () => {} }) => {
   if (!setMuteVideos || typeof setMuteVideos !== 'function') {
     console.error('setMuteVideos no se pasó correctamente a TimerContainer.');
   }
@@ -19,7 +20,7 @@ const TimerContainer = ({ setMuteVideos }) => {
           {showTimer && (
             <CountdownCircleTimer
               key={key}
-              size={150}
+              size={120}
               isPlaying={playing}
               duration={55}
               colors={['#6d25ff', '#c362ff', '#FFB662', '#FFB662']}
@@ -42,34 +43,35 @@ const TimerContainer = ({ setMuteVideos }) => {
 
         {/* 🔹 Controles fijados en la parte inferior */}
         <div className={styles.TimerControls}>
-          <button
-            className={styles.controlButton}
-            onClick={() => setPlaying((prev) => !prev)}
-            disabled={!showTimer}
-          >
-            {playing ? 'Stop' : 'Start'}
-          </button>
-
-          <button
-            className={styles.controlButton}
-            onClick={() => setShowTimer((prev) => !prev)}
-          >
-            {showTimer ? 'Timer' : 'D'}
-          </button>
-
-          <button
-            className={styles.controlButton}
-            onClick={() => {
-              setPlaying(false);
-              setKey((prevKey) => prevKey + 1);
-              if (setMuteVideos && typeof setMuteVideos === 'function') {
-                setMuteVideos(false);
-              }
-            }}
-            disabled={!showTimer}
-          >
-            Reset
-          </button>
+          <div className={styles.controlButtonContainer}>
+            <button
+              className={styles.controlButton}
+              onClick={() => setPlaying((prev) => !prev)}
+              disabled={!showTimer}
+            >
+              {playing ? 'Stop' : 'Start'}
+            </button>
+            <button
+              className={styles.controlButtonBoxin}
+              onClick={() => setShowTimer((prev) => !prev)}
+            >
+              <PiBoxingGloveFill size={40} color="E4E5EA" opacity={1} />
+              {showTimer ? '' : ''}
+            </button>
+            <button
+              className={styles.controlButton}
+              onClick={() => {
+                setPlaying(false);
+                setKey((prevKey) => prevKey + 1);
+                if (setMuteVideos && typeof setMuteVideos === 'function') {
+                  setMuteVideos(false);
+                }
+              }}
+              disabled={!showTimer}
+            >
+              Reset
+            </button>
+          </div>
         </div>
       </div>
     </>
