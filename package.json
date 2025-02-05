@@ -34,5 +34,8 @@
     "singleQuote": true,
     "printWidth": 80,
     "trailingComma": "es5"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1"
   }
 }
