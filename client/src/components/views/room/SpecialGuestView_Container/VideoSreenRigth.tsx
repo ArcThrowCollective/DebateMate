@@ -12,7 +12,10 @@ function VideoScreenRigth({ muteVideos, streamUrl }: Props) {
   const [playing, setPlaying] = useState(true);
   const [muted, setMuted] = useState(true);
   const [offVideo, setOffVideo] = useState(false);
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(undefined);
+  const [videoRefRight, setVideoRefRight] = useState<
+    HTMLVideoElement | undefined
+  >(videoRef.current);
 
   useEffect(() => {
     setMuted(muteVideos);
@@ -36,8 +39,8 @@ function VideoScreenRigth({ muteVideos, streamUrl }: Props) {
       {!offVideo ? (
         <>
           {/* 🔹 `video` ahora soporta todas las opciones de `ReactPlayer` */}
-          {/* <video
-            ref={videoRef}
+          <video
+            ref={videoRefRight}
             className={styles.VideoScreenPlayer}
             autoPlay
             muted={muted}
@@ -45,11 +48,13 @@ function VideoScreenRigth({ muteVideos, streamUrl }: Props) {
             loop
             width="50%"
             height="100%"
-          /> */}
+          />
           <RemoteStream
             roomId="test"
             userName="testUser"
             audio={false}
+            videoRefRight={videoRefRight}
+            setVideoRefRight={setVideoRefRight}
           ></RemoteStream>
 
           <div className={styles.VideoControls}>

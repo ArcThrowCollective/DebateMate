@@ -18,7 +18,7 @@ const VideoStreamModarator = () => {
   return (
     <div className={styles.VideoScreenModaratorContainer}>
       {/* 🔹 Aseguramos que RemoteStream se ejecute al menos una vez */}
-      <RemoteStream />
+      {/* <RemoteStream /> */}
 
       <div className={styles.VideoRoomScreen}>
         <ModaratorScreen stream={streamLeft} />
