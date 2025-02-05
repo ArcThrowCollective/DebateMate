@@ -8,12 +8,17 @@ type Props = {
   video?: boolean;
   audio?: boolean;
 <<<<<<< HEAD
+<<<<<<< HEAD
   videoStreamRight: MediaStream;
   setVideoStreamRight: Function;
 =======
   videoRefRight?: HTMLVideoElement;
   setVideoRefRight?: Function;
 >>>>>>> 29217e6 (test, pass up videoref from RemoteStream)
+=======
+  videoStreamRight: MediaStream;
+  setVideoStreamRight: Function;
+>>>>>>> 27189ca (trying to pass the stream instead of ref, set srcObject in Screen component)
 };
 type PeerConnections = { [id: string]: RTCPeerConnection };
 
@@ -108,6 +113,7 @@ export default function RemoteStream(props: Props) {
       console.log(`= Received remote track from ${socketIdRemote.current}`);
       // videoRefRem.current!.srcObject = event.streams[0];
 <<<<<<< HEAD
+<<<<<<< HEAD
       if (props.videoStreamRight && props.setVideoStreamRight) {
         props.setVideoStreamRight(event.streams[0]);
 =======
@@ -115,6 +121,10 @@ export default function RemoteStream(props: Props) {
         props.videoRefRight.srcObject = event.streams[0];
         props.setVideoRefRight(videoRefRem.current);
 >>>>>>> 29217e6 (test, pass up videoref from RemoteStream)
+=======
+      if (props.videoStreamRight && props.setVideoStreamRight) {
+        props.setVideoStreamRight(event.streams[0]);
+>>>>>>> 27189ca (trying to pass the stream instead of ref, set srcObject in Screen component)
       } else {
         console.log('!!! setVideoRefRight was not passed to RemoteStream');
       }

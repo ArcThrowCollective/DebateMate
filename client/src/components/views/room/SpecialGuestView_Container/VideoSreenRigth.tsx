@@ -15,9 +15,15 @@ function VideoScreenRigth({ muteVideos, streamUrl }: Props) {
   const [muted, setMuted] = useState(true);
   const [offVideo, setOffVideo] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(undefined);
-  const [videoRefRight, setVideoRefRight] = useState<
-    HTMLVideoElement | undefined
-  >(videoRef.current);
+  const [videoStreamRight, setVideoStreamRight] = useState<MediaStream>(
+    new MediaStream()
+  );
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.srcObject = videoStreamRight;
+    }
+  }, [videoStreamRight]);
 
   const roomId = useSelector((state: RootState) => state.navigation.roomId);
 
@@ -45,10 +51,14 @@ function VideoScreenRigth({ muteVideos, streamUrl }: Props) {
           {/* 🔹 `video` ahora soporta todas las opciones de `ReactPlayer` */}
           <video
 <<<<<<< HEAD
+<<<<<<< HEAD
             ref={videoRef}
 =======
             ref={videoRefRight}
 >>>>>>> 29217e6 (test, pass up videoref from RemoteStream)
+=======
+            ref={videoRef}
+>>>>>>> 27189ca (trying to pass the stream instead of ref, set srcObject in Screen component)
             className={styles.VideoScreenPlayer}
             autoPlay
             muted={muted}
@@ -61,13 +71,8 @@ function VideoScreenRigth({ muteVideos, streamUrl }: Props) {
             roomId={roomId!}
             userName="testUser"
             audio={false}
-<<<<<<< HEAD
             videoStreamRight={videoStreamRight}
             setVideoStreamRight={setVideoStreamRight}
-=======
-            videoRefRight={videoRefRight}
-            setVideoRefRight={setVideoRefRight}
->>>>>>> 29217e6 (test, pass up videoref from RemoteStream)
           ></RemoteStream>
 
           <div className={styles.VideoControls}>
