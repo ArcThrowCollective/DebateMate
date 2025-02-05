@@ -7,8 +7,8 @@ type Props = {
   userName: string;
   video?: boolean;
   audio?: boolean;
-  videoRefRight?: HTMLVideoElement;
-  setVideoRefRight?: Function;
+  videoStreamRight: MediaStream;
+  setVideoStreamRight: Function;
 };
 type PeerConnections = { [id: string]: RTCPeerConnection };
 
@@ -102,9 +102,8 @@ export default function RemoteStream(props: Props) {
     peer.ontrack = (event) => {
       console.log(`= Received remote track from ${socketIdRemote.current}`);
       // videoRefRem.current!.srcObject = event.streams[0];
-      if (props.videoRefRight && props.setVideoRefRight) {
-        props.videoRefRight.srcObject = event.streams[0];
-        props.setVideoRefRight(videoRefRem.current);
+      if (props.videoStreamRight && props.setVideoStreamRight) {
+        props.setVideoStreamRight(event.streams[0]);
       } else {
         console.log('!!! setVideoRefRight was not passed to RemoteStream');
       }
