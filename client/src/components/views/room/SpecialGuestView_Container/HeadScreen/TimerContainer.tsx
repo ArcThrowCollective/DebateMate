@@ -7,7 +7,6 @@ import {
 } from '../../../../../state/timer/timerSlice';
 import { useDispatch } from 'react-redux';
 import { UnknownAction } from '@reduxjs/toolkit';
-const TimerContainer = ({ setMuteVideos }) => {
 import { PiBoxingGloveFill } from 'react-icons/pi';
 
 const TimerContainer = ({ setMuteVideos = () => {} }) => {
