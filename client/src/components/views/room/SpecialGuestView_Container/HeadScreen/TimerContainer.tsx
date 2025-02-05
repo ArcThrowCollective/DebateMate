@@ -1,14 +1,15 @@
 import { useEffect, useState } from 'react';
 import styles from './TimerContainer.module.css';
 import { CountdownCircleTimer } from 'react-countdown-circle-timer';
-import { PiBoxingGloveFill } from 'react-icons/pi';
 import {
   setRemainingTime,
   setTimerState,
 } from '../../../../../state/timer/timerSlice';
 import { useDispatch } from 'react-redux';
 import { UnknownAction } from '@reduxjs/toolkit';
-const TimerContainer = ({ setMuteVideos }) => {
+import { PiBoxingGloveFill } from 'react-icons/pi';
+
+const TimerContainer = ({ setMuteVideos = () => {} }) => {
   if (!setMuteVideos || typeof setMuteVideos !== 'function') {
     console.error('setMuteVideos no se pasó correctamente a TimerContainer.');
   }
