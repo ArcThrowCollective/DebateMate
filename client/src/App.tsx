@@ -9,10 +9,6 @@ import ChannelPage from './components/views/channel/ChannelPage.tsx';
 import ProfilePage from './components/views/profile/ProfilePage.tsx';
 import { Room as RoomType } from './types/debate.ts';
 import Room from './components/views/room/room.tsx';
-import DebateLobby from './components/views/debate/DebateLobby.tsx';
-import DebateScreen from './components/views/debate/DebateScreen.tsx';
-import { ApolloProvider } from '@apollo/client';
-import { client } from './utils/graphqlclient';
 import { TrackSpeakerVotes } from './components/UI/voting/Voting.tsx';
 
 import { fetchRoomData } from './utils/graphqlclient.ts';
@@ -51,11 +47,6 @@ function App() {
         {currentPage === 'profile' && <ProfilePage profileId={profileId!} />}
         {currentPage === 'room' && <Room roomId={roomId!} />}
         <TrackSpeakerVotes speakerId="ben" />
-        {/* Test navigations */}
-        {currentPage === 'debatelobby' && <DebateLobby />}
-        <ApolloProvider client={client}>
-          {currentPage === 'debatescreen' && <DebateScreen />}
-        </ApolloProvider>
       </section>
       <Footer />
     </Dashboard>

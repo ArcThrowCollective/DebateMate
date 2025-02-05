@@ -5,10 +5,8 @@ import { Modal } from '../../UI/modal/ShowModal';
 import svg from '../../../assets/55Debate_logo_dark-1573x237.svg';
 import { useDispatch } from 'react-redux';
 import {
-  navigateToDebateLobby,
   navigateToHome,
   navigateToProfile,
-  navigateToRoom,
 } from '../../../state/navigation/navigationSlice';
 
 export default function Header() {
@@ -34,13 +32,6 @@ export default function Header() {
           />
           <span className="flex-1"></span>
           <div className="flex gap-4">
-            <button onClick={() => dispatch(navigateToDebateLobby())}>
-              {/* This is a test */}
-              testRoom
-            </button>
-            <button onClick={() => dispatch(navigateToRoom('Username'))}>
-              TempRoom
-            </button>
             <button onClick={() => setOverlayType('login')}>Login</button>
             <button onClick={() => setOverlayType('signup')}>Sign Up</button>
             <FaUserCircle
@@ -51,10 +42,10 @@ export default function Header() {
           </div>
         </header>
         <div className="border-bottom__purple"></div>
-        <Modal type={overlayType} onClose={closeOverlay} />
+        <Modal type={overlayType} onClose={closeOverlay}></Modal>
       </div>
 
-      <Modal type={overlayType} onClose={closeOverlay} />
+      <Modal type={overlayType} onClose={closeOverlay}></Modal>
     </>
   );
 }
