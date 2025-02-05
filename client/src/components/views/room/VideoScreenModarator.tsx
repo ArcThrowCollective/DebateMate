@@ -11,18 +11,7 @@ import HeadRoomScreen from './HeadRoomScreen';
 
 // import TimerContainer from './SpecialGuestView_Container/HeadScreen/TimerContainer';
 
-//!stream
-import RemoteStream from '../../RemoteStream';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../../state/store';
-
 const VideoScreenModarator: FunctionComponent = () => {
-  //!stream
-  const streamLeft = useSelector((state: RootState) => state.stream.streamLeft);
-  const streamRight = useSelector(
-    (state: RootState) => state.stream.streamRight
-  );
-
   const [muteVideos, setMuteVideos] = useState(false);
 
   return (
@@ -38,8 +27,8 @@ const VideoScreenModarator: FunctionComponent = () => {
         </div>
         <div className={styles.VideoRoomScreen}>
           {/* <ModaratorScreen stream={remoteStream} muteVideos={muteVideos} /> */}
-          <VideoScreenLeft muteVideos={muteVideos} streamUrl={streamLeft} />
-          <VideoScreenRigth muteVideos={muteVideos} streamUrl={streamRight} />
+          <VideoScreenLeft muteVideos={muteVideos} />
+          <VideoScreenRigth muteVideos={muteVideos} />
         </div>
 
         {/* <div className={styles.VideoRoomScreen}>
