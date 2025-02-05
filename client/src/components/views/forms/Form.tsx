@@ -29,6 +29,7 @@ export const Form: React.FC<FormProps> = ({
   const [minRating, setMinRating] = useState(0);
 
   const [error, setError] = useState<string | null>(null);
+  const [channelData, setChannelData] = useState<{ channelURL?: string }>({});
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -39,6 +40,9 @@ export const Form: React.FC<FormProps> = ({
     if (type === 'topic') {
       extraData.minRating = minRating;
     }
+    if (type === 'channel' && channelData.channelURL) {
+      extraData.channelURL = channelData.channelURL; // Use uploaded image URL instead of file
+    }
 
     const formData = handleFormSubmit(e, extraData);
 
@@ -47,7 +51,7 @@ export const Form: React.FC<FormProps> = ({
       console.log('Submission successful:', response);
       onClose();
     } catch (error) {
-      console.error('❌ Submission failed:', error);
+      console.error('Submission failed:', error);
       setError('Failed to submit. Please try again.');
     }
   };
@@ -87,7 +91,7 @@ export const Form: React.FC<FormProps> = ({
         </>
       )}
 
-      {type === 'channel' && <CreateChannel />}
+      {type === 'channel' && <CreateChannel setChannelData={setChannelData} />}
       {type === 'topic' && <CreateTopic setMinRating={setMinRating} />}
 
       <div className="input-container">
