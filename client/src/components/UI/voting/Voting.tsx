@@ -67,10 +67,18 @@ export const TrackSpeakerVotes = ({ speakerId }: { speakerId: string }) => {
   return (
     <div className="flex flex-col items-center gap-4 p-4 rounded-lg shadow-md">
       <div className="flex gap-6">
-        <button className="text-3xl" onClick={() => handleVote('up')}>
+        <button
+          data-testid="btn__thumbs-up"
+          className="text-3xl"
+          onClick={() => handleVote('up')}
+        >
           <FaThumbsUp />
         </button>
-        <button className="text-3xl" onClick={() => handleVote('down')}>
+        <button
+          data-testid="btn__thumbs-down"
+          className="text-3xl"
+          onClick={() => handleVote('down')}
+        >
           <FaThumbsDown />
         </button>
       </div>
