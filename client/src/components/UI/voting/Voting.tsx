@@ -35,7 +35,6 @@ export const TrackSpeakerVotes = ({ speakerId }: { speakerId: string }) => {
   useEffect(() => {
     socket.on('voteUpdated', ({ speakerId, votes }) => {
       dispatch(updateVotes({ speakerId, votes }));
-      // Animation for a thumbs up or thumbs down?
     });
 
     return () => {
