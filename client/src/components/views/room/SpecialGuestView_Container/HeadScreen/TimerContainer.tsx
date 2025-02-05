@@ -1,17 +1,21 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './TimerContainer.module.css';
 import { CountdownCircleTimer } from 'react-countdown-circle-timer';
 import { PiBoxingGloveFill } from 'react-icons/pi';
-
-const TimerContainer = ({ setMuteVideos = () => {} }) => {
+import {
+  setRemainingTime,
+  setTimerState,
+} from '../../../../../state/timer/timerSlice';
+import { useDispatch } from 'react-redux';
+import { UnknownAction } from '@reduxjs/toolkit';
+const TimerContainer = ({ setMuteVideos }) => {
   if (!setMuteVideos || typeof setMuteVideos !== 'function') {
     console.error('setMuteVideos no se pasó correctamente a TimerContainer.');
   }
-
+  const dispatch = useDispatch();
   const [playing, setPlaying] = useState(false);
   const [key, setKey] = useState(0);
   const [showTimer, setShowTimer] = useState(true); // Estado para mostrar/ocultar el temporizador
-
   return (
     <>
       {/* 🔹 Temporizador arriba */}
@@ -25,7 +29,11 @@ const TimerContainer = ({ setMuteVideos = () => {} }) => {
               duration={55}
               colors={['#6d25ff', '#c362ff', '#FFB662', '#FFB662']}
               colorsTime={[30, 20, 10, 0]}
+              onUpdate={(time) => {
+                dispatch(setRemainingTime(time));
+              }}
               onComplete={() => {
+                dispatch(setTimerState({ isTimeOut: true }));
                 if (setMuteVideos && typeof setMuteVideos === 'function') {
                   setMuteVideos(true);
                 } else {
@@ -34,9 +42,11 @@ const TimerContainer = ({ setMuteVideos = () => {} }) => {
                 return { shouldRepeat: false };
               }}
             >
-              {({ remainingTime }) => (
-                <div className={styles.timerNumber}>{remainingTime}</div>
-              )}
+              {({ remainingTime }) => {
+                return (
+                  <div className={styles.timerNumber}>{remainingTime}</div>
+                );
+              }}
             </CountdownCircleTimer>
           )}
         </div>
