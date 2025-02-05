@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import styles from './VideoScreenRigth.module.css';
 import { BsMicMute } from 'react-icons/bs';
 import RemoteStream from '../../../RemoteStream';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../../state/store';
 
 type Props = {
   muteVideos: boolean;
@@ -13,6 +15,8 @@ function VideoScreenRigth({ muteVideos, streamUrl }: Props) {
   const [muted, setMuted] = useState(true);
   const [offVideo, setOffVideo] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+
+  const roomId = useSelector((state: RootState) => state.navigation.roomId);
 
   useEffect(() => {
     setMuted(muteVideos);
@@ -47,7 +51,7 @@ function VideoScreenRigth({ muteVideos, streamUrl }: Props) {
             height="100%"
           /> */}
           <RemoteStream
-            roomId="test"
+            roomId={roomId!}
             userName="testUser"
             audio={false}
           ></RemoteStream>
