@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import styles from './VideoScreenRigth.module.css';
 import { BsMicMute } from 'react-icons/bs';
+import RemoteStream from '../../../RemoteStream';
 
 type Props = {
   muteVideos: boolean;
@@ -35,7 +36,7 @@ function VideoScreenRigth({ muteVideos, streamUrl }: Props) {
       {!offVideo ? (
         <>
           {/* 🔹 `video` ahora soporta todas las opciones de `ReactPlayer` */}
-          <video
+          {/* <video
             ref={videoRef}
             className={styles.VideoScreenPlayer}
             autoPlay
@@ -44,7 +45,12 @@ function VideoScreenRigth({ muteVideos, streamUrl }: Props) {
             loop
             width="50%"
             height="100%"
-          />
+          /> */}
+          <RemoteStream
+            roomId="test"
+            userName="testUser"
+            audio={false}
+          ></RemoteStream>
 
           <div className={styles.VideoControls}>
             <button

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import styles from './VideoScreenRigth.module.css';
 import { BsMicMute } from 'react-icons/bs';
+import Stream from '../../../Stream';
 
 type Props = {
   muteVideos: boolean;
@@ -35,7 +36,7 @@ function VideoScreenLeft({ muteVideos, streamUrl }: Props) {
       {!offVideo ? (
         <>
           {/* 🔹 `video` ahora soporta todas las opciones de `ReactPlayer` */}
-          <video
+          {/* <video
             ref={videoRef}
             className={styles.VideoScreenPlayer}
             autoPlay
@@ -44,7 +45,8 @@ function VideoScreenLeft({ muteVideos, streamUrl }: Props) {
             loop
             width="100%"
             height="90%"
-          />
+          /> */}
+          <Stream></Stream>
 
           <div className={styles.VideoControls}>
             <button

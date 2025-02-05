@@ -26,6 +26,8 @@ export default function Stream() {
         className="videoStream"
         autoPlay
         playsInline
+        width="100%"
+        height="90%"
       ></video>
     </>
   );

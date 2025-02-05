@@ -1,8 +1,6 @@
 import { useRef, useEffect, useState } from 'react';
 import { io, Socket } from 'socket.io-client';
 import env from '../../env';
-import { useDispatch } from 'react-redux';
-import { setStreamLeft, setStreamRight } from '../state/stream/streamSlice';
 
 type Props = {
   roomId: string;
@@ -10,109 +8,186 @@ type Props = {
   video?: boolean;
   audio?: boolean;
 };
+type PeerConnections = { [id: string]: RTCPeerConnection };
 
-export default function RemoteStream({
-  roomId,
-  userName,
-  video = true,
-  audio = false,
-}: Props) {
-  const dispatch = useDispatch();
+export default function RemoteStream(props: Props) {
+  const room = props.roomId;
+  const userName = props.userName;
+  // Collect socket IDs and peers in objects
   const socketLocal = useRef<Socket | null>(null);
-  const peersRef = useRef<{ [id: string]: RTCPeerConnection }>({});
+  const socketIdRemote = useRef<string>('TMP REMOTE ID');
+  const peersRef = useRef<PeerConnections>({});
+  // set up <video> Refs
   const videoRefRem = useRef<HTMLVideoElement>(null);
 
+  // run all connection logic once
   useEffect(() => {
-    const setupStream = async () => {
-      try {
-        // 🔹 Captura la cámara del usuario local y la asigna a Redux
-        const localStream = await navigator.mediaDevices.getUserMedia({
-          video,
-          audio,
-        });
-        dispatch(setStreamLeft(localStream));
+    // create socket
+    const socket = io(`https://${env.SIGNAL_HOST}:${env.SIGNAL_PORT}`, {
+      auth: { userName, room },
+    });
+    socketLocal.current = socket;
 
-        // 🔹 Crea la conexión WebRTC
-        const socket = io(`https://${env.SIGNAL_HOST}:${env.SIGNAL_PORT}`, {
-          auth: { userName, room: roomId },
-        });
-        socketLocal.current = socket;
+    // one-to-one: get remote ID (on new user joining room)
+    socket.on('requestOffer', async (requestOffer) => {
+      socketIdRemote.current = requestOffer.newUser;
+      console.log('i Remote socketId on requestOffer:', socketIdRemote.current);
+      console.log('# Your socket id is: ', socketLocal.current.id);
 
-        const peer = new RTCPeerConnection({
-          iceServers: [
-            { urls: [`stun:${env.STUN_HOST}:${env.STUN_PORT}`] },
-            {
-              urls: [`turn:${env.TURN_HOST}:${env.TURN_PORT}`],
-              username: env.TURN_USER,
-              credential: env.TURN_PWD,
-            },
-          ],
-        });
+      // Push tracks from local stream to peer connection
+      const localStream = await navigator.mediaDevices.getUserMedia({
+        video: props.video || true,
+        audio: props.audio || false,
+      });
+      console.log('= Adding local stream tracks too peer connection');
+      localStream.getTracks().forEach((track) => {
+        peer.addTrack(track, localStream);
+      });
 
-        peer.ontrack = (event) => {
-          console.log(`= Received remote track`);
-          if (event.streams.length > 0) {
-            dispatch(setStreamRight(event.streams[0])); // 🔹 Guarda el stream remoto en Redux
-            if (videoRefRem.current) {
-              videoRefRem.current.srcObject = event.streams[0]; // 🔹 Muestra el stream en el video
-            }
-          }
-        };
-
-        socket.on('requestOffer', async ({ newUser }) => {
-          console.log(`i Received offer request from ${newUser}`);
-          const localStream = await navigator.mediaDevices.getUserMedia({
-            video,
-            audio,
-          });
-
-          localStream.getTracks().forEach((track) => {
-            peer.addTrack(track, localStream);
-          });
-
-          const offer = await peer.createOffer();
-          await peer.setLocalDescription(offer);
-          socket.emit('offer', {
+      // create offer
+      peer
+        .createOffer()
+        .then((offer) => {
+          peer.setLocalDescription(offer);
+          console.log(`... set localDescription`);
+          socketLocal.current?.emit('offer', {
             offer,
-            from: socket.id,
-            to: newUser,
-            room: roomId,
+            from: socketLocal.current?.id,
+            to: socketIdRemote.current,
+            room,
           });
-        });
+          console.log(`o Sent offer to ${socketIdRemote.current}`);
+        })
+        .catch((error) => console.error('Error creating offer:', error));
+      peersRef.current[socketIdRemote.current] = peer;
+    });
 
-        socket.on('offer', async ({ offer, from }) => {
-          await peer.setRemoteDescription(new RTCSessionDescription(offer));
-          const answer = await peer.createAnswer();
-          await peer.setLocalDescription(answer);
-          socket.emit('answer', {
-            answer,
-            from: socket.id,
-            to: from,
-            room: roomId,
-          });
-        });
+    // join room
+    socket.emit('joinRoom', room);
+    console.log(`# Joining room: ${room}`);
 
-        socket.on('answer', async ({ answer, from }) => {
-          const peerConnection = peersRef.current[from];
-          if (peerConnection) {
-            await peerConnection.setRemoteDescription(
-              new RTCSessionDescription(answer)
-            );
-          }
-        });
+    // set up peer connection
+    const peer = new RTCPeerConnection({
+      iceServers: [
+        // { urls: ['stun:stun.l.google.com:19302'] },
+        { urls: [`stun:${env.STUN_HOST}:${env.STUN_PORT}`] },
+        {
+          urls: [`turn:${env.TURN_HOST}:${env.TURN_PORT}`],
+          username: env.TURN_USER,
+          credential: env.TURN_PWD,
+        },
+      ],
+    });
 
-        socket.on('ice-candidate', async ({ candidate, from }) => {
-          await peer.addIceCandidate(new RTCIceCandidate(candidate));
+    peer.onicecandidate = (event) => {
+      console.log('onicecandidate triggered');
+      if (event.candidate) {
+        console.log(
+          `o Sending ICE candidate to ${socketIdRemote.current}:`
+          // , event.candidate // <- uncomment for more info about ICE candidates
+        );
+        socketLocal.current?.emit('ice-candidate', {
+          candidate: event.candidate,
+          from: socketLocal.current?.id,
+          to: socketIdRemote.current,
+          room,
         });
-
-        socket.emit('joinRoom', roomId);
-      } catch (error) {
-        console.error('Error al obtener la cámara:', error);
+      } else {
+        console.log(':warning: No more ICE candidates.');
       }
     };
 
-    setupStream();
-  }, [dispatch, roomId, userName, video, audio]);
+    peer.ontrack = (event) => {
+      console.log(`= Received remote track from ${socketIdRemote.current}`);
+      videoRefRem.current!.srcObject = event.streams[0];
+    };
 
-  return <video ref={videoRefRem} autoPlay playsInline />;
+    // handle offer
+    socketLocal.current?.on(
+      'offer',
+      async ({
+        offer,
+        from,
+      }: {
+        offer: RTCSessionDescriptionInit;
+        from: string;
+      }) => {
+        console.log(`i Received offer from ${from}`);
+        console.log('# Your socket id is: ', socketLocal.current.id);
+
+        // set our remote's socket ID to that of the sender of the offer
+        socketIdRemote.current = from;
+
+        // Push tracks from local stream to peer connection
+        const localStream = await navigator.mediaDevices.getUserMedia({
+          video: props.video || true,
+          audio: props.audio || false,
+        });
+        console.log('= Adding local stream tracks too peer connection');
+        localStream.getTracks().forEach((track) => {
+          peer.addTrack(track, localStream);
+        });
+
+        // see line 73 of prototype:
+        // IF NOT already sent an offer to the remotePeer, createConnection(remote, FALSE)
+        await peer.setRemoteDescription(new RTCSessionDescription(offer));
+        console.log(`... set remoteDescription with offer for ${from}`);
+        // create answer
+        const answer = await peer.createAnswer();
+        await peer.setLocalDescription(answer);
+        console.log(`... set localDescription with answer to ${from}`);
+        socket.emit('answer', {
+          answer,
+          from: socketLocal.current?.id,
+          to: from,
+          room,
+        });
+        console.log('o Sent answer to ', from);
+      }
+    );
+    socket.on(
+      'answer',
+      async ({
+        answer,
+        from,
+        room,
+      }: {
+        answer: RTCSessionDescriptionInit;
+        from: string;
+        room: string;
+      }) => {
+        console.log(`Received answer from ${from} in ${room}`);
+        const peer = peersRef.current[from];
+        if (peer) {
+          await peer.setRemoteDescription(new RTCSessionDescription(answer));
+          console.log(`... set remoteDescription`);
+        }
+      }
+    );
+    socket.on(
+      'ice-candidate',
+      async ({
+        candidate,
+        from,
+      }: {
+        candidate: RTCIceCandidateInit;
+        from: string;
+      }) => {
+        console.log(`_ Received ICE candidate from ${from}`);
+        await peer.addIceCandidate(new RTCIceCandidate(candidate));
+        console.log(`_ Successfully added ICE candidate from ${from}`);
+      }
+    );
+    return () => {
+      socket.emit('leaveRoom', room);
+      socket.disconnect();
+    };
+  }, []);
+
+  // JSX //
+  return (
+    <>
+      <video ref={videoRefRem} autoPlay playsInline />
+    </>
+  );
 }

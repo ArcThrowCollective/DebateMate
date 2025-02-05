@@ -27,7 +27,7 @@ const VideoScreenModarator: FunctionComponent = () => {
 
   return (
     <>
-      <RemoteStream />
+      {/* <RemoteStream /> */}
 
       <div className={styles.VideoScreenModaratorContainer}>
         <div>
@@ -42,9 +42,9 @@ const VideoScreenModarator: FunctionComponent = () => {
           <VideoScreenRigth muteVideos={muteVideos} streamUrl={streamRight} />
         </div>
 
-        <div className={styles.VideoRoomScreen}>
+        {/* <div className={styles.VideoRoomScreen}>
           <FooterScreenContainer />
-        </div>
+        </div> */}
         <div className={styles.HeadRoomScreen}>{/* <HeadRoomScreen /> */}</div>
         {/* <TimerContainer setMuteVideos={setMuteVideos} /> */}
       </div>
