@@ -46,9 +46,21 @@ export const channelMutation = {
       name: { type: GraphQLString },
       description: { type: GraphQLString },
       is_public: { type: GraphQLBoolean },
+      userId: { type: GraphQLString },
     },
-    resolve: async (_: unknown, channel: Channels) => {
-      return await createChannel(channel);
+    resolve: async (
+      _: unknown,
+      args: {
+        name: string;
+        description: string;
+        is_public: boolean;
+        userId: string | null;
+      }
+    ) => {
+      if (!args.userId || args.userId.trim() === '') {
+        args.userId = null;
+      }
+      return await createChannel(args);
     },
   },
 };
