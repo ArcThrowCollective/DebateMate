@@ -45,7 +45,7 @@ function VideoScreenRigth({ muteVideos, streamUrl }: Props) {
           <RemoteStream
             roomId={roomId!}
             userName="testUser"
-            audio={false}
+            audio={true}
           ></RemoteStream>
 
           <div className={styles.VideoControls}>
