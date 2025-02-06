@@ -245,3 +245,48 @@ export const fetchParticipantsByRoomId = async (
     throw error;
   }
 };
+
+export const CREATE_CHANNEL_MUTATION = gql`
+  mutation CreateChannel(
+    $name: String!
+    $description: String!
+    $isPublic: Boolean
+    $userId: String
+  ) {
+    createChannel(
+      name: $name
+      description: $description
+      is_public: $isPublic
+      userId: $userId
+    ) {
+      id
+      name
+      description
+      is_public
+      createdAt
+      user {
+        id
+        username
+        email
+      }
+    }
+  }
+`;
+
+export const createChannel = async (
+  name: String,
+  description: String,
+  isPublic: boolean,
+  userId?: string
+) => {
+  try {
+    const { data } = await client.mutate({
+      mutation: CREATE_CHANNEL_MUTATION,
+      variables: { name, description, isPublic, userId: userId || null },
+    });
+    return data.createChannel;
+  } catch (error) {
+    console.error('Channel creation failed', error);
+    throw error;
+  }
+};
