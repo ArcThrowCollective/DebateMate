@@ -63,7 +63,7 @@ function VideoScreenLeft({ muteVideos, streamUrl }: Props) {
               Off
             </button>
 
-            <div className={styles.TrackSpeakerVotesButtons}>
+            <div className="ml-20">
               <TrackSpeakerVotes speakerId={'speakerId'} />
             </div>
 

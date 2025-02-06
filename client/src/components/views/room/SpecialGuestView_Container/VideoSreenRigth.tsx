@@ -49,7 +49,7 @@ function VideoScreenRigth({ muteVideos, streamUrl }: Props) {
           ></RemoteStream>
 
           <div className={styles.VideoControls}>
-            <div className={styles.TrackSpeakerVotesButtons}>
+            <div className="mr-20">
               <TrackSpeakerVotes speakerId={'speakerId'} />
             </div>
             <button

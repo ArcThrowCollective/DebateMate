@@ -122,5 +122,51 @@ button {
   background-color: var(--dark-color);
 }
 
-.btn__accent {
+.thumbs {
+  background: var(--gradient-dark);
+  color: var(--white);
+  padding: 1rem;
+  border-radius: 100%;
+  box-shadow: var(--box-shadow);
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease-in-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.thumbs:hover {
+  transform: scale(1.1);
+}
+
+/* Thumbs Up Animation */
+.thumbs.up:active .thumb-icon {
+  animation: floatUp 0.5s ease-out;
+}
+
+/* Thumbs Down Animation */
+.thumbs.down:active .thumb-icon {
+  animation: floatDown 0.5s ease-out;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+}
+
+@keyframes floatDown {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(50px);
+    opacity: 0;
+  }
 }

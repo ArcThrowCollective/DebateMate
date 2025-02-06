@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import styles from '../../views/room/VideoSreenModarator.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { FaThumbsUp, FaThumbsDown } from 'react-icons/fa';
 import { io } from 'socket.io-client';
@@ -16,13 +15,13 @@ interface VotesState {
 }
 
 export const TrackSpeakerVotes = ({ speakerId }: { speakerId: string }) => {
-  const dispatch = useDispatch(); // redux
+  const dispatch = useDispatch();
   const votes = useSelector(
     (state: RootState) =>
       (state.votes as VotesState)[speakerId] ?? { up: 0, down: 0 }
-  ); // redux
+  );
 
-  const [timeLeft, setTimeLeft] = useState(55); // Countdown timer
+  const [timeLeft, setTimeLeft] = useState(55);
   const [showModal, setShowModal] = useState(false);
   const [overlayType, setOverlayType] = useState<
     'signup' | 'login' | 'channel' | 'topic' | 'vote' | null
@@ -56,33 +55,41 @@ export const TrackSpeakerVotes = ({ speakerId }: { speakerId: string }) => {
     }
   }, [timeLeft]);
 
-  const handleVote = (type: 'up' | 'down') => {
+  const handleVote = (
+    type: 'up' | 'down',
+    e: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    e.currentTarget.classList.add('clicked');
+
     const updatedVotes = {
       up: type === 'up' ? votes.up + 1 : votes.up,
       down: type === 'down' ? votes.down + 1 : votes.down,
     };
+
     socket.emit('castVote', { speakerId, votes: updatedVotes });
     dispatch(updateVotes({ speakerId, votes: updatedVotes }));
+
+    // Remove animation after it plays
+    setTimeout(() => e.currentTarget.classList.remove('clicked'), 500);
   };
 
   return (
-    <div className="flex flex-col items-center gap-10 p-4 rounded-lg">
-      <p className="text-lg font-bold">Time Left: {timeLeft}s</p>
-
+    <>
       <div className="flex gap-8">
         <button
           data-testid="btn__thumbs-up"
-          className="text-3xl"
-          onClick={() => handleVote('up')}
+          className="text-3xl thumbs up"
+          onClick={(e) => handleVote('up', e)}
         >
-          <FaThumbsUp />
+          <FaThumbsUp className="thumb-icon" />
         </button>
+
         <button
           data-testid="btn__thumbs-down"
-          className="text-3xl"
-          onClick={() => handleVote('down')}
+          className="text-3xl thumbs down"
+          onClick={(e) => handleVote('down', e)}
         >
-          <FaThumbsDown />
+          <FaThumbsDown className="thumb-icon" />
         </button>
       </div>
 
@@ -112,6 +119,6 @@ export const TrackSpeakerVotes = ({ speakerId }: { speakerId: string }) => {
           </div>
         </Modal>
       )}
-    </div>
+    </>
   );
 };
