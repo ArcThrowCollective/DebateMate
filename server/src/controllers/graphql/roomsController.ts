@@ -9,14 +9,23 @@ export const getRooms = async () => {
   });
 };
 
-export const createRoom = async (
-  room: Omit<Rooms, 'id' | 'createdAt' | 'updatedAt'>
-) => {
-  return await prisma.rooms.create({
+export const createRoom = async (roomData: {
+  topic: string;
+  channelId?: string | null;
+  description?: string | null;
+}) => {
+  const newRoom = await prisma.rooms.create({
     data: {
-      ...room,
+      topic: roomData.topic,
+      channelId:
+        roomData.channelId && roomData.channelId.trim() !== ''
+          ? roomData.channelId
+          : undefined,
+      description: roomData.description ?? undefined,
     },
   });
+
+  return newRoom;
 };
 
 export const getRoomById = async (id: string) => {

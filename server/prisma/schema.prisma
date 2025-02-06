@@ -39,7 +39,8 @@ model Users {
 model Rooms {
   id           String              @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   topic        String
-  channelId    String              @db.Uuid
+  channelId    String?              @db.Uuid
+  description  String?
   startTime    DateTime            @default(now())
   endTime      DateTime?
   createdAt    DateTime            @default(now())
@@ -48,7 +49,7 @@ model Rooms {
   history      Debate_History[]
   participants Participants[]
   request      Requests_To_Speak[]
-  channel      Channels            @relation(fields: [channelId], references: [id], onDelete: Cascade)
+  channel      Channels?            @relation(fields: [channelId], references: [id], onDelete: Cascade)
 }
 
 model Participants {

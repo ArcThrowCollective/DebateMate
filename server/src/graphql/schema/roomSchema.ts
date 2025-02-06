@@ -24,6 +24,7 @@ export const roomsType = new GraphQLObjectType({
     endTime: { type: GraphQLString },
     createdAt: { type: GraphQLString },
     updatedAt: { type: GraphQLString },
+    description: { type: GraphQLString },
   },
 });
 
@@ -46,19 +47,28 @@ export const roomsQuery = {
 };
 
 export const roomsMutation = {
-  createDebate: {
+  createRoom: {
     type: roomsType,
     args: {
       topic: { type: new GraphQLNonNull(GraphQLString) },
-      channelId: { type: new GraphQLNonNull(GraphQLID) },
-      startTime: { type: GraphQLString },
-      endTime: { type: GraphQLString },
+      channelId: { type: GraphQLID },
+      description: { type: GraphQLString },
     },
     resolve: async (
       _: unknown,
-      room: Omit<Rooms, 'id' | 'createdAt' | 'updatedAt'>
+      args: {
+        topic: string;
+        channelId?: string | null;
+        description?: string | null;
+      }
     ) => {
-      return await createRoom(room);
+      if (!args.channelId || args.channelId.trim() === '') {
+        args.channelId = null;
+      }
+
+      const description = args.description ? args.description : null;
+
+      return await createRoom({ ...args, description });
     },
   },
 };
