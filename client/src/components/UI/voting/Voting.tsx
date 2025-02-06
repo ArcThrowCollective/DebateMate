@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import styles from '../../views/room/VideoSreenModarator.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { FaThumbsUp, FaThumbsDown } from 'react-icons/fa';
 import { io } from 'socket.io-client';
@@ -65,8 +66,10 @@ export const TrackSpeakerVotes = ({ speakerId }: { speakerId: string }) => {
   };
 
   return (
-    <div className="flex flex-col items-center gap-4 p-4 rounded-lg">
-      <div className="flex gap-6">
+    <div className="flex flex-col items-center gap-10 p-4 rounded-lg">
+      <p className="text-lg font-bold">Time Left: {timeLeft}s</p>
+
+      <div className="flex gap-8">
         <button
           data-testid="btn__thumbs-up"
           className="text-3xl"
@@ -82,7 +85,6 @@ export const TrackSpeakerVotes = ({ speakerId }: { speakerId: string }) => {
           <FaThumbsDown />
         </button>
       </div>
-      <p className="text-lg font-bold">Time Left: {timeLeft}s</p>
 
       {showModal && (
         <Modal type={overlayType} onClose={closeOverlay}>
