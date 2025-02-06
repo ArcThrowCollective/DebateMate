@@ -62,10 +62,6 @@ export default function RemoteStream(props: Props) {
       peersRef.current[socketIdRemote.current] = peer;
     });
 
-    // join room
-    socket.emit('joinRoom', room);
-    console.log(`# Joining room: ${room}`);
-
     // set up peer connection
     const peer = new RTCPeerConnection({
       iceServers: [
@@ -101,6 +97,15 @@ export default function RemoteStream(props: Props) {
       console.log(`= Received remote track from ${socketIdRemote.current}`);
       videoRefRem.current!.srcObject = event.streams[0];
     };
+
+    (async () => {
+      console.log('... waiting to join room ...');
+      await new Promise((r) => setTimeout(r, 1000));
+    })();
+
+    // join room
+    socket.emit('joinRoom', room);
+    console.log(`# Joining room: ${room}`);
 
     // handle offer
     socketLocal.current?.on(
