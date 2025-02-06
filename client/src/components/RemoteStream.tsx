@@ -1,7 +1,7 @@
 import { useRef, useEffect } from 'react';
 import { io, Socket } from 'socket.io-client';
 import { Participant } from '../types/debate';
-import { setParticipantState } from '../state/navigation/participantSlice';
+import { setParticipantState } from '../state/participants/participantSlice';
 import env from '../../env';
 
 type Props = {
