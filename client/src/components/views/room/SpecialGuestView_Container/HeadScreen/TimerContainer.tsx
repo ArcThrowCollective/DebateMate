@@ -8,15 +8,35 @@ import {
 import { useDispatch } from 'react-redux';
 import { PiBoxingGloveFill } from 'react-icons/pi';
 import { RootState } from '../../../../../state/store';
+import { FaThumbsUp, FaThumbsDown } from 'react-icons/fa';
+import { Modal } from '../../../../UI/modal/ShowModal';
+import { Button } from '../../../../UI/buttons/Button';
+import Avatar from '../../../../UI/avatar/Avatar';
 
 const TimerContainer = ({ setMuteVideos = () => {} }) => {
   if (!setMuteVideos || typeof setMuteVideos !== 'function') {
     console.error('setMuteVideos no se pasó correctamente a TimerContainer.');
   }
+
   const dispatch = useDispatch();
   const [playing, setPlaying] = useState(false);
   const [key, setKey] = useState(0);
   const [showTimer, setShowTimer] = useState(true);
+  const [showModal, setShowModal] = useState(false);
+  const [overlayType, setOverlayType] = useState<'vote' | null>(null);
+  const votes = { up: 10, down: 2 }; // Simulación de votos (se debe conectar con Redux)
+
+  const closeOverlay = () => {
+    setShowModal(false);
+    setOverlayType(null);
+  };
+
+  useEffect(() => {
+    if (showModal) {
+      setMuteVideos(true);
+    }
+  }, [showModal, setMuteVideos]);
+
   return (
     <>
       <div className={styles.TheContainer}>
@@ -34,19 +54,17 @@ const TimerContainer = ({ setMuteVideos = () => {} }) => {
               }}
               onComplete={() => {
                 dispatch(setTimerState({ isTimeOut: true }));
+                setShowModal(true); // 🔹 Muestra el modal cuando llega a 0
+                setOverlayType('vote');
                 if (setMuteVideos && typeof setMuteVideos === 'function') {
                   setMuteVideos(true);
-                } else {
-                  console.error('setMuteVideos no es una función válida.');
                 }
                 return { shouldRepeat: false };
               }}
             >
-              {({ remainingTime }) => {
-                return (
-                  <div className={styles.timerNumber}>{remainingTime}</div>
-                );
-              }}
+              {({ remainingTime }) => (
+                <div className={styles.timerNumber}>{remainingTime}</div>
+              )}
             </CountdownCircleTimer>
           )}
         </div>
@@ -55,34 +73,61 @@ const TimerContainer = ({ setMuteVideos = () => {} }) => {
           <div className={styles.controlButtonContainer}>
             <button
               className={styles.controlButton}
-              onClick={() => setPlaying((prev) => !prev)}
-              disabled={!showTimer}
+              onClick={() => setPlaying(true)}
+              disabled={playing}
             >
-              {playing ? 'Stop' : 'Start'}
+              Start
             </button>
             <button
               className={styles.controlButtonBoxin}
               onClick={() => setShowTimer((prev) => !prev)}
             >
               <PiBoxingGloveFill size={45} color="#6d25ff" opacity={0.7} />
-              {showTimer ? '' : ''}
             </button>
             <button
               className={styles.controlButton}
               onClick={() => {
                 setPlaying(false);
                 setKey((prevKey) => prevKey + 1);
+                setShowModal(false);
+                setOverlayType(null);
                 if (setMuteVideos && typeof setMuteVideos === 'function') {
                   setMuteVideos(false);
                 }
               }}
-              disabled={!showTimer}
             >
               Reset
             </button>
           </div>
         </div>
       </div>
+
+      {showModal && (
+        <Modal type={overlayType} onClose={closeOverlay}>
+          <div className="flex flex-col gap-4 items-center p-10">
+            <Avatar userName="username" />
+            <h2 className="text-xl">Final Score</h2>
+            <div className="flex gap-4">
+              <div className="vote__up">
+                <FaThumbsUp /> {votes.up}
+              </div>
+              <div className="vote__down">
+                <FaThumbsDown /> {votes.down}
+              </div>
+            </div>
+            <div className="flex gap-4">
+              <h3 className="">Experience gained:</h3>
+              <p>+130</p>
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-4 items-center mb-10">
+            <p>Join the Debate</p>
+
+            <Button onClick={closeOverlay}>Connect</Button>
+          </div>
+        </Modal>
+      )}
     </>
   );
 };
