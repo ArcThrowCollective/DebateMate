@@ -40,7 +40,7 @@ function VideoScreenLeft({ muteVideos, streamUrl }: Props) {
       {!offVideo ? (
         <>
           <Stream onStreamReady={setLocalStream}></Stream>
-          <div className={styles.userNameOverlay}>PHIL</div>
+          <div className={styles.userNameOverlay}>JESÚS</div>
           <div className={styles.VideoControls}>
             <button
               className={styles.PlayVideoRigth}

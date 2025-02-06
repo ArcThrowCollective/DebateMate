@@ -199,7 +199,15 @@ export default function RemoteStream(props: Props) {
   // JSX //
   return (
     <>
-      <video ref={videoRefRem} autoPlay playsInline />
+      <video
+        ref={videoRefRem}
+        autoPlay
+        playsInline
+        autoPlay
+        playsInline
+        width="100%"
+        height="100%"
+      />
     </>
   );
 }

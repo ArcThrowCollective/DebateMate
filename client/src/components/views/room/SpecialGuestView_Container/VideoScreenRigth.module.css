@@ -213,7 +213,7 @@
 }
 .userNameOverlay {
   position: absolute;
-  top: 20%;
+  top: 30%;
   left: 5%;
   transform: translateX(-50%);
   background: rgba(0, 0, 0, 0.5); /* 🔹 Fondo semitransparente */
@@ -227,7 +227,7 @@
 
 .userNameOverlayRigth {
   position: absolute;
-  top: 20%;
+  top: 30%;
   right: 5%;
   transform: translateX(-50%);
   background: rgba(0, 0, 0, 0.5); /* 🔹 Fondo semitransparente */
