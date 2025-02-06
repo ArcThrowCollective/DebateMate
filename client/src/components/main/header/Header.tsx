@@ -34,9 +34,11 @@ export default function Header() {
           <div className="flex gap-4">
             <button onClick={() => setOverlayType('login')}>Login</button>
             <button onClick={() => setOverlayType('signup')}>Sign Up</button>
-            <FaUserCircle
-              className="avatar"
-              size="2rem"
+
+            <img
+              src="https://github.com/dripstaltd.png"
+              alt=""
+              className="avatar w-10 rounded-full "
               onClick={() => dispatch(navigateToProfile('Number1 User'))}
             />
           </div>
