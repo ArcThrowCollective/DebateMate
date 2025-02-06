@@ -186,7 +186,7 @@ export default function RemoteStream(props: Props) {
     );
     socket.on('roomParticipants', (updatedParticipants: Participant[]) => {
       console.log('Updated Participants in the room:', updatedParticipants);
-      setParticipantState(updatedParticipants);
+      setParticipantState({ participants: updatedParticipants });
     });
 
     // disconnect
