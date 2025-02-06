@@ -12,6 +12,7 @@ import { FaThumbsUp, FaThumbsDown } from 'react-icons/fa';
 import { Modal } from '../../../../UI/modal/ShowModal';
 import { Button } from '../../../../UI/buttons/Button';
 import Avatar from '../../../../UI/avatar/Avatar';
+import { IoColorFill } from 'react-icons/io5';
 
 const TimerContainer = ({ setMuteVideos = () => {} }) => {
   if (!setMuteVideos || typeof setMuteVideos !== 'function') {
@@ -40,33 +41,40 @@ const TimerContainer = ({ setMuteVideos = () => {} }) => {
   return (
     <>
       <div className={styles.TheContainer}>
-        <div className={styles.TimerContainer}>
-          {showTimer && (
-            <CountdownCircleTimer
-              key={key}
-              size={120}
-              isPlaying={playing}
-              duration={55}
-              colors={['#6d25ff', '#c362ff', '#FFB662', '#FFB662']}
-              colorsTime={[30, 20, 10, 0]}
-              onUpdate={(time) => {
-                dispatch(setRemainingTime(time));
-              }}
-              onComplete={() => {
-                dispatch(setTimerState({ isTimeOut: true }));
-                setShowModal(true); // 🔹 Muestra el modal cuando llega a 0
-                setOverlayType('vote');
-                if (setMuteVideos && typeof setMuteVideos === 'function') {
-                  setMuteVideos(true);
-                }
-                return { shouldRepeat: false };
-              }}
-            >
-              {({ remainingTime }) => (
-                <div className={styles.timerNumber}>{remainingTime}</div>
-              )}
-            </CountdownCircleTimer>
-          )}
+        <div className={styles.logoTimer}>
+          <img src="src/assets/room-img/DEBATE BG.png" alt="" />
+        </div>
+        <div>
+          <div className={styles.TimerContainer}>
+            {showTimer && (
+              <CountdownCircleTimer
+                key={key}
+                size={1}
+                isPlaying={playing}
+                duration={55}
+                strokeWidth={1}
+                colors={['#e4e5e9', '#e4e5e9', '#e4e5e9', '#e4e5e9']}
+                colorsTime={[30, 20, 10, 0]}
+                trailColor="rgba(255, 255, 255, 0.1)"
+                onUpdate={(time) => {
+                  dispatch(setRemainingTime(time));
+                }}
+                onComplete={() => {
+                  dispatch(setTimerState({ isTimeOut: true }));
+                  setShowModal(true); // 🔹 Muestra el modal cuando llega a 0
+                  setOverlayType('vote');
+                  if (setMuteVideos && typeof setMuteVideos === 'function') {
+                    setMuteVideos(true);
+                  }
+                  return { shouldRepeat: false };
+                }}
+              >
+                {({ remainingTime }) => (
+                  <div className={styles.timerNumber}>{remainingTime}</div>
+                )}
+              </CountdownCircleTimer>
+            )}
+          </div>{' '}
         </div>
 
         <div className={styles.TimerControls}>
@@ -82,7 +90,7 @@ const TimerContainer = ({ setMuteVideos = () => {} }) => {
               className={styles.controlButtonBoxin}
               onClick={() => setShowTimer((prev) => !prev)}
             >
-              <PiBoxingGloveFill size={45} color="#6d25ff" opacity={0.7} />
+              <PiBoxingGloveFill size={45} color="#ffb662" opacity={0.7} />
             </button>
             <button
               className={styles.controlButton}

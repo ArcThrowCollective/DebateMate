@@ -40,6 +40,10 @@ function VideoScreenLeft({ muteVideos, streamUrl }: Props) {
       {!offVideo ? (
         <>
           <Stream onStreamReady={setLocalStream}></Stream>
+          <div className={styles.rightcarduser}>
+            <div className={styles.usernameLeft}>PHILL</div>
+            {/* <div className={styles.avataruserrightcardheadIcon} /> */}
+          </div>
           <div className={styles.VideoControls}>
             <button
               className={styles.PlayVideoRigth}

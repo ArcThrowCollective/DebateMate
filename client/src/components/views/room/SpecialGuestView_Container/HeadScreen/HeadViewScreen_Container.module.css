@@ -1,21 +1,27 @@
 .nametopic {
   position: absolute;
   display: flex;
-  color: rgba(242, 240, 245, 0.9);
+  color: rgba(26, 21, 39, 0.8);
   font-weight: bolder;
   left: 16px;
   top: 50px;
   font-size: 30px;
 }
 
+.logoTimer {
+  padding-left: 700px;
+  background-color: red;
+  color: rgba(26, 21, 39, 0.8);
+}
 .live {
+  padding: 4px;
   display: flex;
   align-items: center;
   font-size: 15px;
   font-weight: bolder;
-  color: rgba(53, 47, 65, 1);
+  color: rgb(245, 184, 112);
 
-  background-color: rgb(245, 184, 112, 0.4);
+  background-color: rgba(26, 21, 39, 0.8);
   background-size: 40px;
   height: 20px;
   margin-left: 16px;
@@ -34,7 +40,7 @@
   font-size: 20px;
   font-weight: bold;
   margin: 0;
-  color: var(--white);
+  color: rgba(26, 21, 39, 0.8);
 }
 
 .live_Container {
@@ -56,10 +62,11 @@
   font-size: 3.2em;
   line-height: normal;
   color: var(--white);
-  background: linear-gradient(
+  background: var(--white);
+  /* background: linear-gradient(
     180deg,
     rgba(26, 21, 39) 5%,
     rgba(53, 47, 65, 0.7) 60%,
     rgba(224, 222, 228, 0.2) 150%
-  );
+  ); */
 }

@@ -7,12 +7,12 @@ const UserName_Card: FunctionComponent = () => {
   return (
     <div className={styles.usernameheadContainer}>
       <div className={styles.leftcarduser}>
-        <div className={styles.avataruserleftcardheadIcon} />
+        {/* <div className={styles.avataruserleftcardheadIcon} /> */}
         <div className={styles.usernameLeft}>PHILL</div>
       </div>
-      <div className={styles.BattleLine}>
+      {/* <div className={styles.BattleLine}>
         <BattleLine />
-      </div>
+      </div> */}
 
       <div className={styles.TimerContainer}>
         <TimerContainer />
@@ -20,7 +20,7 @@ const UserName_Card: FunctionComponent = () => {
 
       <div className={styles.rightcarduser}>
         <div className={styles.usernameRight}>BEN</div>
-        <div className={styles.avataruserrightcardheadIcon} />
+        {/* <div className={styles.avataruserrightcardheadIcon} /> */}
       </div>
     </div>
   );

@@ -28,7 +28,6 @@ const HeadViewScreenContainer: FunctionComponent = () => {
           </div>
           <div className={styles.totalonline}>24</div>
         </div>
-
         <div className={styles.nametopic}>{roomData?.topic}</div>
       </div>
     </div>

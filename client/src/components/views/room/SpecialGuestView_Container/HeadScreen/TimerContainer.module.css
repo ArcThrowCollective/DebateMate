@@ -5,16 +5,29 @@
   height: 100vh;
 }
 
+.logoTimer {
+  margin-top: 2px;
+  margin-left: 100px;
+  width: 220px;
+  font-weight: bolder;
+}
+
+.timerNumber {
+  font-size: 50px;
+  font-weight: bolder;
+}
+
 .TimerContainer {
   top: 22px;
   display: flex;
-  left: 50%;
+  left: 20%;
   position: relative;
   width: auto;
   position: absolute;
   height: auto;
   transform: translate(-50%, -50%);
-  color: #fff;
+  color: rgba(26, 21, 39);
+
   font-family: 'Titillium Web';
   display: flex;
   justify-content: center;
@@ -46,6 +59,8 @@
   gap: 20px;
   display: flex;
   justify-content: center;
+  margin-left: 160px;
+  margin-bottom: 20px;
 }
 .controlButton {
   height: 40px;
@@ -73,15 +88,35 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
-  background: var(--gradient-light);
+  padding: 5px;
+  color: rgb(255, 182, 98, 1);
+
   box-shadow: var(--box-shadow);
-  opacity: 0.8;
+
   cursor: pointer;
   position: relative;
   z-index: 10000;
+  background-color: rgba(0, 0, 0, 0.8);
+
+  border: none;
+  padding: 10px 15px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 16px;
+  z-index: 99999;
+  position: relative;
+  height: 4rem;
+  width: 4rem;
+  text-align: center;
+  color: var(--white);
+  background: var(--gradient-dark);
+  box-shadow: var(--box-shadow);
+  opacity: 0.8;
+  pointer-events: auto;
+  border-radius: 100%;
 }
 
 .timerNumber {

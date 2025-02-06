@@ -37,12 +37,12 @@ const ModaratorScreen = ({
 
   return (
     <div className={styles.VideoModaratorScreenContainer}>
-      <div className={styles.request_Container}>
+      {/* <div className={styles.request_Container}>
         <RequestContainer />
-      </div>
-      <div>
+      </div> */}
+      {/* <div>
         <FooterScreenContainer />
-      </div>
+      </div> */}
 
       {stream ? (
         <ReactPlayer
