@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../../../../state/store';
 import { fetchRoomById } from '../../../../../utils/graphqlclient';
 import { Room } from '../../../../../types/debate';
+import { selectParticipantCount } from '../../../../../state/store';
 
 const HeadViewScreenContainer: FunctionComponent = () => {
   const roomId = useSelector((state: RootState) => state.navigation.roomId);
@@ -26,7 +27,7 @@ const HeadViewScreenContainer: FunctionComponent = () => {
           <div>
             <GrView className={styles.viewersIcon} />
           </div>
-          <div className={styles.totalonline}>24</div>
+          <div className={styles.totalonline}></div>
         </div>
         <div className={styles.nametopic}>{roomData?.topic}</div>
       </div>

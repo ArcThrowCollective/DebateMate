@@ -1,12 +1,15 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Participant } from '../../types/debate';
+import { RootState } from '../store';
 
 interface ParticipantState {
   participants: Participant[];
+  participantCount: number;
 }
 
 const initialState: ParticipantState = {
   participants: [],
+  participantCount: 0,
 };
 
 const participantSlice = createSlice({
@@ -19,9 +22,16 @@ const participantSlice = createSlice({
     ) => {
       state.participants = action.payload.participants;
     },
+    setParticipantCount: (state, action: PayloadAction<number>) => {
+      state.participantCount = action.payload;
+    },
   },
 });
 
-export const { setParticipantState } = participantSlice.actions;
+export const selectParticipantCount = (state: RootState) =>
+  state.participants.participantCount;
+
+export const { setParticipantState, setParticipantCount } =
+  participantSlice.actions;
 
 export default participantSlice.reducer;
