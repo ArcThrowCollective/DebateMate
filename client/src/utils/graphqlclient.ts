@@ -290,3 +290,32 @@ export const createChannel = async (
     throw error;
   }
 };
+
+export const CREATE_ROOM_MUTATION = gql`
+  mutation CreateRoom(
+    $topic: String!
+    $description: String!
+    $channelId: String
+  ) {
+    topic
+    description
+    channelId
+  }
+`;
+
+export const createRoom = async (
+  topic: String,
+  description: String,
+  channelId?: String
+) => {
+  try {
+    const { data } = await client.mutate({
+      mutation: CREATE_ROOM_MUTATION,
+      variables: { topic, description, channelId },
+    });
+    return data.createRoom;
+  } catch (error) {
+    console.error('Room creation failed', error);
+    throw error;
+  }
+};

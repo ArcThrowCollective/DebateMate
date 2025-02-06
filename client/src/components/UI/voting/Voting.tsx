@@ -8,7 +8,7 @@ import { Modal } from '../modal/ShowModal';
 import Avatar from '../avatar/Avatar';
 import { Button } from '../buttons/Button';
 
-const socket = io(import.meta.env.VITE_SOCKET_URL);
+//const socket = io(import.meta.env.VITE_SOCKET_URL);
 
 interface VotesState {
   [key: string]: { up: number; down: number };
@@ -34,13 +34,12 @@ export const TrackSpeakerVotes = ({ speakerId }: { speakerId: string }) => {
   };
 
   useEffect(() => {
-    socket.on('voteUpdated', ({ speakerId, votes }) => {
+    /*socket.on('voteUpdated', ({ speakerId, votes }) => {
       dispatch(updateVotes({ speakerId, votes }));
-    });
-
-    return () => {
+    });*/
+    /*return () => {
       socket.off('voteUpdated');
-    };
+    };*/
   }, [dispatch]);
 
   useEffect(() => {

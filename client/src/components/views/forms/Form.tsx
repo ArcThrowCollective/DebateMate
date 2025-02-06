@@ -46,7 +46,7 @@ export const Form: React.FC<FormProps> = ({
       extraData.channelURL = channelData.channelURL; // Use uploaded image URL instead of file
     }
 
-    const formData = handleFormSubmit(e, extraData);
+    const formData = await handleFormSubmit(e, extraData);
 
     delete formData.topicImage;
     delete formData.channelBanner;

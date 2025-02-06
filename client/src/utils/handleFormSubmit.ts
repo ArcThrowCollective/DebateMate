@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-export const handleFormSubmit = (
+
+export const handleFormSubmit = async (
   e: React.FormEvent<HTMLFormElement>,
   extraData: Record<string, any> = {}
 ) => {
