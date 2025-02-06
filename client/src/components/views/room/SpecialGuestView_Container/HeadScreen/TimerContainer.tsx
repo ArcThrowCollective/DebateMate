@@ -6,8 +6,8 @@ import {
   setTimerState,
 } from '../../../../../state/timer/timerSlice';
 import { useDispatch } from 'react-redux';
-import { UnknownAction } from '@reduxjs/toolkit';
 import { PiBoxingGloveFill } from 'react-icons/pi';
+import { RootState } from '../../../../../state/store';
 
 const TimerContainer = ({ setMuteVideos = () => {} }) => {
   if (!setMuteVideos || typeof setMuteVideos !== 'function') {
@@ -16,10 +16,9 @@ const TimerContainer = ({ setMuteVideos = () => {} }) => {
   const dispatch = useDispatch();
   const [playing, setPlaying] = useState(false);
   const [key, setKey] = useState(0);
-  const [showTimer, setShowTimer] = useState(true); // Estado para mostrar/ocultar el temporizador
+  const [showTimer, setShowTimer] = useState(true);
   return (
     <>
-      {/* 🔹 Temporizador arriba */}
       <div className={styles.TheContainer}>
         <div className={styles.TimerContainer}>
           {showTimer && (
@@ -52,7 +51,6 @@ const TimerContainer = ({ setMuteVideos = () => {} }) => {
           )}
         </div>
 
-        {/* 🔹 Controles fijados en la parte inferior */}
         <div className={styles.TimerControls}>
           <div className={styles.controlButtonContainer}>
             <button

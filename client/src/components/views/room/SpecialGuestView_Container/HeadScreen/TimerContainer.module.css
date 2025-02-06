@@ -41,7 +41,7 @@
 .controlButtonContainer {
   position: absolute;
   transform: translate(-50%, -50%);
-  bottom: 60px;
+  bottom: 40px;
   align-items: center;
   gap: 20px;
   display: flex;

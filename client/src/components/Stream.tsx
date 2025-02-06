@@ -1,6 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 
-export default function Stream() {
+type Props = {
+  //add
+  onStreamReady: (stream: MediaStream) => void;
+};
+export default function Stream({ onStreamReady }: Props) {
   // note: MediaStream is a non-serializable object and can apparently not be used as a redux state...
   const [stream, setStream] = useState(new MediaStream());
   const refVideo = useRef<HTMLVideoElement>(null);
@@ -15,9 +19,10 @@ export default function Stream() {
       });
       setStream(stream);
       refVideo.current.srcObject = localStream;
+      onStreamReady(localStream); //add
     };
     getLocalStream();
-  }, []);
+  }, [onStreamReady]); //add
 
   return (
     <>

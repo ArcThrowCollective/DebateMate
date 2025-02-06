@@ -12,7 +12,6 @@ const BattleLine = () => {
         labelSize="18px"
         customLabel={styles.label}
         maxCompleted={100}
-        // customLabel="O"
         width="400px"
       />
     </div>

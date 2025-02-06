@@ -4,6 +4,7 @@ import { BsMicMute } from 'react-icons/bs';
 import Stream from '../../../Stream';
 import { AiFillLike } from 'react-icons/ai';
 import { AiFillDislike } from 'react-icons/ai';
+import { TrackSpeakerVotes } from '../../../UI/voting/Voting';
 
 type Props = {
   muteVideos: boolean;
@@ -15,40 +16,30 @@ function VideoScreenLeft({ muteVideos, streamUrl }: Props) {
   const [muted, setMuted] = useState(true);
   const [offVideo, setOffVideo] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [localStream, setLocalStream] = useState<MediaStream | null>(null);
 
   useEffect(() => {
     setMuted(muteVideos);
   }, [muteVideos]);
 
   useEffect(() => {
-    if (videoRef.current && streamUrl) {
-      videoRef.current.srcObject = streamUrl;
-      videoRef.current.muted = muted; // 🔹 Aplica `muted`
-      videoRef.current.loop = true; // 🔹 Activa `loop`
+    if (videoRef.current && (streamUrl || localStream)) {
+      videoRef.current.srcObject = streamUrl || localStream;
+      videoRef.current.muted = muted;
+      videoRef.current.loop = true;
       if (playing) {
         videoRef.current.play();
       } else {
         videoRef.current.pause();
       }
     }
-  }, [streamUrl, playing, muted]);
+  }, [streamUrl, playing, muted, localStream]);
 
   return (
     <div className={styles.VideoScreenContainer}>
       {!offVideo ? (
         <>
-          {/* 🔹 `video` ahora soporta todas las opciones de `ReactPlayer` */}
-          {/* <video
-            ref={videoRef}
-            className={styles.VideoScreenPlayer}
-            autoPlay
-            muted={muted}
-            playsInline
-            loop
-            width="100%"
-            height="90%"
-          /> */}
-          <Stream></Stream>
+          <Stream onStreamReady={setLocalStream}></Stream>
           <div className={styles.VideoControls}>
             <button
               className={styles.PlayVideoRigth}
@@ -71,12 +62,18 @@ function VideoScreenLeft({ muteVideos, streamUrl }: Props) {
             >
               Off
             </button>
-            <button>
+
+            <div className={styles.TrackSpeakerVotesButtons}>
+              <TrackSpeakerVotes speakerId={'speakerId'} />
+            </div>
+
+            {/* <button>
               <AiFillDislike className={styles.dislike} />
             </button>
             <button>
               <AiFillLike className={styles.like} />
-            </button>
+            </button> */}
+
             <div className={styles.footerscreenContainer}>
               <div className={styles.participantsContainer}></div>
               <div className={styles.ModeratorRoom}></div>

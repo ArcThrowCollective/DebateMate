@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../../../state/store';
 import { AiFillLike } from 'react-icons/ai';
 import { AiFillDislike } from 'react-icons/ai';
+import { TrackSpeakerVotes } from '../../../UI/voting/Voting';
 
 type Props = {
   muteVideos: boolean;
@@ -27,8 +28,8 @@ function VideoScreenRigth({ muteVideos, streamUrl }: Props) {
   useEffect(() => {
     if (videoRef.current && streamUrl) {
       videoRef.current.srcObject = streamUrl;
-      videoRef.current.muted = muted; // 🔹 Aplica `muted`
-      videoRef.current.loop = true; // 🔹 Activa `loop`
+      videoRef.current.muted = muted;
+      videoRef.current.loop = true;
       if (playing) {
         videoRef.current.play();
       } else {
@@ -41,17 +42,6 @@ function VideoScreenRigth({ muteVideos, streamUrl }: Props) {
     <div className={styles.VideoScreenContainer}>
       {!offVideo ? (
         <>
-          {/* 🔹 `video` ahora soporta todas las opciones de `ReactPlayer` */}
-          {/* <video
-            ref={videoRef}
-            className={styles.VideoScreenPlayer}
-            autoPlay
-            muted={muted}
-            playsInline
-            loop
-            width="50%"
-            height="100%"
-          /> */}
           <RemoteStream
             roomId={roomId!}
             userName="testUser"
@@ -59,12 +49,9 @@ function VideoScreenRigth({ muteVideos, streamUrl }: Props) {
           ></RemoteStream>
 
           <div className={styles.VideoControls}>
-            <button>
-              <AiFillDislike className={styles.dislike} />
-            </button>
-            <button>
-              <AiFillLike className={styles.like} />
-            </button>
+            <div className={styles.TrackSpeakerVotesButtons}>
+              <TrackSpeakerVotes speakerId={'speakerId'} />
+            </div>
             <button
               className={styles.PlayVideoRigth}
               onClick={() => setPlaying(!playing)}

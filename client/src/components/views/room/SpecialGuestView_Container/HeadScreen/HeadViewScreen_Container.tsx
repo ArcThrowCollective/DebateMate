@@ -19,16 +19,18 @@ const HeadViewScreenContainer: FunctionComponent = () => {
     }
   }, []);
   return (
-    <div className={styles.headviewContainer}>
-      <div className={styles.live_Container}>
-        <div className={styles.live}>LIVE</div>
-        <div>
-          <GrView className={styles.viewersIcon} />
+    <div className="bg-white">
+      <div className={styles.headviewContainer}>
+        <div className={styles.live_Container}>
+          <div className={styles.live}>LIVE</div>
+          <div>
+            <GrView className={styles.viewersIcon} />
+          </div>
+          <div className={styles.totalonline}>24</div>
         </div>
-        <div className={styles.totalonline}>24</div>
-      </div>
 
-      <div className={styles.nametopic}>{roomData?.topic}</div>
+        <div className={styles.nametopic}>{roomData?.topic}</div>
+      </div>
     </div>
   );
 };
