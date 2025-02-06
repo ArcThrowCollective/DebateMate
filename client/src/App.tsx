@@ -9,7 +9,6 @@ import ChannelPage from './components/views/channel/ChannelPage.tsx';
 import ProfilePage from './components/views/profile/ProfilePage.tsx';
 import { Room as RoomType } from './types/debate.ts';
 import Room from './components/views/room/room.tsx';
-import { TrackSpeakerVotes } from './components/UI/voting/Voting.tsx';
 
 import { fetchRoomData } from './utils/graphqlclient.ts';
 import { useState, useEffect } from 'react';
@@ -36,7 +35,7 @@ function App() {
     };
 
     getRooms();
-  }, []); // ✅ Empty array ensures it runs only once when the component mounts
+  }, []);
 
   return (
     <Dashboard>
@@ -46,7 +45,6 @@ function App() {
         {currentPage === 'channel' && <ChannelPage channelId={channelId!} />}
         {currentPage === 'profile' && <ProfilePage profileId={profileId!} />}
         {currentPage === 'room' && <Room roomId={roomId!} />}
-        <TrackSpeakerVotes speakerId="ben" />
       </section>
       <Footer />
     </Dashboard>
