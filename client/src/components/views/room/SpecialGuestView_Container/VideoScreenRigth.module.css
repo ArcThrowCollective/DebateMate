@@ -211,3 +211,30 @@
   font-weight: bold;
   color: red;
 }
+.userNameOverlay {
+  position: absolute;
+  top: 20%;
+  left: 5%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.5); /* 🔹 Fondo semitransparente */
+  color: white;
+  padding: 8px 12px;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 14px;
+  z-index: 10;
+}
+
+.userNameOverlayRigth {
+  position: absolute;
+  top: 20%;
+  right: 5%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.5); /* 🔹 Fondo semitransparente */
+  color: white;
+  padding: 8px 12px;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 14px;
+  z-index: 10;
+}

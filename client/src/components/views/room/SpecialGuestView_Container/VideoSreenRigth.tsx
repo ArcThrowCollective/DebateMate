@@ -40,6 +40,7 @@ function VideoScreenRigth({ muteVideos, streamUrl }: Props) {
 
   return (
     <div className={styles.VideoScreenContainer}>
+      <div className={styles.userNameOverlayRigth}>Ben</div>
       {!offVideo ? (
         <>
           <RemoteStream

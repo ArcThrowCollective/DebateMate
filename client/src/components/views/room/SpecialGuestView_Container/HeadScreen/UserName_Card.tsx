@@ -6,10 +6,9 @@ import BattleLine from './BattleLine_Container';
 const UserName_Card: FunctionComponent = () => {
   return (
     <div className={styles.usernameheadContainer}>
-      <div className={styles.leftcarduser}>
-        {/* <div className={styles.avataruserleftcardheadIcon} /> */}
+      {/* <div className={styles.leftcarduser}>
         <div className={styles.usernameLeft}>PHILL</div>
-      </div>
+      </div> */}
       {/* <div className={styles.BattleLine}>
         <BattleLine />
       </div> */}
@@ -18,10 +17,10 @@ const UserName_Card: FunctionComponent = () => {
         <TimerContainer />
       </div>
 
-      <div className={styles.rightcarduser}>
-        <div className={styles.usernameRight}>BEN</div>
-        {/* <div className={styles.avataruserrightcardheadIcon} /> */}
-      </div>
+      {/* <div className={styles.rightcarduser}>
+        <div className={styles.usernameRight}>BEN</div> */}
+      {/* <div className={styles.avataruserrightcardheadIcon} /> */}
+      {/* </div> */}
     </div>
   );
 };
