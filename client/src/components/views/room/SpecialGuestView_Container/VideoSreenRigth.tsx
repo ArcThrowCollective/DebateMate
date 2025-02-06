@@ -50,15 +50,7 @@ function VideoScreenRigth({ muteVideos, streamUrl }: Props) {
         <>
           {/* 🔹 `video` ahora soporta todas las opciones de `ReactPlayer` */}
           <video
-<<<<<<< HEAD
-<<<<<<< HEAD
             ref={videoRef}
-=======
-            ref={videoRefRight}
->>>>>>> 29217e6 (test, pass up videoref from RemoteStream)
-=======
-            ref={videoRef}
->>>>>>> 27189ca (trying to pass the stream instead of ref, set srcObject in Screen component)
             className={styles.VideoScreenPlayer}
             autoPlay
             muted={muted}
