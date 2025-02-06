@@ -98,14 +98,13 @@ export default function RemoteStream(props: Props) {
       videoRefRem.current!.srcObject = event.streams[0];
     };
 
+    // join room after delay (wait for localstream to get camera)
     (async () => {
       console.log('... waiting to join room ...');
-      await new Promise((r) => setTimeout(r, 1000));
+      await new Promise((r) => setTimeout(r, 2500));
+      socket.emit('joinRoom', room);
+      console.log(`# Joining room: ${room}`);
     })();
-
-    // join room
-    socket.emit('joinRoom', room);
-    console.log(`# Joining room: ${room}`);
 
     // handle offer
     socketLocal.current?.on(
