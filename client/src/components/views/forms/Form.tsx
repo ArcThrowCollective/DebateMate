@@ -30,6 +30,7 @@ export const Form: React.FC<FormProps> = ({
 
   const [error, setError] = useState<string | null>(null);
   const [channelData, setChannelData] = useState<{ channelURL?: string }>({});
+  const [topicData, setTopicData] = useState<{ imageUrl?: string }>({});
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -39,12 +40,16 @@ export const Form: React.FC<FormProps> = ({
     const extraData: Record<string, any> = { formType: type };
     if (type === 'topic') {
       extraData.minRating = minRating;
+      extraData.imageUrl = topicData.imageUrl;
     }
     if (type === 'channel' && channelData.channelURL) {
       extraData.channelURL = channelData.channelURL; // Use uploaded image URL instead of file
     }
 
     const formData = handleFormSubmit(e, extraData);
+
+    delete formData.topicImage;
+    delete formData.channelBanner;
 
     try {
       const response = await submitFormData(type, formData);
@@ -92,7 +97,9 @@ export const Form: React.FC<FormProps> = ({
       )}
 
       {type === 'channel' && <CreateChannel setChannelData={setChannelData} />}
-      {type === 'topic' && <CreateTopic setMinRating={setMinRating} />}
+      {type === 'topic' && (
+        <CreateTopic setMinRating={setMinRating} setTopicData={setTopicData} />
+      )}
 
       <div className="input-container">
         <button className="btn" type="submit">
