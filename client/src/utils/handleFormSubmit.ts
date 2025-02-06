@@ -10,6 +10,7 @@ export const handleFormSubmit = async (
   const formData = new FormData(e.currentTarget);
 
   // Merge additional data - like the stars
+  console.log('This is formData ', formData);
   for (const key in extraData) {
     formData.append(key, extraData[key].toString());
   }

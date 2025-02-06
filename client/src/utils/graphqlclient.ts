@@ -292,26 +292,35 @@ export const createChannel = async (
 };
 
 export const CREATE_ROOM_MUTATION = gql`
-  mutation CreateRoom(
-    $topic: String!
-    $description: String!
-    $channelId: String
-  ) {
-    topic
-    description
-    channelId
+  mutation CreateRoom($topic: String!, $description: String, $channelId: ID) {
+    createRoom(
+      topic: $topic
+      description: $description
+      channelId: $channelId
+    ) {
+      id
+      topic
+      description
+      channelId
+      createdAt
+      updatedAt
+    }
   }
 `;
 
 export const createRoom = async (
   topic: String,
-  description: String,
+  description?: String,
   channelId?: String
 ) => {
   try {
     const { data } = await client.mutate({
       mutation: CREATE_ROOM_MUTATION,
-      variables: { topic, description, channelId },
+      variables: {
+        topic,
+        description: description || null,
+        channelId: channelId || null,
+      },
     });
     return data.createRoom;
   } catch (error) {

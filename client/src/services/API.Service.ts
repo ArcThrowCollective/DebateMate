@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from 'axios';
-import { createChannel } from '../utils/graphqlclient';
+import { createChannel, createRoom } from '../utils/graphqlclient';
 
 const URL = 'http://127.0.0.1:3000';
 
@@ -18,6 +18,7 @@ export const submitFormData = async (
 ) => {
   try {
     if (formType === 'channel') {
+      // channel path
       console.log('this is API.Service', formData);
       const newChannel: ChannelType = {
         channelName: formData.channelName as string,
@@ -27,6 +28,8 @@ export const submitFormData = async (
       const newChannelCreated = await createNewChannel(newChannel);
       console.log('this is new Channel created', newChannelCreated);
       return;
+    } else if (formType === 'topic') {
+      //! use create room here
     }
     const response = await axios.post(`${URL}/${formType}`, formData, {
       headers: {
@@ -62,8 +65,6 @@ const createNewChannel = async (formData: ChannelType) => {
         data.isPublic,
         data.userId
       );
-
-      console.log('adfafddfa:', channelCreated);
 
       if (!channelCreated) {
         throw new Error('Couldnt create new Channel!');
