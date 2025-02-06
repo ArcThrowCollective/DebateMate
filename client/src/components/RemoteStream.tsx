@@ -1,5 +1,7 @@
 import { useRef, useEffect } from 'react';
 import { io, Socket } from 'socket.io-client';
+import { Participant } from '../types/debate';
+import { setParticipantState } from '../state/participants/participantSlice';
 import env from '../../env';
 
 type Props = {
@@ -182,6 +184,12 @@ export default function RemoteStream(props: Props) {
         console.log(`_ Successfully added ICE candidate from ${from}`);
       }
     );
+    socket.on('roomParticipants', (updatedParticipants: Participant[]) => {
+      console.log('Updated Participants in the room:', updatedParticipants);
+      setParticipantState(updatedParticipants);
+    });
+
+    // disconnect
     return () => {
       socket.emit('leaveRoom', room);
       socket.disconnect();
