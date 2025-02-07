@@ -70,7 +70,21 @@ const TimerContainer = ({ setMuteVideos = () => {} }) => {
                 }}
               >
                 {({ remainingTime }) => (
-                  <div className="text-[64px] text-[--dark-color] font-[1000] text-(--accent-color)">
+                  <div
+                    className="text-[64px] text-[--dark-color] font-[1000] text-(--accent-color)"
+                    style={{
+                      color:
+                        remainingTime <= 10
+                          ? '#FFB662'
+                          : remainingTime <= 25
+                            ? '#cf82ff'
+                            : remainingTime <= 35
+                              ? '#cf82ff'
+                              : remainingTime <= 45
+                                ? '#6d25ff'
+                                : 'var(--dark-color)',
+                    }}
+                  >
                     {remainingTime}
                   </div>
                 )}
