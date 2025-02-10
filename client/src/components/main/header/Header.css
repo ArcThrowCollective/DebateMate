@@ -1,0 +1,19 @@
+header {
+  background: var(--white);
+  /* box-shadow: var(--box-shadow); */
+  padding: 1rem;
+}
+
+.avatar {
+  cursor: pointer;
+}
+
+.logo {
+  width: clamp(4rem, 60%, 10rem);
+}
+
+.border-bottom__purple {
+  height: 2px;
+  width: 100%;
+  background: var(--gradient-purple);
+}

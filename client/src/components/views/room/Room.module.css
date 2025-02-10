@@ -1,0 +1,16 @@
+.RoomContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--white);
+  height: 100vh;
+  width: 100vw;
+  z-index: 20;
+  overflow: hidden;
+}
+
+.HeadContainer {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}

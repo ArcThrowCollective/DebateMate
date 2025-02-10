@@ -1,26 +1,163 @@
+<div align="center" style="padding: 20px;">
+  <img src="client/src/assets/room-img/55DEBATE logoBigwilly.png" width="350" alt="StackTally logo">
+
+##
+
+  <h3><i>" 🗣️ Political</i> debating platform based on real-time video/audio comms."</i></h3>
+</div>
+
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
-# Debate App Something
+🚀 **Engage in structured debates, track rankings, and compete in real time.**
 
-**(Political) debating platform based on real-time video/audio comms.**
+---
 
-## What is ... all about?
+## 🌍 What is 55Debate?
 
-The landing page presents a list of channels as tiles. Guests can join public channels, or register to become Members. Members can create channels, and within a channel can create and manage debate rooms, as well as create announcements.
-<br><br>
-In debate rooms, members can debate using real-time peer-to-peer audio/video streaming (using WebRTC) and/or text chat. Members must have a "speaking permission" to speak, and can request permission using a button. Optionally, a member with the role Moderator handles those requests, controls a speech timer, etc.
+55Debate is a **real-time debate platform** that allows users to join **public and private channels**, create **debate rooms**, and engage in **live peer-to-peer video debates** using **WebRTC**.
 
-## Project Team Members
+- **Join a channel** and step into a debate room.
+- **Set a topic**, hit start, and battle it out **live**.
+- **55 seconds per turn** – Get your point across before time runs out!
+- **Track rankings and climb the leaderboard**.
 
-<a href="https://github.com/dripstaltd">
-  <img src="https://github.com/dripstaltd.png" width="60px" hspace="10" style="border-radius: 100px; outline: solid 1px gray;outline-offset: -0.5px;">
-</a>
-<a href="https://github.com/nortonph">
-  <img src="https://github.com/nortonph.png" width="60px" hspace="10" style="border-radius: 100px; outline: solid 1px gray;outline-offset: -0.5px;">
-</a>
-<a href="https://github.com/j7sus">
-  <img src="https://github.com/j7sus.png" width="60px" hspace="10" style="border-radius: 100px; outline: solid 1px gray;outline-offset: -0.5px;">
-</a>
-<a href="https://github.com/toldpixel">
-  <img src="https://github.com/toldpixel.png" width="60px" hspace="10" style="border-radius: 100px; outline: solid 1px gray;outline-offset: -0.5px;">
-</a>
+🔹 **Built for thinkers, challengers, and anyone who loves a good argument.**
+
+---
+
+## 🛠️ Tech Stack
+
+### **Frontend**
+
+- **Framework:** React, TypeScript
+- **State Management:** Redux Toolkit
+- **Styling:** Tailwind CSS
+- **Routing:** React Router
+- **GraphQL API:** Apollo Client
+- **Real-Time Communication:** Socket.io
+- **Video Streaming:** WebRTC
+- **Testing:** Cypress
+
+### **Backend**
+
+- **Framework:** Express, TypeScript
+- **Database:** PostgreSQL (Managed with Prisma ORM)
+- **Authentication:** JSON Web Tokens (JWT)
+- **Real-Time Communication:** WebSockets (Socket.io)
+- **Video Streaming:** WebRTC
+- **GraphQL API:** Apollo Server
+- **Testing:** Jest
+
+---
+
+## 🚀 Getting Started
+
+### **1️⃣ Clone the Repository**
+
+```sh
+git clone https://github.com/ArcThrowCollective/DebateMate.git
+cd DebateMate
+```
+
+### **2️⃣ Set Up Environment Variables**
+
+You'll need `.env` files for both the **frontend** and **backend**.
+
+- The backend requires `.env`, `.env.dev`, and `.env.prod`.
+- The frontend requires `.env`.
+
+Create the necessary `.env` files based on `.env.example` in each directory.
+
+### **3️⃣ Install Dependencies**
+
+```sh
+# Install dependencies for both frontend and backend
+npm install
+```
+
+### **4️⃣ Start the Backend**
+
+```sh
+cd backend
+npm run start
+```
+
+### **5️⃣ Start the Frontend**
+
+```sh
+cd frontend
+npm run dev
+```
+
+🎉 **Your app should now be running locally!**
+
+---
+
+## 👥 Project Team
+
+| Member  | GitHub Profile                               |
+| ------- | -------------------------------------------- |
+| JP      | [@dripstaltd](https://github.com/dripstaltd) |
+| Ben     | [@nortonph](https://github.com/nortonph)     |
+| Jesus   | [@j7sus](https://github.com/j7sus)           |
+| Philipp | [@toldpixel](https://github.com/toldpixel)   |
+
+---
+
+## 📜 Scripts
+
+### **Frontend**
+
+| Command           | Description                        |
+| ----------------- | ---------------------------------- |
+| `npm run dev`     | Starts the frontend with Vite      |
+| `npm run build`   | Builds the frontend for production |
+| `npm run lint`    | Runs ESLint                        |
+| `npm run preview` | Previews the production build      |
+| `npm run test`    | Runs Cypress tests                 |
+
+### **Backend**
+
+| Command                | Description                          |
+| ---------------------- | ------------------------------------ |
+| `npm run start`        | Starts the backend server            |
+| `npm run build`        | Compiles TypeScript to JavaScript    |
+| `npm run migrate:dev`  | Runs Prisma migrations (development) |
+| `npm run migrate:prod` | Runs Prisma migrations (production)  |
+| `npm run seed:dev`     | Seeds the database (development)     |
+| `npm run seed:prod`    | Seeds the database (production)      |
+| `npm run test`         | Runs Jest tests                      |
+| `npm run lint`         | Runs ESLint                          |
+
+---
+
+## 💡 Features & Roadmap
+
+### **Implemented Features**
+
+- ✅ Live **peer-to-peer video debates** (WebRTC)
+- ✅ **Public & Private Channels** for debate organization
+- ✅ **Rankings & Statistics** to track debate performance
+- ✅ **Real-time chat & notifications** (Socket.io)
+- ✅ **Moderator controls** for structured debates
+
+### **Planned Features**
+
+- 🔜 User **profile customization** (avatars, nicknames, etc.)
+- 🔜 **Voting system** to rank debate performances
+- 🔜 **Moderator tools** for structured debates
+- 🔜 **Mobile-friendly UI**
+
+---
+
+## 🛠️ Contributing
+
+We appreciate contributions! If you'd like to **fix bugs**, **add features**, or **improve documentation**, feel free to fork the repo and open a **pull request**.
+
+1. **Fork the repository**
+2. **Create a new branch** (`feature/your-feature`)
+3. **Commit your changes** (`git cz`)
+4. **Push your branch** (`git push origin feature/your-feature`)
+5. **Open a pull request**
+
+---

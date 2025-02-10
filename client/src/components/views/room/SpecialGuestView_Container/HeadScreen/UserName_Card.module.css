@@ -1,0 +1,67 @@
+.usernameheadContainer {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  top: 40px;
+  opacity: 0.9;
+  z-index: 10000;
+  pointer-events: auto;
+}
+
+.leftcarduser {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(180deg, #cf82ff 0%, #6d25ff 100%);
+  width: auto;
+  height: 30px;
+  border-radius: 30px 0px 0px 30px;
+  margin-right: 305px;
+  top: -80px;
+  left: 0;
+}
+.rightcarduser {
+  position: absolute;
+  display: flex;
+  height: 30px;
+  right: 0;
+  top: -80px;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(180deg, #cf82ff 0%, #6d25ff 100%);
+  width: auto;
+  border-radius: 0px 30px 30px 0px;
+  margin-left: 305px;
+  /* margin-top: 50px; */
+}
+
+.usernameLeft,
+.usernameRight {
+  font-size: 20px;
+  font-weight: bold;
+  color: #e4e5ea;
+  padding: 0 20px;
+}
+
+.avataruserleftcardheadIcon,
+.avataruserrightcardheadIcon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid white;
+  background-color: #d0cece;
+}
+
+.BattleLine {
+  position: absolute;
+  top: -100px;
+}
+
+.TimerContainer {
+  position: absolute;
+  top: -190px;
+}

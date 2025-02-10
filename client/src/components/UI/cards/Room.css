@@ -1,0 +1,90 @@
+.room__container {
+  background: var(--purple__card);
+  width: 325px;
+  height: 257px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  position: relative;
+  user-select: none;
+}
+
+.room__image {
+  width: 100%;
+  height: 70%;
+  background: var(--gradient-light);
+  border-radius: 0 0 var(--border-radius) var(--border-radius);
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.room__textArea {
+  color: var(--white);
+  display: flex;
+  padding-top: 0.3rem;
+  height: 4.8rem;
+  align-items: center;
+  overflow-y: hidden;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.room__textArea > span {
+  width: 20%;
+  height: 100%;
+}
+
+.btn__join {
+  position: absolute;
+  top: 9.2rem;
+  right: 1rem;
+  text-align: center;
+
+  height: 4rem;
+  width: 4rem;
+
+  color: var(--white);
+  background: var(--gradient-dark);
+
+  border-radius: 100%;
+
+  font-weight: 600;
+  font-size: 1.3rem;
+  box-shadow: var(--box-shadow);
+
+  cursor: pointer;
+}
+
+#liveLabel {
+  position: absolute;
+  left: 0.3rem;
+  top: 0.3rem;
+
+  background: var(--gradient-dark);
+  color: var(--white);
+  font-size: 0.6rem;
+  font-weight: 700;
+
+  border-radius: 0.2rem;
+  padding: 0 0.2rem;
+}
+
+#viewerCountLabel {
+  display: flex;
+  position: absolute;
+  right: 0.3rem;
+  top: 0.3rem;
+  gap: 0.1rem;
+
+  background: var(--gradient-dark);
+  color: var(--accent-color);
+  font-size: 0.6rem;
+  font-weight: 700;
+
+  border-radius: 0.2rem;
+  padding: 0 0.2rem;
+}
+
+#topic__title {
+}

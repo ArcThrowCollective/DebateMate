@@ -1,0 +1,119 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Channels {
+  id            String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  description   String
+  userId        String?  @unique @db.Uuid
+  is_public     Boolean
+  channel_image String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  avatarUrl     String?
+  name          String
+  user          Users?   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  rooms         Rooms[]
+}
+
+model Users {
+  id            String           @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  username      String
+  email         String           @unique
+  password      String
+  role          Role             @default(GUEST)
+  profile_image String?
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @updatedAt
+  channels      Channels?
+  history       Debate_History[]
+  notifications Notifications[]
+  participants  Participants[]
+}
+
+model Rooms {
+  id           String              @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  topic        String
+  channelId    String?              @db.Uuid
+  description  String?
+  startTime    DateTime            @default(now())
+  endTime      DateTime?
+  createdAt    DateTime            @default(now())
+  updatedAt    DateTime            @updatedAt
+  imageUrl     String?
+  history      Debate_History[]
+  participants Participants[]
+  request      Requests_To_Speak[]
+  channel      Channels?            @relation(fields: [channelId], references: [id], onDelete: Cascade)
+}
+
+model Participants {
+  id         String              @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  userId     String              @db.Uuid
+  role       Role                @default(GUEST)
+  isSpeaking Boolean             @default(false)
+  joinedAt   DateTime            @default(now())
+  roomId     String              @db.Uuid
+  room       Rooms               @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  user       Users               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  request    Requests_To_Speak[]
+}
+
+model Notifications {
+  id        String           @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  userId    String           @db.Uuid
+  message   String
+  type      NotificationType
+  isRead    Boolean          @default(false)
+  createdAt DateTime         @default(now())
+  user      Users            @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Debate_History {
+  id       String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  userId   String   @db.Uuid
+  role     Role     @default(GUEST)
+  joinedAt DateTime
+  leftAt   DateTime
+  roomId   String   @db.Uuid
+  room     Rooms    @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  user     Users    @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Requests_To_Speak {
+  id            String        @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  participantId String        @db.Uuid
+  status        RequestStatus @default(PENDING)
+  requestedAt   DateTime      @default(now())
+  handledAt     DateTime?
+  roomId        String        @db.Uuid
+  participant   Participants  @relation(fields: [participantId], references: [id], onDelete: Cascade)
+  room          Rooms         @relation(fields: [roomId], references: [id], onDelete: Cascade)
+}
+
+enum Role {
+  GUEST
+  MEMBER
+  ADMIN
+  LISTENER
+  SPEAKER
+  MODERATOR
+}
+
+enum NotificationType {
+  SYSTEM
+  REQUEST
+  DEBATE
+  CUSTOM
+}
+
+enum RequestStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}

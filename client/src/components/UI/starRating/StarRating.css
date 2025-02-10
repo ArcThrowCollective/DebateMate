@@ -1,0 +1,26 @@
+.star-rating {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.star {
+  font-size: 24px;
+  transition: color 0.2s;
+  display: inline-flex;
+  align-items: center;
+  text-shadow: var(--text-shadow);
+}
+
+.filled-star {
+  color: var(--accent-color);
+}
+
+.outline-star {
+  color: var(--accent-color);
+}
+
+input[type='checkbox'] {
+  accent-color: var(--purple-color);
+}

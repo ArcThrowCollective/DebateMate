@@ -1,0 +1,126 @@
+.TheContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+}
+
+.logoTimer {
+  margin-top: 2px;
+  margin-left: 100px;
+  width: 220px;
+  font-weight: bolder;
+}
+
+.timerNumber {
+  font-size: 50px;
+  font-weight: bolder;
+}
+
+.TimerContainer {
+  top: 22px;
+  display: flex;
+  left: 20%;
+  position: relative;
+  width: auto;
+  position: absolute;
+  height: auto;
+  transform: translate(-50%, -50%);
+  color: rgba(26, 21, 39);
+
+  font-family: 'Titillium Web';
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  pointer-events: auto;
+}
+
+.timerControls {
+  position: fixed;
+  bottom: 100;
+  left: 50%;
+  width: 100%;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 1000;
+  padding: 10px 20px;
+}
+
+.controlButtonContainer {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  bottom: 40px;
+  align-items: center;
+  gap: 20px;
+  display: flex;
+  justify-content: center;
+  margin-left: 160px;
+  margin-bottom: 20px;
+}
+.controlButton {
+  height: 40px;
+  width: 80px;
+  position: relative;
+  background-color: transparent;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.3s;
+  align-items: center;
+  justify-content: center;
+}
+
+.controlButtonBoxin,
+.controlButton:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+  background-color: rgba(207, 130, 255, 0.3);
+}
+.controlButtonBoxin {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  padding: 5px;
+  color: rgb(255, 182, 98, 1);
+
+  box-shadow: var(--box-shadow);
+
+  cursor: pointer;
+  position: relative;
+  z-index: 10000;
+  background-color: rgba(0, 0, 0, 0.8);
+
+  border: none;
+  padding: 10px 15px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 16px;
+  z-index: 99999;
+  position: relative;
+  height: 4rem;
+  width: 4rem;
+  text-align: center;
+  color: var(--white);
+  background: var(--gradient-dark);
+  box-shadow: var(--box-shadow);
+  opacity: 0.8;
+  pointer-events: auto;
+  border-radius: 100%;
+}
+
+.timerNumber {
+  font-size: 60px;
+  font-weight: bold;
+  text-align: center;
+}

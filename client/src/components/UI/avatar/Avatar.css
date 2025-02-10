@@ -1,0 +1,18 @@
+.avatar__small {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--dark-color);
+  background: var(--accent-color);
+  border-radius: 50%;
+  height: 2.4rem;
+  width: 2.4rem;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--box-shadow);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  flex-shrink: 0;
+}

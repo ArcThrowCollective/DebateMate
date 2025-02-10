@@ -1,11 +1,32 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.8;
-  font-weight: 400;
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wdth,wght@75..100,100..900&family=Titillium+Web:ital,wght@0,200;0,400;0,600;0,700;0,900;1,200;1,400;1,600;1,700&display=swap');
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --accent-color: #ffb662;
+  --dark-color: #352f41;
+  --gradient-purple: linear-gradient(to top, #6d25ff, #cf82ff);
+  --gradient-dark: linear-gradient(307deg, #514a5c 0%, #1a1527 100%);
+  --gradient-light: linear-gradient(307deg, #e4e5ea 0%, #f0f1f6 100%);
+  --gradient-purple__light: linear-gradient(
+    283deg,
+    #514a5ca1 0%,
+    #1a1527a1 100%
+  );
+
+  user-select: none;
+  --purple-color: #6d25ff;
+  --purple__card: linear-gradient(to top, #6d25ff 0%, #cf82ff 50%);
+  --white: #e4e5ea;
+  --border-radius: 0.6rem;
+  --box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  --text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.58);
+  font-family: 'Titillium Web', serif;
+  background: var(--gradient-light);
+  color: var(--dark-color);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -13,16 +34,139 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-body {
-  margin: 0;
-  padding: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+::selection {
+  color: var(--accent-color);
+  background: var(--dark-color);
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.8;
+  letter-spacing: 0.08rem;
+  text-decoration: none;
+  text-transform: none;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  overflow-y: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 700;
+  letter-spacing: 0.1rem;
+}
+
+.card {
+  background: var(--gradient-light);
+}
+
+.purple-border {
+  border: 2px solid #6d25ff;
+}
+
+.border-gradient {
+  position: relative;
+  padding: 2px;
+  border-radius: var(--border-radius);
+  background: var(--gradient-purple);
+  width: 200px;
+}
+
+.border-gradient-inner {
+  display: flex;
+  justify-content: center;
+  font-weight: 600;
+  color: var(--purple-color);
+  background: var(--gradient-light);
+  border-radius: inherit;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.accent {
+  color: var(--accent-color);
+}
+
+.center {
+  margin: 0 auto;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* Custom horizontal scrollbar */
+.scrollbar-thin::-webkit-scrollbar {
+  height: 0.8rem;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background-color: var(--dark-color);
+  border-radius: 0.4rem;
+}
+.scrollbar-thin::-webkit-scrollbar-track {
+  background-color: var(--dark-color);
+}
+
+.thumbs {
+  background: var(--gradient-dark);
+  color: var(--white);
+  padding: 1rem;
+  border-radius: 100%;
+  box-shadow: var(--box-shadow);
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease-in-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.thumbs:hover {
+  transform: scale(1.1);
+}
+
+/* Thumbs Up Animation */
+.thumbs.up:active .thumb-icon {
+  animation: floatUp 0.5s ease-out;
+}
+
+/* Thumbs Down Animation */
+.thumbs.down:active .thumb-icon {
+  animation: floatDown 0.5s ease-out;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+}
+
+@keyframes floatDown {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(50px);
+    opacity: 0;
+  }
 }

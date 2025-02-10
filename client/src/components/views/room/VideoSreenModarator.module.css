@@ -1,0 +1,32 @@
+.VideoScreenModaratorContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.HeadRoomScreen {
+  width: 100%;
+  position: relative;
+  z-index: 10;
+  display: flex;
+}
+
+.VideoRoomScreen {
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: 10;
+  display: flex;
+  position: absolute;
+}
+
+.FooterRoomScreen {
+  display: flex;
+  z-index: 12;
+}

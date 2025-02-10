@@ -1,0 +1,240 @@
+.VideoScreenContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+
+  position: relative;
+}
+.VideoRoomScreen {
+  height: 100vh;
+  width: 100%;
+  object-fit: cover;
+}
+
+.VideoScrenPlayer {
+  display: flex;
+  width: auto;
+}
+
+.VideoControls {
+  position: absolute;
+  bottom: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 25px;
+  z-index: 99999;
+  background: linear-gradient(
+    180deg,
+    rgba(81, 74, 92, 0.8) 40px,
+    rgba(53, 47, 65, 0.8) 90%,
+    rgba(26, 21, 39, 0.8) 100%
+  );
+  width: 100%;
+  height: 15%;
+
+  pointer-events: auto;
+}
+
+.PlayVideoRigth,
+.MuteVideoRight,
+.OffVideoRight {
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 16px;
+  z-index: 99999;
+  position: relative;
+  height: 4rem;
+  width: 4rem;
+  text-align: center;
+  color: var(--white);
+  background: var(--gradient-dark);
+  box-shadow: var(--box-shadow);
+  opacity: 0.8;
+  pointer-events: auto;
+  border-radius: 100%;
+}
+
+.PlayVideoRigth:hover,
+.MuteVideoRight:hover,
+.OffVideoRight:hover {
+  background-color: #cf82ff(0, 0, 0, 1);
+  transform: scale(1.1);
+}
+.reactButtonsContainer {
+  position: absolute;
+  top: 100px;
+}
+
+.dislike {
+  color: var(--dark-color);
+  font-size: 30px;
+  opacity: 0.8;
+  text-align: center;
+
+  border: none;
+  padding: 10px 15px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 16px;
+  z-index: 99999;
+  position: relative;
+  height: 4rem;
+  width: 4rem;
+  text-align: center;
+  background: #ffb662;
+  box-shadow: var(--box-shadow);
+  opacity: 0.7;
+  pointer-events: auto;
+  border-radius: 100%;
+}
+
+.TrackSpeakerVotesButtons {
+  margin-left: 20px;
+  margin-right: 60px;
+  padding-bottom: 65px;
+}
+
+.like {
+  color: var(--dark-color);
+  font-size: 30px;
+  text-align: center;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 16px;
+  z-index: 99999;
+  position: relative;
+  height: 4rem;
+  width: 4rem;
+  text-align: center;
+  background-color: rgb(130, 250, 175);
+  box-shadow: var(--box-shadow);
+  opacity: 0.7;
+  pointer-events: auto;
+  border-radius: 100%;
+}
+.buttonBeMute {
+  color: var(--white);
+  font-size: 30px;
+  opacity: 0.8;
+  text-align: center;
+}
+.footerscreenContainer {
+  pointer-events: none;
+  width: 100vw;
+  height: 60px;
+  position: fixed;
+  bottom: 91px;
+  left: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 900;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* background: linear-gradient(
+    180deg,
+    #c362ff 0%,
+    rgba(0, 0, 0, 0) 66%,
+    #6d25ff 100%
+  ); */
+  /* background-size: 200% 200%;
+  animation: gradientMove 5s infinite alternate ease-in-out; */
+}
+
+@keyframes gradientMove {
+  0% {
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.2) 0%,
+      rgba(195, 98, 255, 0.3) 66%,
+      rgba(109, 37, 255, 0.5) 100%
+    );
+    background-position: 0% 100%;
+  }
+  50% {
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.2) 0%,
+      rgba(195, 98, 255, 0.3) 66%,
+      rgba(109, 37, 255, 0.5) 100%
+    );
+    background-position: 100% 0%;
+  }
+
+  100% {
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.2) 0%,
+      rgba(195, 98, 255, 0.3) 66%,
+      rgba(109, 37, 255, 0.5) 100%
+    );
+    background-position: 0% 100%;
+  }
+}
+
+.usernameLeft {
+  background-color: red;
+}
+
+.rightcarduser {
+  position: absolute;
+  display: flex;
+  height: 30px;
+  right: 0;
+  top: -80px;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(180deg, #cf82ff 0%, #6d25ff 100%);
+  width: auto;
+  border-radius: 0px 30px 30px 0px;
+  margin-left: 305px;
+  /* margin-top: 50px; */
+}
+
+.usernameLeft {
+  font-size: 20px;
+  font-weight: bold;
+  color: red;
+}
+.userNameOverlay {
+  position: absolute;
+  top: 30%;
+  left: 5%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.5); /* 🔹 Fondo semitransparente */
+  color: white;
+  padding: 8px 12px;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 14px;
+  z-index: 10;
+}
+
+.userNameOverlayRigth {
+  position: absolute;
+  top: 30%;
+  right: 5%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.5); /* 🔹 Fondo semitransparente */
+  color: white;
+  padding: 8px 12px;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 14px;
+  z-index: 10;
+}

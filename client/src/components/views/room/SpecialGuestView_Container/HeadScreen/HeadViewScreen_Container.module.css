@@ -1,0 +1,72 @@
+.nametopic {
+  position: absolute;
+  display: flex;
+  color: rgba(26, 21, 39, 0.8);
+  font-weight: bolder;
+  left: 16px;
+  top: 50px;
+  font-size: 30px;
+}
+
+.logoTimer {
+  padding-left: 700px;
+  background-color: red;
+  color: rgba(26, 21, 39, 0.8);
+}
+.live {
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  font-weight: bolder;
+  color: rgb(245, 184, 112);
+
+  background-color: rgba(26, 21, 39, 0.8);
+  background-size: 40px;
+  height: 20px;
+  margin-left: 16px;
+}
+.viewersIcon {
+  width: 20px;
+  display: flex;
+  font-weight: bolder;
+  margin-left: 6px;
+  margin-right: 6px;
+  color: rgb(245, 184, 112);
+}
+
+.totalonline {
+  display: flex;
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0;
+  color: rgba(26, 21, 39, 0.8);
+}
+
+.live_Container {
+  position: absolute;
+  width: 100px;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  bottom: 130px;
+}
+
+.headviewContainer {
+  width: 100vw;
+  height: 200px;
+  padding-top: 35px;
+  display: flex;
+  flex-direction: column;
+
+  font-size: 3.2em;
+  line-height: normal;
+  color: var(--white);
+  background: var(--white);
+  /* background: linear-gradient(
+    180deg,
+    rgba(26, 21, 39) 5%,
+    rgba(53, 47, 65, 0.7) 60%,
+    rgba(224, 222, 228, 0.2) 150%
+  ); */
+}

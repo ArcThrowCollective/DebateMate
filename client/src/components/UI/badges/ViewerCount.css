@@ -1,0 +1,12 @@
+#viewerCountLabel {
+  display: flex;
+  gap: 0.1rem;
+
+  background: var(--gradient-dark);
+  color: var(--accent-color);
+  font-size: 0.6rem;
+  font-weight: 700;
+
+  border-radius: 0.2rem;
+  padding: 0 0.2rem;
+}

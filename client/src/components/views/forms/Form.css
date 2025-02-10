@@ -1,0 +1,78 @@
+#form__container {
+  position: relative;
+  align-self: center;
+  user-select: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  gap: 2rem;
+  padding: 3rem;
+}
+
+.input-container {
+  position: relative;
+  display: inline-block;
+  padding: 2px;
+  border-radius: 8px;
+  background: var(--gradient-purple);
+  width: fit-content;
+}
+
+.input-container input,
+.btn,
+textarea {
+  border: none;
+  outline: none;
+  border-radius: 6px;
+  background-color: var(--white);
+  width: 200px;
+  padding: 0.4rem;
+  width: 20rem;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  color: var(--dark-color);
+}
+
+#formTitle {
+  font-size: 2.3rem;
+  text-transform: capitalize;
+  user-select: none;
+}
+
+textarea {
+  overflow: hidden;
+  resize: none;
+}
+
+#closeForm {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  cursor: pointer;
+  font-size: 1rem;
+  transition:
+    font-size,
+    right,
+    top,
+    0.1s ease;
+}
+
+#closeForm:hover {
+  font-size: 1.3rem;
+  color: var(--purple-color);
+  right: 0.8rem;
+  top: 0.8rem;
+}
+
+.error-message {
+  position: absolute;
+  bottom: -2.4rem;
+  color: var(--accent-color);
+}

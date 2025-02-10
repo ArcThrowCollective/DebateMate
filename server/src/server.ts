@@ -1,21 +1,43 @@
-import express, { Express, Request, Response } from 'express';
-import dotenv from 'dotenv';
+import express from 'express';
+import bodyParser from 'body-parser';
 import cors from 'cors';
-import APIRoutes from './Routes/API.router';
+import { PrismaClient } from '@prisma/client';
+import config from '../config/env_config';
+import { index_router } from './routes/index_routes';
+import cookieParser from 'cookie-parser';
+import { setupWebSocketServer } from './routes/graphql';
+import { createServer } from 'http';
 
-// Initialize with config
-dotenv.config();
+const prisma = new PrismaClient();
+const app = express();
+const PORT: number = parseInt(config.PORT || '3000', 10);
+const HOST: string = config.SERVER_HOST as string;
+const httpServer = createServer(app);
 
-const app: Express = express();
-const port = process.env.PORT;
+app.use(cookieParser());
+app.use(bodyParser.json());
+app.use(express.json());
+app.use(
+  cors({
+    // when using cookies, credentials must be set to true, allow all * is not allowed
+    origin: ['http://127.0.0.1:5173', 'http://localhost:5173'],
+    credentials: true,
+  })
+);
 
-// Middlewares
-app.use(cors<Request>());
+// Setup the websocket server for graphql pub/sub
+setupWebSocketServer(httpServer);
+app.use(index_router);
 
-// Routes
-app.use('/api', APIRoutes);
-
-// Listening to server
-app.listen(port || 3000, () => {
-  console.log(`Server is running at http://localhost:${port}`);
-});
+(async () => {
+  try {
+    await prisma.$connect();
+    console.log('Prisma connected successfully!');
+    app.listen(PORT, HOST, function () {
+      console.log(`starting server on port: ${PORT}`);
+    });
+  } catch (error) {
+    console.error(error);
+    process.exit(1);
+  }
+})();

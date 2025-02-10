@@ -1,0 +1,83 @@
+.requestspeak {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  height: 30px;
+  width: auto;
+  border-radius: 25px 0px 0px 25px;
+  background: linear-gradient(180deg, #e4e5ea, #f0f1f6);
+}
+.butonnoIcon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-size: 50px;
+
+  color: #7c30ff;
+  cursor: pointer;
+  background-color: rgb(245, 184, 112);
+  opacity: 0.9;
+}
+.buttonyesIcon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-size: 50px;
+  color: #7c30ff;
+  border: none;
+  cursor: pointer;
+  background-color: rgb(130, 250, 175);
+  opacity: 0.9;
+}
+.handIconRequest {
+  width: 50px;
+  height: 50px;
+  padding: 4px;
+
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid white;
+  background-color: #d0cece;
+}
+.userName {
+  display: flex;
+  align-items: center;
+  padding-left: 15px;
+  padding-right: 15px;
+  font-weight: bolder;
+}
+
+.request_Container {
+  height: 50px;
+  text-align: left;
+  font-size: 18px;
+  color: #000;
+  font-family: 'Titillium Web';
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 20px;
+  opacity: 0.6;
+  position: absolute;
+  bottom: 140px;
+  /* background-color: rgba(255, 255, 255, 0.8); */
+  transition: background-color 0.3s ease-in-out; /* 🔹 Animación de color */
+}
+
+.accepted {
+  border-radius: 25%;
+  background-color: rgb(
+    130,
+    250,
+    175,
+    0.3
+  ) !important; /* 🔹 Fondo verde al aceptar */
+}
+
+.butonnorequestContainer {
+  /* position: absolute; */
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  left: 0%;
+}
