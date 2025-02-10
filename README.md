@@ -1,8 +1,12 @@
-# 🗣️ 55Debate – Real-Time Debate Platform
+<div align="center" style="padding: 20px;">
+  <img src="client/src/assets/room-img/55DEBATE logoBigwilly.png" width="350" alt="StackTally logo">
+
+##
+
+  <h3><i>" 🗣️ Political</i> debating platform based on real-time video/audio comms."</i></h3>
+</div>
 
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
-
-**A (Political) Debating Platform based on Real-Time Video/Audio Communication.**
 
 🚀 **Engage in structured debates, track rankings, and compete in real time.**
 
