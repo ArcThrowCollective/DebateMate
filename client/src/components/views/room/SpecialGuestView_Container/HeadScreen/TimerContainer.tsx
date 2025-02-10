@@ -70,7 +70,23 @@ const TimerContainer = ({ setMuteVideos = () => {} }) => {
                 }}
               >
                 {({ remainingTime }) => (
-                  <div className={styles.timerNumber}>{remainingTime}</div>
+                  <div
+                    className="text-[64px] text-[--dark-color] font-[1000] text-(--accent-color)"
+                    style={{
+                      color:
+                        remainingTime <= 10
+                          ? '#FFB662'
+                          : remainingTime <= 25
+                            ? '#cf82ff'
+                            : remainingTime <= 35
+                              ? '#cf82ff'
+                              : remainingTime <= 45
+                                ? '#6d25ff'
+                                : 'var(--dark-color)',
+                    }}
+                  >
+                    {remainingTime}
+                  </div>
                 )}
               </CountdownCircleTimer>
             )}
@@ -90,7 +106,7 @@ const TimerContainer = ({ setMuteVideos = () => {} }) => {
               className={styles.controlButtonBoxin}
               onClick={() => setShowTimer((prev) => !prev)}
             >
-              <PiBoxingGloveFill size={45} color="#ffb662" opacity={0.7} />
+              <PiBoxingGloveFill size={45} color="#ffb662" opacity={1} />
             </button>
             <button
               className={styles.controlButton}
